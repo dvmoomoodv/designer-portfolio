@@ -1,0 +1,8 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" fill="#D9D2CA"/>
+  <rect x="80" y="80" width="1040" height="740" stroke="#8B8178" stroke-width="2"/>
+  <circle cx="360" cy="360" r="150" fill="#B4A79A"/>
+  <rect x="550" y="240" width="320" height="220" fill="#8B8178"/>
+  <rect x="700" y="520" width="240" height="140" fill="#ECE7E1"/>
+  <text x="80" y="860" fill="#514943" font-family="Arial, sans-serif" font-size="26" letter-spacing="4">EDITORIAL ARCHIVE</text>
+</svg>

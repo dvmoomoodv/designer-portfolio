@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive Portfolio</title>
+  <meta name="description" content="Editorial-style portfolio archive featuring selected work, notes, and visual research.">
+  <script>
+    (function () {
+      var savedTheme = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : (prefersDark ? 'dark' : 'light');
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+      document.documentElement.dataset.theme = theme;
+      document.documentElement.style.colorScheme = theme;
+    }());
+    window.tailwind = window.tailwind || {};
+    window.tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            accent: {
+              DEFAULT: '#746e67',
+              soft: '#8c857d'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif']
+          },
+          boxShadow: {
+            card: '0 18px 40px rgba(17, 24, 39, 0.08)'
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <link rel="stylesheet" href="./assets/css/custom.css">
+</head>
+<body class="page-shell bg-stone-50 text-stone-900 antialiased transition-colors duration-300 dark:bg-stone-950 dark:text-stone-100">
+  <div class="relative min-h-screen overflow-x-clip">
+    <div class="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(circle_at_top,rgba(120,113,108,0.10),transparent_60%)] dark:bg-[radial-gradient(circle_at_top,rgba(231,229,228,0.08),transparent_60%)]"></div>
+
+    <header class="site-header relative z-30 border-b border-stone-200/80 bg-stone-50/85 backdrop-blur-xl dark:border-stone-800 dark:bg-stone-950/85">
+      <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
+        <a href="./index.html" class="header-brand text-sm font-medium tracking-[0.22em]">ARCHIVE PORTFOLIO</a>
+        <nav class="hidden items-center gap-8 md:flex" aria-label="Primary navigation">
+          <a data-nav="index" href="./index.html" class="nav-link">Home</a>
+          <a data-nav="work" href="./work.html" class="nav-link">Work</a>
+          <a data-nav="about" href="./about.html" class="nav-link">About</a>
+          <a data-nav="resume" href="./resume.html" class="nav-link">Resume</a>
+          <a data-nav="contact" href="./contact.html" class="nav-link">Contact</a>
+        </nav>
+        <div class="flex items-center gap-2">
+          <button type="button" data-theme-toggle class="header-icon-button inline-flex h-10 w-10 items-center justify-center border focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent" aria-label="Toggle color theme">
+            <span data-theme-icon aria-hidden="true">◐</span>
+          </button>
+          <button type="button" data-menu-open class="header-icon-button inline-flex h-10 w-10 items-center justify-center border focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:hidden" aria-label="Open menu">
+            <span aria-hidden="true">≡</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div data-menu-overlay class="fixed inset-0 z-40 hidden bg-stone-950/40 backdrop-blur-sm"></div>
+    <aside data-menu-drawer class="site-drawer fixed right-0 top-0 z-50 flex h-full w-full max-w-xs translate-x-full flex-col border-l border-stone-200 bg-stone-50 p-6 transition-transform duration-300 dark:border-stone-800 dark:bg-stone-950">
+      <div class="mb-10 flex items-center justify-between">
+        <span class="text-xs uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">Navigation</span>
+        <button type="button" data-menu-close class="header-icon-button inline-flex h-10 w-10 items-center justify-center border" aria-label="Close menu">×</button>
+      </div>
+      <nav class="flex flex-col gap-5 text-lg" aria-label="Mobile navigation">
+        <a data-nav="index" href="./index.html" class="drawer-link">Home</a>
+        <a data-nav="work" href="./work.html" class="drawer-link">Work</a>
+        <a data-nav="about" href="./about.html" class="drawer-link">About</a>
+        <a data-nav="resume" href="./resume.html" class="drawer-link">Resume</a>
+        <a data-nav="contact" href="./contact.html" class="drawer-link">Contact</a>
+      </nav>
+    </aside>
+
+    <main>
+      <section class="mx-auto max-w-7xl px-6 pb-20 pt-16 lg:px-10 lg:pb-28 lg:pt-24">
+        <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <div class="max-w-3xl">
+            <p class="mb-4 text-xs uppercase tracking-[0.24em] text-stone-500 dark:text-stone-400">Creative Developer · Visual Storyteller · Archive Builder</p>
+            <h1 class="muted-heading max-w-4xl text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl lg:text-6xl dark:text-stone-100">Creative developer and visual storyteller building web-based experiences, image-led archives, and selected works.</h1>
+            <p class="muted-copy mt-6 max-w-2xl text-base leading-8 text-stone-600 dark:text-stone-300">This portfolio is structured as a calm archive: a space for professional work, visual development, illustration, and experimental notes. The emphasis is on continuity, process, and images that hold the page.</p>
+            <div class="mt-10 flex flex-wrap items-center gap-4 text-sm text-stone-500 dark:text-stone-400">
+              <span>Based in Seoul</span>
+              <span class="hidden h-1 w-1 rounded-full bg-stone-300 sm:block dark:bg-stone-700"></span>
+              <span>Open to selected commissions and collaborations</span>
+            </div>
+          </div>
+          <div class="lg:pl-12">
+            <a href="./assets/images/featured-01.svg" data-image-frame class="image-frame surface-card overflow-hidden border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900">
+              <img src="./assets/images/featured-01.svg" alt="Abstract archive composition placeholder" class="h-full w-full object-cover transition duration-700 hover:scale-[1.02]">
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="surface-subtle mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <div class="section-divider mb-10 flex items-end justify-between gap-6 border-b border-stone-200 pb-5 dark:border-stone-800">
+          <div>
+            <p class="text-xs uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">Selected Work</p>
+            <h2 class="surface-title mt-2 text-2xl font-semibold tracking-tight">Recent projects and archive highlights</h2>
+          </div>
+          <a href="./work.html" class="meta-link text-sm">View archive</a>
+        </div>
+        <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          <article class="group space-y-4">
+            <a href="./assets/images/project-01.svg" data-image-frame class="image-frame surface-card block overflow-hidden border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900">
+              <img src="./assets/images/project-01.svg" alt="Artificial Aesthetics project cover placeholder" class="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.02] group-hover:opacity-95">
+            </a>
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="surface-title text-lg font-medium"><a href="./project.html" class="surface-link">Artificial Aesthetics</a></h3>
+                <p class="mt-1 text-sm text-stone-500 dark:text-stone-400">Visual Development</p>
+              </div>
+              <span class="text-sm text-stone-500 dark:text-stone-400">2024</span>
+            </div>
+          </article>
+          <article class="group space-y-4">
+            <a href="./assets/images/project-02.svg" data-image-frame class="image-frame surface-card block overflow-hidden border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900">
+              <img src="./assets/images/project-02.svg" alt="Unreliable Memories project cover placeholder" class="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.02] group-hover:opacity-95">
+            </a>
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="surface-title text-lg font-medium"><a href="./project.html" class="surface-link">Unreliable Memories</a></h3>
+                <p class="mt-1 text-sm text-stone-500 dark:text-stone-400">Experimental</p>
+              </div>
+              <span class="text-sm text-stone-500 dark:text-stone-400">2025</span>
+            </div>
+          </article>
+          <article class="group space-y-4">
+            <a href="./assets/images/project-03.svg" data-image-frame class="image-frame surface-card block overflow-hidden border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900">
+              <img src="./assets/images/project-03.svg" alt="Cultural Analytics project cover placeholder" class="aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.02] group-hover:opacity-95">
+            </a>
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="surface-title text-lg font-medium"><a href="./project.html" class="surface-link">Cultural Analytics</a></h3>
+                <p class="mt-1 text-sm text-stone-500 dark:text-stone-400">Professional Work</p>
+              </div>
+              <span class="text-sm text-stone-500 dark:text-stone-400">2023</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <div class="surface-band grid gap-10 border-y border-stone-200 py-12 lg:grid-cols-[0.7fr_1.3fr] dark:border-stone-800">
+          <div>
+            <p class="text-xs uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">Categories</p>
+            <h2 class="surface-title mt-2 text-2xl font-semibold tracking-tight">Portfolio overview</h2>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <a href="./work.html" class="category-tile">
+              <span>Professional Work</span>
+              <span class="meta">12 projects</span>
+            </a>
+            <a href="./work.html" class="category-tile">
+              <span>Visual Development</span>
+              <span class="meta">08 projects</span>
+            </a>
+            <a href="./work.html" class="category-tile">
+              <span>Environment Design</span>
+              <span class="meta">06 projects</span>
+            </a>
+            <a href="./work.html" class="category-tile">
+              <span>Illustration</span>
+              <span class="meta">14 works</span>
+            </a>
+            <a href="./work.html" class="category-tile">
+              <span>Sketchbook</span>
+              <span class="meta">Ongoing archive</span>
+            </a>
+            <a href="./work.html" class="category-tile">
+              <span>Experimental</span>
+              <span class="meta">Research studies</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+        <div class="section-divider mb-10 flex items-end justify-between gap-6 border-b border-stone-200 pb-5 dark:border-stone-800">
+          <div>
+            <p class="text-xs uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400">Notes</p>
+            <h2 class="surface-title mt-2 text-2xl font-semibold tracking-tight">Writing, process fragments, and short observations</h2>
+          </div>
+          <a href="./about.html" class="meta-link text-sm">Read more</a>
+        </div>
+        <div class="grid gap-6 lg:grid-cols-3">
+          <article class="surface-card border border-stone-200 p-6 transition hover:border-stone-400 dark:border-stone-800 dark:hover:border-stone-600">
+            <p class="text-sm text-stone-500 dark:text-stone-400">Article · 2025</p>
+            <h3 class="surface-title mt-6 text-xl font-medium">AI Aesthetics and visual memory</h3>
+            <p class="mt-4 leading-7 text-stone-600 dark:text-stone-300">A short note on synthetic imagery, repetition, and the changing texture of visual archives.</p>
+          </article>
+          <article class="surface-card border border-stone-200 p-6 transition hover:border-stone-400 dark:border-stone-800 dark:hover:border-stone-600">
+            <p class="text-sm text-stone-500 dark:text-stone-400">Book · 2024</p>
+            <h3 class="surface-title mt-6 text-xl font-medium">The archive as interface</h3>
+            <p class="mt-4 leading-7 text-stone-600 dark:text-stone-300">Thinking through portfolio design as an arrangement of categories, intervals, and traces rather than a static showcase.</p>
+          </article>
+          <article class="surface-card border border-stone-200 p-6 transition hover:border-stone-400 dark:border-stone-800 dark:hover:border-stone-600">
+            <p class="text-sm text-stone-500 dark:text-stone-400">Note · 2026</p>
+            <h3 class="surface-title mt-6 text-xl font-medium">Sketchbook studies and web rhythm</h3>
+            <p class="mt-4 leading-7 text-stone-600 dark:text-stone-300">A compact study on how sequential images and sparse text can slow down browsing in productive ways.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="surface-band border-t border-stone-200/80 py-8 dark:border-stone-800">
+      <div class="mx-auto flex max-w-7xl flex-col gap-3 px-6 text-sm text-stone-500 sm:flex-row sm:items-center sm:justify-between lg:px-10 dark:text-stone-400">
+        <p>Archive Portfolio © 2026</p>
+        <div class="flex flex-wrap gap-4">
+          <a href="./about.html" class="meta-link">Notes</a>
+          <a href="./contact.html" class="meta-link">Contact</a>
+          <a href="./resume.html" class="meta-link">Resume</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="./assets/js/theme.js" defer></script>
+  <script src="./assets/js/menu.js" defer></script>
+  <script src="./assets/js/media.js" defer></script>
+</body>
+</html>
