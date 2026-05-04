@@ -1,0 +1,53 @@
+{
+  "page": {
+    "title":       { "ko": "", "en": "About" },
+    "description": { "ko": "", "en": "About page for portfolio archive." }
+  },
+  "hero": {
+    "kicker": { "ko": "", "en": "About" },
+    "title":  { "ko": "", "en": "A practice centered on archives, images, and digital form." },
+    "paragraphs": [
+      { "id": "p1", "text": { "ko": "", "en": "I work across creative development, visual research, illustration, and archive-oriented web design. My practice often begins with image systems and extends into interfaces that hold, sequence, and contextualize them." } },
+      { "id": "p2", "text": { "ko": "", "en": "The projects collected here range from commissioned visual work to independent studies. Across formats, I am interested in quiet structures, careful pacing, and the relationship between visual material and editorial space." } }
+    ]
+  },
+  "disciplines": {
+    "kicker": { "ko": "", "en": "Disciplines" },
+    "items": [
+      { "id": "d1", "title": { "ko": "", "en": "Creative Development" }, "body": { "ko": "", "en": "Static websites, experimental web presentation, editorial layout systems." } },
+      { "id": "d2", "title": { "ko": "", "en": "Visual Development" },   "body": { "ko": "", "en": "Concept imagery, visual sequencing, presentation structures for archive-based projects." } },
+      { "id": "d3", "title": { "ko": "", "en": "Illustration" },         "body": { "ko": "", "en": "Image-making for books, articles, and independent narrative studies." } },
+      { "id": "d4", "title": { "ko": "", "en": "Research / Writing" },   "body": { "ko": "", "en": "Short essays, process notes, and writing on visual culture, archives, and interface design." } }
+    ]
+  },
+  "experience": {
+    "kicker": { "ko": "", "en": "Experience" },
+    "items": [
+      { "id": "e1",
+        "title":  { "ko": "", "en": "Independent Creative Practice" },
+        "period": { "ko": "", "en": "2022 – Present" },
+        "body":   { "ko": "", "en": "Developing visual archives, portfolio systems, and image-based narrative projects for personal and commissioned contexts." }
+      },
+      { "id": "e2",
+        "title":  { "ko": "", "en": "Selected Capabilities" },
+        "period": { "ko": "", "en": "Ongoing" },
+        "body":   { "ko": "", "en": "Archive design, web prototyping, visual curation, editorial systems, image sequencing, and presentation design." }
+      }
+    ]
+  },
+  "resume_card": {
+    "tag":   { "ko": "", "en": "Resume" },
+    "title": { "ko": "", "en": "View resume" },
+    "body":  { "ko": "", "en": "A concise overview of selected experience, skills, and project contexts." },
+    "href":  "./resume.php"
+  },
+  "links_card": {
+    "tag":   { "ko": "", "en": "Contact" },
+    "title": { "ko": "", "en": "Links" },
+    "items": [
+      { "id": "l1", "label": { "ko": "", "en": "Email" },     "href": "mailto:hello@example.com" },
+      { "id": "l2", "label": { "ko": "", "en": "Instagram" }, "href": "https://www.instagram.com/" },
+      { "id": "l3", "label": { "ko": "", "en": "Behance" },   "href": "https://www.behance.net/" }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "page": {
+    "title":       { "ko": "", "en": "Contact" },
+    "description": { "ko": "", "en": "Contact page for inquiries and collaborations." }
+  },
+  "hero": {
+    "kicker": { "ko": "", "en": "Contact" },
+    "title":  { "ko": "", "en": "For commissions, collaborations, and editorial conversations." },
+    "body":   { "ko": "", "en": "I am open to selected inquiries related to creative development, visual direction, archives, and image-based projects." }
+  },
+  "email": {
+    "label":   { "ko": "", "en": "Email" },
+    "address": "hello@example.com"
+  },
+  "social": {
+    "label": { "ko": "", "en": "Social" },
+    "items": [
+      { "id": "s1", "label": { "ko": "", "en": "Instagram" }, "href": "https://www.instagram.com/" },
+      { "id": "s2", "label": { "ko": "", "en": "Behance" },   "href": "https://www.behance.net/" },
+      { "id": "s3", "label": { "ko": "", "en": "LinkedIn" },  "href": "https://www.linkedin.com/" }
+    ]
+  },
+  "inquiry": {
+    "label": { "ko": "", "en": "Inquiry note" },
+    "body":  { "ko": "", "en": "For new projects, a short note including context, timeline, and scope is helpful. Replies are generally sent within a few business days." }
+  }
+}

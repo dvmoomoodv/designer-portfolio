@@ -1,0 +1,57 @@
+{
+  "page": {
+    "title":       { "ko": "", "en": "Archive Portfolio" },
+    "description": { "ko": "", "en": "Editorial-style portfolio archive featuring selected work, notes, and visual research." }
+  },
+  "hero": {
+    "kicker": { "ko": "", "en": "Creative Developer · Visual Storyteller · Archive Builder" },
+    "title":  { "ko": "", "en": "Creative developer and visual storyteller building web-based experiences, image-led archives, and selected works." },
+    "body":   { "ko": "", "en": "This portfolio is structured as a calm archive: a space for professional work, visual development, illustration, and experimental notes. The emphasis is on continuity, process, and images that hold the page." },
+    "meta_items": [
+      { "id": "loc",  "text": { "ko": "", "en": "Based in Seoul" } },
+      { "id": "open", "text": { "ko": "", "en": "Open to selected commissions and collaborations" } }
+    ],
+    "image":     "./assets/images/featured-01.svg",
+    "image_alt": { "ko": "", "en": "Abstract archive composition placeholder" }
+  },
+  "selected_work": {
+    "kicker":         { "ko": "", "en": "Selected Work" },
+    "title":          { "ko": "", "en": "Recent projects and archive highlights" },
+    "view_all_label": { "ko": "", "en": "View archive" },
+    "project_ids": ["p01", "p02", "p03"]
+  },
+  "categories": {
+    "kicker": { "ko": "", "en": "Categories" },
+    "title":  { "ko": "", "en": "Portfolio overview" },
+    "items": [
+      { "id": "c1", "label": { "ko": "", "en": "Professional Work" },   "meta": { "ko": "", "en": "12 projects" }      },
+      { "id": "c2", "label": { "ko": "", "en": "Visual Development" },  "meta": { "ko": "", "en": "08 projects" }      },
+      { "id": "c3", "label": { "ko": "", "en": "Environment Design" }, "meta": { "ko": "", "en": "06 projects" }      },
+      { "id": "c4", "label": { "ko": "", "en": "Illustration" },        "meta": { "ko": "", "en": "14 works" }         },
+      { "id": "c5", "label": { "ko": "", "en": "Sketchbook" },          "meta": { "ko": "", "en": "Ongoing archive" } },
+      { "id": "c6", "label": { "ko": "", "en": "Experimental" },        "meta": { "ko": "", "en": "Research studies" } }
+    ]
+  },
+  "notes": {
+    "kicker":         { "ko": "", "en": "Notes" },
+    "title":          { "ko": "", "en": "Writing, process fragments, and short observations" },
+    "view_all_label": { "ko": "", "en": "Read more" },
+    "items": [
+      { "id": "n1",
+        "tag":  { "ko": "", "en": "Article · 2025" },
+        "title": { "ko": "", "en": "AI Aesthetics and visual memory" },
+        "body":  { "ko": "", "en": "A short note on synthetic imagery, repetition, and the changing texture of visual archives." }
+      },
+      { "id": "n2",
+        "tag":  { "ko": "", "en": "Book · 2024" },
+        "title": { "ko": "", "en": "The archive as interface" },
+        "body":  { "ko": "", "en": "Thinking through portfolio design as an arrangement of categories, intervals, and traces rather than a static showcase." }
+      },
+      { "id": "n3",
+        "tag":  { "ko": "", "en": "Note · 2026" },
+        "title": { "ko": "", "en": "Sketchbook studies and web rhythm" },
+        "body":  { "ko": "", "en": "A compact study on how sequential images and sparse text can slow down browsing in productive ways." }
+      }
+    ]
+  }
+}

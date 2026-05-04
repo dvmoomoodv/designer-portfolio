@@ -1,0 +1,103 @@
+{
+  "items": [
+    {
+      "id": "p01",
+      "slug": "artificial-aesthetics",
+      "title":          { "ko": "", "en": "Artificial Aesthetics" },
+      "category_id":    "visual",
+      "category_label": { "ko": "", "en": "Visual Development" },
+      "year":           "2024",
+      "cover":          "./assets/images/project-01.svg",
+      "cover_alt":      { "ko": "", "en": "Artificial Aesthetics project cover placeholder" },
+      "detail": {
+        "kicker":     { "ko": "", "en": "Visual Development · 2024" },
+        "hero_image": "./assets/images/project-01.svg",
+        "hero_alt":   { "ko": "", "en": "Artificial Aesthetics hero image placeholder" },
+        "info_dl": [
+          { "id": "i1", "label": { "ko": "", "en": "Format" },  "value": { "ko": "", "en": "Research-led visual series" } },
+          { "id": "i2", "label": { "ko": "", "en": "Context" }, "value": { "ko": "", "en": "Independent archive" } },
+          { "id": "i3", "label": { "ko": "", "en": "Role" },    "value": { "ko": "", "en": "Concept, image system, web presentation" } }
+        ],
+        "overview_kicker": { "ko": "", "en": "Overview" },
+        "overview_paragraphs": [
+          { "id": "o1", "text": { "ko": "", "en": "Artificial Aesthetics is an image-led study that examines how machine-generated visual language begins to resemble memory, citation, and repetition. The project was developed as both a visual sequence and an archival interface." } },
+          { "id": "o2", "text": { "ko": "", "en": "The work explores transitions between stillness and pattern. Individual frames were composed to feel self-contained, while the sequence as a whole suggests a shifting visual argument. The web presentation is intentionally restrained, allowing spacing and image order to carry much of the rhythm." } }
+        ],
+        "concept_kicker": { "ko": "", "en": "Concept / Process" },
+        "concept_blocks": [
+          { "id": "cb1", "title": { "ko": "", "en": "Research framing" }, "body": { "ko": "", "en": "The project began with a set of notes on synthetic realism, unreliable memory, and archival sequencing. These notes shaped both the image tone and the presentation logic." } },
+          { "id": "cb2", "title": { "ko": "", "en": "Visual language" },  "body": { "ko": "", "en": "A limited palette, soft contrast, and repeated spatial motifs were used to maintain continuity across the series while avoiding decorative excess." } }
+        ],
+        "gallery_kicker": { "ko": "", "en": "Gallery" },
+        "gallery_title":  { "ko": "", "en": "Selected frames and supporting studies" },
+        "gallery_images": [
+          { "id": "g1", "src": "./assets/images/detail-01.svg", "alt": { "ko": "", "en": "Gallery image placeholder one" }   },
+          { "id": "g2", "src": "./assets/images/detail-02.svg", "alt": { "ko": "", "en": "Gallery image placeholder two" }   },
+          { "id": "g3", "src": "./assets/images/detail-03.svg", "alt": { "ko": "", "en": "Gallery image placeholder three" } }
+        ],
+        "credits_kicker": { "ko": "", "en": "Credits / Tools" },
+        "credits_dl": [
+          { "id": "cr1", "label": { "ko": "", "en": "Creative Direction" }, "value": { "ko": "", "en": "Independent" } },
+          { "id": "cr2", "label": { "ko": "", "en": "Tools" },              "value": { "ko": "", "en": "HTML, Tailwind CDN, Photoshop, Figma" } },
+          { "id": "cr3", "label": { "ko": "", "en": "Output" },             "value": { "ko": "", "en": "Web archive, image series" } },
+          { "id": "cr4", "label": { "ko": "", "en": "Year" },               "value": { "ko": "", "en": "2024" } }
+        ]
+      }
+    },
+    {
+      "id": "p02",
+      "slug": "unreliable-memories",
+      "title":          { "ko": "", "en": "Unreliable Memories" },
+      "category_id":    "experimental",
+      "category_label": { "ko": "", "en": "Experimental" },
+      "year":           "2025",
+      "cover":          "./assets/images/project-02.svg",
+      "cover_alt":      { "ko": "", "en": "Unreliable Memories project cover placeholder" },
+      "detail": null
+    },
+    {
+      "id": "p03",
+      "slug": "cultural-analytics",
+      "title":          { "ko": "", "en": "Cultural Analytics" },
+      "category_id":    "professional",
+      "category_label": { "ko": "", "en": "Professional Work" },
+      "year":           "2023",
+      "cover":          "./assets/images/project-03.svg",
+      "cover_alt":      { "ko": "", "en": "Cultural Analytics project cover placeholder" },
+      "detail": null
+    },
+    {
+      "id": "p04",
+      "slug": "the-nutcracker",
+      "title":          { "ko": "", "en": "The Nutcracker" },
+      "category_id":    "illustration",
+      "category_label": { "ko": "", "en": "Illustration" },
+      "year":           "2024",
+      "cover":          "./assets/images/project-04.svg",
+      "cover_alt":      { "ko": "", "en": "The Nutcracker project cover placeholder" },
+      "detail": null
+    },
+    {
+      "id": "p05",
+      "slug": "car-drawings",
+      "title":          { "ko": "", "en": "Car Drawings" },
+      "category_id":    "sketchbook",
+      "category_label": { "ko": "", "en": "Sketchbook" },
+      "year":           "2022",
+      "cover":          "./assets/images/project-05.svg",
+      "cover_alt":      { "ko": "", "en": "Car Drawings project cover placeholder" },
+      "detail": null
+    },
+    {
+      "id": "p06",
+      "slug": "sketchbook-studies",
+      "title":          { "ko": "", "en": "Sketchbook Studies" },
+      "category_id":    "environment",
+      "category_label": { "ko": "", "en": "Environment Design" },
+      "year":           "2026",
+      "cover":          "./assets/images/project-06.svg",
+      "cover_alt":      { "ko": "", "en": "Environment Design project cover placeholder" },
+      "detail": null
+    }
+  ]
+}

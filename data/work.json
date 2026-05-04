@@ -1,0 +1,20 @@
+{
+  "page": {
+    "title":       { "ko": "", "en": "Work" },
+    "description": { "ko": "", "en": "Selected work archive across disciplines and ongoing studies." }
+  },
+  "hero": {
+    "kicker": { "ko": "", "en": "Archive" },
+    "title":  { "ko": "", "en": "Selected work across disciplines and ongoing studies." },
+    "body":   { "ko": "", "en": "This archive groups projects by medium, context, and process. The structure is designed to be easy to extend as new work, writing, and sketchbook material are added." }
+  },
+  "filters": [
+    { "id": "all",          "label": { "ko": "", "en": "Featured" }            },
+    { "id": "professional", "label": { "ko": "", "en": "Professional Work" }   },
+    { "id": "visual",       "label": { "ko": "", "en": "Visual Development" }  },
+    { "id": "environment",  "label": { "ko": "", "en": "Environment Design" } },
+    { "id": "illustration", "label": { "ko": "", "en": "Illustration" }        },
+    { "id": "sketchbook",   "label": { "ko": "", "en": "Sketchbook" }          },
+    { "id": "experimental", "label": { "ko": "", "en": "Experimental" }        }
+  ]
+}

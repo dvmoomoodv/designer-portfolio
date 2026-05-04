@@ -1,0 +1,10 @@
+# 어드민 비밀번호 해시 (커밋 금지)
+data/auth.json
+
+# 사용자 업로드 이미지 (런타임 생성물)
+assets/images/uploads/
+
+# 백업/임시 파일
+data/*.bak
+*.swp
+.DS_Store

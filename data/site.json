@@ -1,0 +1,20 @@
+{
+  "brand": {
+    "ko": "",
+    "en": "ARCHIVE PORTFOLIO"
+  },
+  "nav": [
+    { "id": "index",   "href": "./index.php",   "label": { "ko": "", "en": "Home" } },
+    { "id": "work",    "href": "./work.php",    "label": { "ko": "", "en": "Work" } },
+    { "id": "about",   "href": "./about.php",   "label": { "ko": "", "en": "About" } },
+    { "id": "resume",  "href": "./resume.php",  "label": { "ko": "", "en": "Resume" } },
+    { "id": "contact", "href": "./contact.php", "label": { "ko": "", "en": "Contact" } }
+  ],
+  "footer": {
+    "copyright": { "ko": "", "en": "Archive Portfolio © 2026" }
+  },
+  "meta": {
+    "default_title":       { "ko": "", "en": "Archive Portfolio" },
+    "default_description": { "ko": "", "en": "Editorial-style portfolio archive featuring selected work, notes, and visual research." }
+  }
+}
