@@ -1,0 +1,121 @@
+/* 어드민 공통 컴포넌트 스타일 (Tailwind CDN 위에 얹는 보조). */
+
+.admin-card {
+  background: white;
+  border: 1px solid rgb(231 229 228);
+  border-radius: 12px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+.dark .admin-card {
+  background: rgb(28 25 23);
+  border-color: rgb(41 37 36);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+.admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  transition: background-color 120ms ease, border-color 120ms ease, color 120ms ease;
+  cursor: pointer;
+}
+
+.admin-btn--primary {
+  background: rgb(41 37 36);
+  color: white;
+}
+.admin-btn--primary:hover { background: rgb(28 25 23); }
+.dark .admin-btn--primary { background: rgb(231 229 228); color: rgb(28 25 23); }
+.dark .admin-btn--primary:hover { background: rgb(214 211 209); }
+
+.admin-btn--ghost {
+  background: transparent;
+  color: rgb(87 83 78);
+  border-color: rgb(231 229 228);
+}
+.admin-btn--ghost:hover { background: rgb(245 245 244); color: rgb(28 25 23); }
+.dark .admin-btn--ghost { color: rgb(214 211 209); border-color: rgb(41 37 36); }
+.dark .admin-btn--ghost:hover { background: rgb(28 25 23); color: rgb(245 245 244); }
+
+.admin-input,
+.admin-textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid rgb(214 211 209);
+  background: white;
+  color: rgb(28 25 23);
+  font-size: 0.95rem;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.admin-input:focus,
+.admin-textarea:focus {
+  outline: none;
+  border-color: rgb(120 113 108);
+  box-shadow: 0 0 0 3px rgba(120,113,108,0.15);
+}
+.dark .admin-input,
+.dark .admin-textarea {
+  background: rgb(28 25 23);
+  border-color: rgb(68 64 60);
+  color: rgb(245 245 244);
+}
+.dark .admin-input:focus,
+.dark .admin-textarea:focus {
+  border-color: rgb(168 162 158);
+  box-shadow: 0 0 0 3px rgba(168,162,158,0.15);
+}
+
+.admin-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgb(120 113 108);
+  margin-bottom: 0.4rem;
+}
+.dark .admin-label { color: rgb(168 162 158); }
+
+.admin-flash {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+}
+.admin-flash--error {
+  background: rgb(254 242 242);
+  color: rgb(153 27 27);
+  border-color: rgb(254 202 202);
+}
+.dark .admin-flash--error {
+  background: rgba(153,27,27,0.15);
+  color: rgb(252 165 165);
+  border-color: rgba(153,27,27,0.4);
+}
+.admin-flash--success {
+  background: rgb(240 253 244);
+  color: rgb(22 101 52);
+  border-color: rgb(187 247 208);
+}
+.dark .admin-flash--success {
+  background: rgba(22,101,52,0.15);
+  color: rgb(134 239 172);
+  border-color: rgba(22,101,52,0.4);
+}
+.admin-flash--info {
+  background: rgb(241 245 249);
+  color: rgb(30 41 59);
+  border-color: rgb(226 232 240);
+}
+.dark .admin-flash--info {
+  background: rgba(30,41,59,0.4);
+  color: rgb(226 232 240);
+  border-color: rgba(30,41,59,0.6);
+}
