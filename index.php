@@ -12,9 +12,22 @@ $footer_links = [
 ];
 
 $hero          = $data['hero']          ?? [];
+$design        = $data['design']        ?? [];
 $selected      = $data['selected_work'] ?? [];
 $categories    = $data['categories']    ?? [];
 $notes         = $data['notes']         ?? [];
+
+function home_hex_color($value, string $fallback): string {
+    return is_string($value) && preg_match('/^#[0-9A-Fa-f]{6}$/', $value) ? $value : $fallback;
+}
+$home_style = sprintf(
+    '--home-bg:%s;--home-text:%s;--home-muted:%s;--home-accent:%s;--home-card:%s;',
+    home_hex_color($design['background_color'] ?? null, '#f8f6f3'),
+    home_hex_color($design['text_color'] ?? null, '#1c1917'),
+    home_hex_color($design['muted_text_color'] ?? null, '#57534e'),
+    home_hex_color($design['accent_color'] ?? null, '#047857'),
+    home_hex_color($design['card_background_color'] ?? null, '#ffffff')
+);
 
 $selected_projects = [];
 foreach (($selected['project_ids'] ?? []) as $pid) {
@@ -23,7 +36,7 @@ foreach (($selected['project_ids'] ?? []) as $pid) {
 }
 ?>
 <?php include __DIR__ . '/includes/partials/head.php'; ?>
-<body class="page-shell bg-stone-50 text-stone-900 antialiased transition-colors duration-300 dark:bg-stone-950 dark:text-stone-100">
+<body class="home-page page-shell bg-stone-50 text-stone-900 antialiased transition-colors duration-300 dark:bg-stone-950 dark:text-stone-100" style="<?= e($home_style) ?>">
   <div class="relative min-h-screen overflow-x-clip">
     <div class="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(circle_at_top,rgba(120,113,108,0.10),transparent_60%)] dark:bg-[radial-gradient(circle_at_top,rgba(231,229,228,0.08),transparent_60%)]"></div>
 
@@ -34,9 +47,9 @@ foreach (($selected['project_ids'] ?? []) as $pid) {
       <section class="mx-auto max-w-7xl px-6 pb-20 pt-16 lg:px-10 lg:pb-28 lg:pt-24">
         <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <div class="max-w-3xl">
-            <p class="mb-4 text-xs uppercase tracking-[0.24em] text-stone-500 dark:text-stone-400"><?= te($hero['kicker'] ?? []) ?></p>
-            <h1 class="muted-heading max-w-4xl text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl lg:text-6xl dark:text-stone-100"><?= te($hero['title'] ?? []) ?></h1>
-            <p class="muted-copy mt-6 max-w-2xl text-base leading-8 text-stone-600 dark:text-stone-300"><?= te($hero['body'] ?? []) ?></p>
+            <p class="home-hero-kicker mb-4 text-xs uppercase tracking-[0.24em] text-stone-500 dark:text-stone-400"><?= te($hero['kicker'] ?? []) ?></p>
+            <h1 class="home-hero-title muted-heading max-w-4xl text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl lg:text-6xl dark:text-stone-100"><?= te($hero['title'] ?? []) ?></h1>
+            <p class="home-muted muted-copy mt-6 max-w-2xl text-base leading-8 text-stone-600 dark:text-stone-300"><?= te($hero['body'] ?? []) ?></p>
             <?php if (!empty($hero['meta_items'])): ?>
               <div class="mt-10 flex flex-wrap items-center gap-4 text-sm text-stone-500 dark:text-stone-400">
                 <?php $first = true; foreach ($hero['meta_items'] as $mi): ?>

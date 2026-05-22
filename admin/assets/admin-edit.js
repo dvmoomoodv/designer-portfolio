@@ -12,6 +12,51 @@
   function updateStatus() {
     var el = document.getElementById('saveStatus');
     if (el) el.textContent = '저장되지 않은 변경사항이 있습니다.';
+    applyHomePreviewColors();
+  }
+
+  document.querySelectorAll('[data-color-picker]').forEach(function (picker) {
+    var text = picker.parentNode.querySelector('[data-color-field]');
+    if (!text) return;
+    picker.addEventListener('input', function () {
+      text.value = picker.value;
+      text.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    text.addEventListener('input', function () {
+      if (/^#[0-9A-Fa-f]{6}$/.test(text.value)) picker.value = text.value;
+    });
+  });
+
+  document.querySelectorAll('[data-preview-refresh]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var iframe = document.querySelector('[data-admin-preview]');
+      if (iframe) iframe.src = iframe.src.split('?')[0] + '?preview=' + Date.now();
+    });
+  });
+
+  var previewFrame = document.querySelector('[data-admin-preview]');
+  if (previewFrame) previewFrame.addEventListener('load', applyHomePreviewColors);
+
+  function fieldValue(name) {
+    var el = form.querySelector('[name="' + name + '"]');
+    return el ? el.value : '';
+  }
+
+  function applyHomePreviewColors() {
+    var iframe = document.querySelector('[data-admin-preview]');
+    if (!iframe || !iframe.contentDocument) return;
+    var body = iframe.contentDocument.body;
+    if (!body || !body.classList.contains('home-page')) return;
+    var map = {
+      '--home-bg': fieldValue('d[design][background_color]'),
+      '--home-text': fieldValue('d[design][text_color]'),
+      '--home-muted': fieldValue('d[design][muted_text_color]'),
+      '--home-accent': fieldValue('d[design][accent_color]'),
+      '--home-card': fieldValue('d[design][card_background_color]')
+    };
+    Object.keys(map).forEach(function (key) {
+      if (/^#[0-9A-Fa-f]{6}$/.test(map[key])) body.style.setProperty(key, map[key]);
+    });
   }
 
   /* ── details 토글: 화살표 회전 ── */

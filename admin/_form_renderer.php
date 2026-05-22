@@ -30,15 +30,21 @@ function fr_is_multiline(string $key, $v): bool {
     if (preg_match('/body|description|paragraph|text|overview/i', $key)) return true;
     return is_string($v) && strlen($v) > 100;
 }
+function fr_is_color(string $key, $v): bool {
+    return is_string($v) && preg_match('/color/i', $key) && preg_match('/^#[0-9A-Fa-f]{6}$/', $v);
+}
 function fr_label(string $key): string {
     return ucwords(str_replace(['_', '-'], ' ', $key));
 }
 function fr_select_options(string $key): ?array {
-    return match ($key) {
-        'enabled' => ['1' => '사용', '0' => '사용 안 함'],
-        'per_page' => ['3' => '3개씩', '4' => '4개씩', '5' => '5개씩', '6' => '6개씩', '8' => '8개씩', '9' => '9개씩', '12' => '12개씩', '16' => '16개씩', '24' => '24개씩'],
-        default => null,
-    };
+    switch ($key) {
+        case 'enabled':
+            return ['1' => '사용', '0' => '사용 안 함'];
+        case 'per_page':
+            return ['3' => '3개씩', '4' => '4개씩', '5' => '5개씩', '6' => '6개씩', '8' => '8개씩', '9' => '9개씩', '12' => '12개씩', '16' => '16개씩', '24' => '24개씩'];
+        default:
+            return null;
+    }
 }
 function fr_item_summary(array $item, int $i): string {
     $title = '';
@@ -56,9 +62,18 @@ function render_node(string $path, $v, string $key): void {
     elseif  (fr_is_obj_list($v))    render_obj_list($path, $v, fr_label($key));
     elseif  (fr_is_scalar_list($v)) render_scalar_list($path, $v, fr_label($key));
     elseif  (is_array($v))          render_assoc($path, $v, fr_label($key));
+    elseif  (fr_is_color($key, $v)) render_color($path, (string)$v, fr_label($key));
     elseif  (fr_is_image($v))       render_image($path, (string)$v, fr_label($key));
     elseif  (fr_select_options($key)) render_select($path, (string)$v, fr_label($key), fr_select_options($key) ?? []);
     else                            render_scalar($path, $v, fr_label($key), $key);
+}
+
+function render_color(string $path, string $v, string $label): void {
+    echo '<div><label class="admin-label">' . e($label) . '</label>';
+    echo '<div class="flex gap-2">';
+    echo '<input class="h-11 w-16 rounded border border-stone-300 bg-white p-1 dark:border-stone-700 dark:bg-stone-900" type="color" value="' . e($v) . '" data-color-picker>';
+    echo '<input class="admin-input" type="text" name="' . e($path) . '" value="' . e($v) . '" data-color-field>';
+    echo '</div></div>';
 }
 
 function render_select(string $path, string $v, string $label, array $options): void {

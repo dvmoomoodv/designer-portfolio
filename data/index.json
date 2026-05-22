@@ -9,6 +9,13 @@
             "en": "Editorial-style portfolio archive featuring selected work, notes, and visual research."
         }
     },
+    "design": {
+        "background_color": "#f8f6f3",
+        "text_color": "#1c1917",
+        "muted_text_color": "#57534e",
+        "accent_color": "#047857",
+        "card_background_color": "#ffffff"
+    },
     "hero": {
         "kicker": {
             "ko": "",

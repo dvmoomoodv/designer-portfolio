@@ -116,4 +116,15 @@ include __DIR__ . '/_layout_head.php';
   </div>
 </form>
 
+<section class="admin-card mt-8 p-4" data-preview-panel>
+  <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
+    <div>
+      <h2 class="text-lg font-semibold">미리보기</h2>
+      <p class="text-sm text-stone-500 dark:text-stone-400">저장 후 새로고침하면 실제 반영 화면을 확인할 수 있습니다. Home 색상은 입력 중에도 아래 화면에 바로 반영됩니다.</p>
+    </div>
+    <button type="button" class="admin-btn admin-btn--ghost text-sm" data-preview-refresh>미리보기 새로고침</button>
+  </div>
+  <iframe src="../<?= e($preview_map[$page] ?? 'index.php') ?>" data-admin-preview class="h-[520px] w-full rounded-lg border border-stone-200 bg-white dark:border-stone-800"></iframe>
+</section>
+
 <?php include __DIR__ . '/_layout_foot.php'; ?>

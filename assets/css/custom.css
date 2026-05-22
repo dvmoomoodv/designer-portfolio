@@ -34,6 +34,34 @@ body {
     linear-gradient(to bottom, rgba(28, 25, 23, 0.42), transparent 24%);
 }
 
+.home-page.page-shell {
+  background:
+    radial-gradient(circle at top, color-mix(in srgb, var(--home-accent, #047857) 14%, transparent), transparent 36%),
+    var(--home-bg, #f8f6f3);
+  color: var(--home-text, #1c1917);
+}
+
+.home-page .home-hero-title,
+.home-page .surface-title {
+  color: var(--home-text, #1c1917) !important;
+}
+
+.home-page .home-hero-kicker,
+.home-page .meta-link:hover {
+  color: var(--home-accent, #047857) !important;
+}
+
+.home-page .home-muted,
+.home-page .muted-copy,
+.home-page .category-tile .meta {
+  color: var(--home-muted, #57534e) !important;
+}
+
+.home-page .surface-card,
+.home-page .category-tile {
+  background-color: color-mix(in srgb, var(--home-card, #ffffff) 82%, transparent);
+}
+
 .site-header {
   background-color: rgba(248, 246, 243, 0.85);
   border-color: rgba(231, 229, 228, 0.8);
