@@ -3,6 +3,13 @@
     "title":       { "ko": "", "en": "Research" },
     "description": { "ko": "", "en": "Research archive for media cultural studies, data science, and education/CV notes." }
   },
+  "design": {
+    "background_color": "#f8f6f3",
+    "text_color": "#1c1917",
+    "muted_text_color": "#57534e",
+    "accent_color": "#047857",
+    "card_background_color": "#ffffff"
+  },
   "hero": {
     "kicker": { "ko": "", "en": "Research" },
     "title":  { "ko": "", "en": "Research notes across culture, data, and education." },

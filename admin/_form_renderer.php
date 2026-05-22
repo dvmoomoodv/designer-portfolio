@@ -38,6 +38,8 @@ function fr_label(string $key): string {
 }
 function fr_select_options(string $key): ?array {
     switch ($key) {
+        case 'apply_to_all_pages':
+            return ['1' => '전체 페이지에 공통 색상 적용', '0' => '페이지별 색상 사용'];
         case 'enabled':
             return ['1' => '사용', '0' => '사용 안 함'];
         case 'per_page':

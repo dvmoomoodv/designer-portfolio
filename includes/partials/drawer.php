@@ -27,7 +27,7 @@ $active_filter = isset($_GET['filter']) ? (string)$_GET['filter'] : '';
             <?php
               $child_href = (string)($child['href'] ?? '#');
               $child_current = $current_nav === ($child['id'] ?? '')
-                  || ($active_filter !== '' && str_contains($child_href, 'filter=' . rawurlencode($active_filter)));
+                  || ($active_filter !== '' && strpos($child_href, 'filter=' . rawurlencode($active_filter)) !== false);
             ?>
             <a data-nav="<?= e($child['id'] ?? '') ?>" href="<?= e($child_href) ?>" class="drawer-sub-link<?= $child_current ? ' is-active' : '' ?>"><?= te($child['label'] ?? []) ?></a>
           <?php endforeach; ?>

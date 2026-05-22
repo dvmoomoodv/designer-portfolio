@@ -18,7 +18,7 @@ $data  = load_data($page);
  *  - 숫자 인덱스로만 된 배열 → array_values() 로 재인덱스 (삭제/정렬 후 빈 공간 제거)
  *  - 나머지는 재귀 처리
  */
-function normalize_post(mixed $v): mixed {
+function normalize_post($v) {
     if (!is_array($v)) {
         return is_string($v) ? $v : '';
     }
@@ -96,7 +96,7 @@ include __DIR__ . '/_layout_head.php';
   <?= csrf_field() ?>
   <div class="space-y-4">
     <?php foreach ($data as $section_key => $section_val): ?>
-      <?php $open = in_array($section_key, ['page', 'hero', 'pagination'], true); ?>
+      <?php $open = in_array($section_key, ['page', 'design', 'hero', 'pagination'], true); ?>
       <details class="admin-card"<?= $open ? ' open' : '' ?>>
         <summary class="flex cursor-pointer select-none items-center justify-between gap-4 p-5 list-none">
           <span class="font-semibold tracking-wide"><?= e(fr_label($section_key)) ?></span>

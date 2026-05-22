@@ -50,7 +50,7 @@ foreach (($contact['social']['items'] ?? []) as $link) {
                 <?php
                   $child_href = (string)($child['href'] ?? '#');
                   $child_current = $current_nav === ($child['id'] ?? '')
-                      || ($active_filter !== '' && str_contains($child_href, 'filter=' . rawurlencode($active_filter)));
+                      || ($active_filter !== '' && strpos($child_href, 'filter=' . rawurlencode($active_filter)) !== false);
                 ?>
                 <a data-nav="<?= e($child['id'] ?? '') ?>" href="<?= e($child_href) ?>"<?= $child_current ? ' aria-current="page"' : '' ?>><?= te($child['label'] ?? []) ?></a>
               <?php endforeach; ?>

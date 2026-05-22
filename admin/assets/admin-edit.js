@@ -46,7 +46,7 @@
     var iframe = document.querySelector('[data-admin-preview]');
     if (!iframe || !iframe.contentDocument) return;
     var body = iframe.contentDocument.body;
-    if (!body || !body.classList.contains('home-page')) return;
+    if (!body || !body.classList.contains('page-shell')) return;
     var map = {
       '--home-bg': fieldValue('d[design][background_color]'),
       '--home-text': fieldValue('d[design][text_color]'),

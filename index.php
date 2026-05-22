@@ -12,22 +12,9 @@ $footer_links = [
 ];
 
 $hero          = $data['hero']          ?? [];
-$design        = $data['design']        ?? [];
 $selected      = $data['selected_work'] ?? [];
 $categories    = $data['categories']    ?? [];
 $notes         = $data['notes']         ?? [];
-
-function home_hex_color($value, string $fallback): string {
-    return is_string($value) && preg_match('/^#[0-9A-Fa-f]{6}$/', $value) ? $value : $fallback;
-}
-$home_style = sprintf(
-    '--home-bg:%s;--home-text:%s;--home-muted:%s;--home-accent:%s;--home-card:%s;',
-    home_hex_color($design['background_color'] ?? null, '#f8f6f3'),
-    home_hex_color($design['text_color'] ?? null, '#1c1917'),
-    home_hex_color($design['muted_text_color'] ?? null, '#57534e'),
-    home_hex_color($design['accent_color'] ?? null, '#047857'),
-    home_hex_color($design['card_background_color'] ?? null, '#ffffff')
-);
 
 $selected_projects = [];
 foreach (($selected['project_ids'] ?? []) as $pid) {
@@ -36,7 +23,7 @@ foreach (($selected['project_ids'] ?? []) as $pid) {
 }
 ?>
 <?php include __DIR__ . '/includes/partials/head.php'; ?>
-<body class="home-page page-shell bg-stone-50 text-stone-900 antialiased transition-colors duration-300 dark:bg-stone-950 dark:text-stone-100" style="<?= e($home_style) ?>">
+<body class="home-page page-shell bg-stone-50 text-stone-900 antialiased transition-colors duration-300 dark:bg-stone-950 dark:text-stone-100" style="<?= e(page_design_style($data)) ?>">
   <div class="relative min-h-screen overflow-x-clip">
     <div class="pointer-events-none absolute inset-x-0 top-0 h-80 bg-[radial-gradient(circle_at_top,rgba(120,113,108,0.10),transparent_60%)] dark:bg-[radial-gradient(circle_at_top,rgba(231,229,228,0.08),transparent_60%)]"></div>
 

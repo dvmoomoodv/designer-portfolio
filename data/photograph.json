@@ -3,6 +3,13 @@
     "title":       { "ko": "", "en": "Photograph" },
     "description": { "ko": "", "en": "Photography archive for profile, wedding, couple, family, friend, documentary, and CV images." }
   },
+  "design": {
+    "background_color": "#f8f6f3",
+    "text_color": "#1c1917",
+    "muted_text_color": "#57534e",
+    "accent_color": "#047857",
+    "card_background_color": "#ffffff"
+  },
   "hero": {
     "kicker": { "ko": "", "en": "Photograph" },
     "title":  { "ko": "", "en": "Photography archive for people, places, and documentary moments." },

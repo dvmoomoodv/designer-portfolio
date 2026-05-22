@@ -20,7 +20,7 @@ $pager = paginate_array($items, pagination_settings($data, 8));
 $items = $pager['items'];
 ?>
 <?php include __DIR__ . '/includes/partials/head.php'; ?>
-<body class="page-shell bg-stone-50 text-stone-900 antialiased transition-colors duration-300 dark:bg-stone-950 dark:text-stone-100">
+<body class="page-shell bg-stone-50 text-stone-900 antialiased transition-colors duration-300 dark:bg-stone-950 dark:text-stone-100" style="<?= e(page_design_style($data)) ?>">
   <?php include __DIR__ . '/includes/partials/header.php'; ?>
   <?php include __DIR__ . '/includes/partials/drawer.php'; ?>
 

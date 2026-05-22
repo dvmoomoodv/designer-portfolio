@@ -150,3 +150,48 @@ function page_url(array $extra): string
     $path = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: 'index.php');
     return './' . $path . ($query ? '?' . http_build_query($query) : '');
 }
+
+function hex_color($value, string $fallback): string
+{
+    return is_string($value) && preg_match('/^#[0-9A-Fa-f]{6}$/', $value) ? $value : $fallback;
+}
+
+function design_defaults(): array
+{
+    return [
+        'background_color' => '#f8f6f3',
+        'text_color' => '#1c1917',
+        'muted_text_color' => '#57534e',
+        'accent_color' => '#047857',
+        'card_background_color' => '#ffffff',
+    ];
+}
+
+function resolved_design(array $pageData = []): array
+{
+    $siteDesign = site_data()['design'] ?? [];
+    $pageDesign = $pageData['design'] ?? [];
+    $defaults = design_defaults();
+    $applyAll = (string)($siteDesign['apply_to_all_pages'] ?? '0') === '1';
+    $base = array_merge($defaults, is_array($siteDesign) ? $siteDesign : []);
+    if (!$applyAll && is_array($pageDesign)) {
+        $base = array_merge($base, $pageDesign);
+    }
+    foreach ($defaults as $key => $fallback) {
+        $base[$key] = hex_color($base[$key] ?? null, $fallback);
+    }
+    return $base;
+}
+
+function page_design_style(array $pageData = []): string
+{
+    $d = resolved_design($pageData);
+    return sprintf(
+        '--home-bg:%s;--home-text:%s;--home-muted:%s;--home-accent:%s;--home-card:%s;',
+        $d['background_color'],
+        $d['text_color'],
+        $d['muted_text_color'],
+        $d['accent_color'],
+        $d['card_background_color']
+    );
+}

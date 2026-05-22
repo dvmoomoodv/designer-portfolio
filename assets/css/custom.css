@@ -41,24 +41,37 @@ body {
   color: var(--home-text, #1c1917);
 }
 
-.home-page .home-hero-title,
-.home-page .surface-title {
+.page-shell[style] {
+  background:
+    radial-gradient(circle at top, color-mix(in srgb, var(--home-accent, #047857) 12%, transparent), transparent 36%),
+    var(--home-bg, #f8f6f3);
+  color: var(--home-text, #1c1917);
+}
+
+.page-shell[style] .muted-heading,
+.page-shell[style] .surface-title,
+.home-page .home-hero-title {
   color: var(--home-text, #1c1917) !important;
 }
 
-.home-page .home-hero-kicker,
-.home-page .meta-link:hover {
+.page-shell[style] .meta-link:hover,
+.page-shell[style] .surface-link:hover,
+.home-page .home-hero-kicker {
   color: var(--home-accent, #047857) !important;
 }
 
-.home-page .home-muted,
-.home-page .muted-copy,
-.home-page .category-tile .meta {
+.page-shell[style] .muted-copy,
+.page-shell[style] .category-tile .meta,
+.page-shell[style] .text-stone-500,
+.page-shell[style] .text-stone-600,
+.home-page .home-muted {
   color: var(--home-muted, #57534e) !important;
 }
 
-.home-page .surface-card,
-.home-page .category-tile {
+.page-shell[style] .surface-card,
+.page-shell[style] .surface-band,
+.page-shell[style] .surface-subtle,
+.page-shell[style] .category-tile {
   background-color: color-mix(in srgb, var(--home-card, #ffffff) 82%, transparent);
 }
 
