@@ -106,6 +106,102 @@ $preview_map = [
     'contact'    => 'contact.php',
 ];
 
+$common_guide = [
+    '색상은 #ffffff 형식의 6자리 HEX 값만 저장됩니다. 잘못된 값은 기존값 또는 기본값으로 자동 보정됩니다.',
+    '이미지는 업로드 후에도 반드시 저장 버튼을 눌러야 실제 데이터에 반영됩니다.',
+    '목록 항목은 추가, 삭제, 위/아래 이동 후 저장하면 순서가 그대로 사이트에 반영됩니다.',
+    '한국어 입력칸이 비어 있으면 사이트에서는 영문 값이 대신 표시됩니다.',
+];
+
+$page_guides = [
+    'site' => [
+        'title' => '사이트 공통 / 메뉴 저장 기준',
+        'items' => [
+            'Brand는 상단 로고 텍스트에 반영됩니다.',
+            'Nav는 상단 큰 메뉴와 드롭다운 소항목에 반영됩니다. href 값은 ./page.php 또는 ./page.php?filter=id 형식으로 입력하세요.',
+            'Design의 Apply To All Pages를 전체 적용으로 바꾸면 모든 페이지가 site의 색상 기준을 따릅니다.',
+        ],
+    ],
+    'index' => [
+        'title' => 'Home 저장 기준',
+        'items' => [
+            'Design은 Home 색상입니다. 단, site에서 전체 적용이 켜져 있으면 site 색상이 우선합니다.',
+            'Hero image는 메인 첫 화면 우측 이미지에 반영됩니다.',
+            'Selected Work의 project_ids는 projects.json에 있는 프로젝트 id와 같아야 표시됩니다.',
+            'Categories의 href는 클릭 시 이동할 페이지/필터 주소입니다.',
+        ],
+    ],
+    'about' => [
+        'title' => 'About Me 저장 기준',
+        'items' => [
+            'Side Nav의 id는 about.php 안의 섹션 앵커와 연결됩니다. 예: story, education, cv',
+            'Disciplines는 Edu 영역 카드로 표시됩니다.',
+            'Experience는 CV 영역의 경력/설명 목록으로 표시됩니다.',
+        ],
+    ],
+    'work' => [
+        'title' => 'Concept Art 저장 기준',
+        'items' => [
+            'Filters의 id는 프로젝트 category_id와 같아야 필터가 정상 작동합니다.',
+            'Pagination의 Per Page는 한 페이지에 보일 프로젝트 수입니다.',
+            '실제 카드 내용은 Projects 편집 화면에서 수정합니다.',
+        ],
+    ],
+    'research' => [
+        'title' => 'Research 저장 기준',
+        'items' => [
+            'Filters의 id와 각 item의 category_id가 같아야 필터가 정상 작동합니다.',
+            'source_url이 http로 시작하면 새 창으로 열립니다. 비워두면 링크는 # 처리됩니다.',
+            'Pagination의 Per Page는 한 페이지에 보일 글 개수입니다.',
+        ],
+    ],
+    'photograph' => [
+        'title' => 'Photography 저장 기준',
+        'items' => [
+            'Filters의 id와 각 사진 item의 category_id가 같아야 필터가 정상 작동합니다.',
+            'image는 썸네일과 클릭 확대 이미지에 같이 사용됩니다.',
+            'Pagination의 Per Page는 한 페이지에 보일 사진 개수입니다.',
+        ],
+    ],
+    'doodle' => [
+        'title' => 'Doodle & Scribble 저장 기준',
+        'items' => [
+            'category_id는 doodle 또는 scribble처럼 Filters의 id와 맞춰주세요.',
+            'Pagination의 Per Page는 한 페이지에 보일 드로잉/낙서 개수입니다.',
+            'image_alt는 이미지 설명이며 접근성과 검색에 사용됩니다.',
+        ],
+    ],
+    'projects' => [
+        'title' => 'Projects 저장 기준',
+        'items' => [
+            'id는 다른 곳에서 참조되므로 가능한 한 변경하지 않는 것이 안전합니다.',
+            'category_id는 Concept Art 필터 id와 같아야 필터링됩니다.',
+            'cover는 목록 카드 이미지이고, detail.gallery_images는 프로젝트 상세 갤러리 이미지입니다.',
+        ],
+    ],
+    'resume' => [
+        'title' => 'Resume 저장 기준',
+        'items' => [
+            'Experience는 경력 목록, Capabilities는 역량 카드로 표시됩니다.',
+            'Contact Card의 address는 하단 연락 카드에 표시됩니다.',
+            'Resume은 현재 상단 메뉴에는 없지만 미리보기와 직접 URL에서 확인 가능합니다.',
+        ],
+    ],
+    'contact' => [
+        'title' => 'Contact 저장 기준',
+        'items' => [
+            'Email address는 mailto 링크로 사용됩니다.',
+            'Social items의 href는 외부 링크 주소입니다. https:// 포함을 권장합니다.',
+            'Brand와 Worked With는 상단 Contact 드롭다운의 소항목 앵커와 연결됩니다.',
+        ],
+    ],
+];
+
+$guide = $page_guides[$page] ?? [
+    'title' => '저장 기준',
+    'items' => ['필드 수정 후 저장하면 해당 JSON 데이터와 연결된 페이지에 반영됩니다.'],
+];
+
 $admin_title = $page_labels[$page] ?? $page;
 include __DIR__ . '/_layout_head.php';
 ?>
@@ -123,6 +219,34 @@ include __DIR__ . '/_layout_head.php';
        class="admin-btn admin-btn--ghost text-sm">↗ 미리보기</a>
   </div>
 </div>
+
+<details class="admin-card mb-6">
+  <summary class="flex cursor-pointer select-none items-center justify-between gap-4 p-5 list-none">
+    <span class="flex items-center gap-3 font-semibold tracking-wide">
+      <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-stone-900 text-sm text-white dark:bg-stone-100 dark:text-stone-900">?</span>
+      <?= e($guide['title']) ?>
+    </span>
+    <span class="text-xs text-stone-400 transition-transform" data-chevron>▾</span>
+  </summary>
+  <div class="grid gap-5 border-t border-stone-200 p-5 text-sm leading-7 text-stone-600 md:grid-cols-2 dark:border-stone-800 dark:text-stone-300">
+    <div>
+      <p class="mb-2 font-semibold text-stone-800 dark:text-stone-100">이 페이지 기준</p>
+      <ul class="list-disc space-y-1 pl-5">
+        <?php foreach (($guide['items'] ?? []) as $item): ?>
+          <li><?= e($item) ?></li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+    <div>
+      <p class="mb-2 font-semibold text-stone-800 dark:text-stone-100">공통 저장 기준</p>
+      <ul class="list-disc space-y-1 pl-5">
+        <?php foreach ($common_guide as $item): ?>
+          <li><?= e($item) ?></li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+  </div>
+</details>
 
 <?php if ($flash === 'success'): ?>
   <div class="admin-flash admin-flash--success mb-6"><?= e($flash_message) ?></div>
