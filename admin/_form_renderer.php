@@ -77,7 +77,7 @@ function render_image(string $path, string $v, string $label): void {
     if ($v) echo '<img src="' . e($v) . '" class="h-14 w-14 flex-shrink-0 rounded object-cover border border-stone-200 dark:border-stone-800" alt="preview">';
     echo '<div class="flex-1 space-y-1">';
     echo '<input class="admin-input" type="text" name="' . e($path) . '" value="' . e($v) . '" data-image-path>';
-    echo '<button type="button" class="admin-btn admin-btn--ghost text-xs" data-upload-trigger data-upload-target="' . e($path) . '">↑ 이미지 업로드 (Phase 5)</button>';
+    echo '<button type="button" class="admin-btn admin-btn--ghost text-xs" data-upload-trigger data-upload-target="' . e($path) . '">↑ 이미지 업로드</button>';
     echo '</div></div></div>';
 }
 

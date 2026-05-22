@@ -1,10 +1,6 @@
 <?php
 require_once __DIR__ . '/../includes/bootstrap.php';
 
-if (!auth_is_initialized()) {
-    header('Location: ./setup.php');
-    exit;
-}
 if (auth_is_logged_in()) {
     header('Location: ./index.php');
     exit;
@@ -24,8 +20,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     } elseif (!csrf_verify($_POST['csrf_token'] ?? null)) {
         $error = '세션이 만료되었습니다. 다시 시도해주세요.';
     } else {
+        $username = trim((string)($_POST['username'] ?? ''));
         $pw = (string)($_POST['password'] ?? '');
-        if (auth_check_password($pw)) {
+        if (auth_check_credentials($username, $pw)) {
             auth_record_success();
             auth_login();
             $dest = (string)($_POST['next'] ?? './index.php');
@@ -37,7 +34,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
         } else {
             auth_record_failure();
             usleep(400000);
-            $error = '비밀번호가 올바르지 않습니다.';
+            $error = '아이디 또는 비밀번호가 올바르지 않습니다.';
             $lock  = auth_throttle_remaining();
         }
     }
@@ -50,7 +47,7 @@ include __DIR__ . '/_layout_head.php';
 <div class="mx-auto max-w-md py-12">
   <div class="admin-card p-8">
     <h1 class="text-2xl font-semibold tracking-tight">어드민 로그인</h1>
-    <p class="mt-2 text-sm text-stone-500 dark:text-stone-400">rohigraphy.co.kr</p>
+    <p class="mt-2 text-sm text-stone-500 dark:text-stone-400">콘텐츠 수정을 위해 로그인하세요.</p>
 
     <?php if ($error): ?>
       <div class="admin-flash admin-flash--error mt-6"><?= e($error) ?></div>
@@ -62,8 +59,12 @@ include __DIR__ . '/_layout_head.php';
       <?= csrf_field() ?>
       <input type="hidden" name="next" value="<?= e($next) ?>">
       <div>
+        <label class="admin-label" for="username">아이디</label>
+        <input class="admin-input" type="text" name="username" id="username" required autofocus <?= $lock > 0 ? 'disabled' : '' ?>>
+      </div>
+      <div>
         <label class="admin-label" for="password">비밀번호</label>
-        <input class="admin-input" type="password" name="password" id="password" required autofocus <?= $lock > 0 ? 'disabled' : '' ?>>
+        <input class="admin-input" type="password" name="password" id="password" required <?= $lock > 0 ? 'disabled' : '' ?>>
       </div>
       <button type="submit" class="admin-btn admin-btn--primary w-full" <?= $lock > 0 ? 'disabled' : '' ?>>로그인</button>
     </form>

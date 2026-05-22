@@ -57,6 +57,19 @@ $page_labels = [
     'contact'  => 'Contact (contact.json)',
 ];
 
+$preview_map = [
+    'site'       => 'index.php',
+    'index'      => 'index.php',
+    'about'      => 'about.php',
+    'work'       => 'work.php',
+    'research'   => 'research.php',
+    'photograph' => 'photograph.php',
+    'doodle'     => 'doodle.php',
+    'projects'   => 'work.php',
+    'resume'     => 'resume.php',
+    'contact'    => 'contact.php',
+];
+
 $admin_title = $page_labels[$page] ?? $page;
 include __DIR__ . '/_layout_head.php';
 ?>
@@ -65,10 +78,10 @@ include __DIR__ . '/_layout_head.php';
   <div>
     <a href="./index.php" class="text-sm text-stone-500 hover:text-stone-700 dark:text-stone-400 dark:hover:text-stone-200">← 대시보드</a>
     <h1 class="mt-2 text-3xl font-semibold tracking-tight"><?= e($page_labels[$page] ?? $page) ?></h1>
-    <p class="mt-1 text-sm text-stone-500 dark:text-stone-400">필드 편집 후 하단 <strong>저장</strong> 버튼 클릭. 이미지 업로드는 Phase 5에서 추가됩니다.</p>
+    <p class="mt-1 text-sm text-stone-500 dark:text-stone-400">텍스트, 메뉴, 목록, 이미지 경로를 수정할 수 있습니다. 이미지 업로드 후에도 하단 <strong>저장</strong> 버튼을 눌러야 반영됩니다.</p>
   </div>
   <div class="flex gap-3">
-    <a href="../<?= e($page === 'index' ? 'index.php' : ($page === 'projects' ? 'work.php' : $page . '.php')) ?>" target="_blank"
+    <a href="../<?= e($preview_map[$page] ?? 'index.php') ?>" target="_blank"
        class="admin-btn admin-btn--ghost text-sm">↗ 미리보기</a>
   </div>
 </div>

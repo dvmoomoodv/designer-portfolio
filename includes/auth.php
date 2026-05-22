@@ -1,20 +1,13 @@
 <?php
 declare(strict_types=1);
 
-/**
- * 어드민 비밀번호 해시 저장 구조 (data/auth.json):
- *   {
- *     "password_hash": "...",
- *     "created_at":    "ISO8601",
- *     "failed":        { "count": 0, "until": 0 }
- *   }
- *
- * 운영자 1명 전제. 첫 사용 시 admin/setup.php 로 비밀번호 설정.
- */
+/** 고정 어드민 계정. 비밀번호 원문은 저장하지 않고 해시로 비교한다. */
+const ADMIN_FIXED_USERNAME = 'admin';
+const ADMIN_FIXED_PASSWORD_SHA256 = 'fa1f0cb144bfc60d1c7f1b65de5045af00b0186199f4dbae4c521bb99fe4271e';
 
 function auth_is_initialized(): bool
 {
-    return is_file(AUTH_FILE);
+    return true;
 }
 
 function auth_load(): array
@@ -49,22 +42,17 @@ function auth_save(array $auth): void
 
 function auth_set_password(string $plain): void
 {
-    if (strlen($plain) < 8) {
-        throw new InvalidArgumentException('비밀번호는 최소 8자 이상.');
-    }
-    $auth = auth_load();
-    $auth['password_hash'] = password_hash($plain, PASSWORD_DEFAULT);
-    $auth['created_at']    = $auth['created_at'] ?? date('c');
-    $auth['updated_at']    = date('c');
-    $auth['failed']        = ['count' => 0, 'until' => 0];
-    auth_save($auth);
+    throw new LogicException('고정 로그인 방식에서는 비밀번호를 변경할 수 없습니다.');
 }
 
 function auth_check_password(string $plain): bool
 {
-    $auth = auth_load();
-    $hash = $auth['password_hash'] ?? '';
-    return $hash !== '' && password_verify($plain, $hash);
+    return hash_equals(ADMIN_FIXED_PASSWORD_SHA256, hash('sha256', $plain));
+}
+
+function auth_check_credentials(string $username, string $plain): bool
+{
+    return hash_equals(ADMIN_FIXED_USERNAME, $username) && auth_check_password($plain);
 }
 
 /* 단순 lockout: 5회 연속 실패 시 5분 잠금. */
@@ -96,6 +84,7 @@ function auth_login(): void
     session_regenerate_id(true);
     $_SESSION['admin'] = [
         'logged_in' => true,
+        'username'  => ADMIN_FIXED_USERNAME,
         'login_at'  => time(),
     ];
 }
