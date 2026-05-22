@@ -58,25 +58,20 @@ function auth_check_credentials(string $username, string $plain): bool
 /* 단순 lockout: 5회 연속 실패 시 5분 잠금. */
 function auth_throttle_remaining(): int
 {
-    $auth  = auth_load();
-    $until = (int)($auth['failed']['until'] ?? 0);
+    $until = (int)($_SESSION['admin_failed']['until'] ?? 0);
     return max(0, $until - time());
 }
 
 function auth_record_failure(): void
 {
-    $auth   = auth_load();
-    $count  = (int)($auth['failed']['count'] ?? 0) + 1;
+    $count  = (int)($_SESSION['admin_failed']['count'] ?? 0) + 1;
     $until  = $count >= 5 ? time() + 300 : 0;
-    $auth['failed'] = ['count' => $count, 'until' => $until];
-    auth_save($auth);
+    $_SESSION['admin_failed'] = ['count' => $count, 'until' => $until];
 }
 
 function auth_record_success(): void
 {
-    $auth = auth_load();
-    $auth['failed'] = ['count' => 0, 'until' => 0];
-    auth_save($auth);
+    unset($_SESSION['admin_failed']);
 }
 
 function auth_login(): void
