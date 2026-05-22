@@ -1,0 +1,91 @@
+{
+  "page": {
+    "title":       { "ko": "", "en": "Photograph" },
+    "description": { "ko": "", "en": "Photography archive for profile, wedding, couple, family, friend, documentary, and CV images." }
+  },
+  "hero": {
+    "kicker": { "ko": "", "en": "Photograph" },
+    "title":  { "ko": "", "en": "Photography archive for people, places, and documentary moments." },
+    "body":   { "ko": "", "en": "A visual photo index inspired by editorial grids and field photography archives. Browse profile, wedding, couple, family, friend, documentary, and CV-oriented images." }
+  },
+  "filters": [
+    { "id": "all", "label": { "ko": "", "en": "Featured" } },
+    { "id": "profile", "label": { "ko": "", "en": "Profile" } },
+    { "id": "wedding-couple", "label": { "ko": "", "en": "Wedding / Couple" } },
+    { "id": "family-friend", "label": { "ko": "", "en": "Family / Friend" } },
+    { "id": "documentary", "label": { "ko": "", "en": "Documentary" } },
+    { "id": "cv", "label": { "ko": "", "en": "CV" } }
+  ],
+  "items": [
+    {
+      "id": "ph01",
+      "category_id": "documentary",
+      "category_label": { "ko": "", "en": "Documentary" },
+      "title": { "ko": "", "en": "Field light study" },
+      "location": { "ko": "", "en": "Outdoor archive" },
+      "year": "2026",
+      "image": "./assets/images/project-01.svg",
+      "image_alt": { "ko": "", "en": "Documentary photography placeholder" }
+    },
+    {
+      "id": "ph02",
+      "category_id": "profile",
+      "category_label": { "ko": "", "en": "Profile" },
+      "title": { "ko": "", "en": "Portrait session" },
+      "location": { "ko": "", "en": "Studio / natural light" },
+      "year": "2026",
+      "image": "./assets/images/project-02.svg",
+      "image_alt": { "ko": "", "en": "Profile photography placeholder" }
+    },
+    {
+      "id": "ph03",
+      "category_id": "wedding-couple",
+      "category_label": { "ko": "", "en": "Wedding / Couple" },
+      "title": { "ko": "", "en": "Couple story" },
+      "location": { "ko": "", "en": "Ceremony / walk" },
+      "year": "2025",
+      "image": "./assets/images/detail-01.svg",
+      "image_alt": { "ko": "", "en": "Wedding and couple photography placeholder" }
+    },
+    {
+      "id": "ph04",
+      "category_id": "family-friend",
+      "category_label": { "ko": "", "en": "Family / Friend" },
+      "title": { "ko": "", "en": "Family afternoon" },
+      "location": { "ko": "", "en": "Home / park" },
+      "year": "2025",
+      "image": "./assets/images/project-03.svg",
+      "image_alt": { "ko": "", "en": "Family and friend photography placeholder" }
+    },
+    {
+      "id": "ph05",
+      "category_id": "documentary",
+      "category_label": { "ko": "", "en": "Documentary" },
+      "title": { "ko": "", "en": "City texture" },
+      "location": { "ko": "", "en": "Street / travel" },
+      "year": "2024",
+      "image": "./assets/images/detail-02.svg",
+      "image_alt": { "ko": "", "en": "Street documentary photography placeholder" }
+    },
+    {
+      "id": "ph06",
+      "category_id": "cv",
+      "category_label": { "ko": "", "en": "CV" },
+      "title": { "ko": "", "en": "Professional portrait" },
+      "location": { "ko": "", "en": "Portfolio / CV" },
+      "year": "2026",
+      "image": "./assets/images/project-06.svg",
+      "image_alt": { "ko": "", "en": "CV portrait photography placeholder" }
+    },
+    {
+      "id": "ph07",
+      "category_id": "documentary",
+      "category_label": { "ko": "", "en": "Documentary" },
+      "title": { "ko": "", "en": "Landscape memory" },
+      "location": { "ko": "", "en": "Travel archive" },
+      "year": "2024",
+      "image": "./assets/images/detail-03.svg",
+      "image_alt": { "ko": "", "en": "Landscape photography placeholder" }
+    }
+  ]
+}

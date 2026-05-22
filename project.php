@@ -25,14 +25,15 @@ $footer_links = [
 $detail = $project['detail'] ?? null;
 $prev = $index > 0 ? $all_projects[$index - 1] : null;
 $next = ($index >= 0 && $index < count($all_projects) - 1) ? $all_projects[$index + 1] : null;
+$gallery_images = $detail['gallery_images'] ?? [];
 ?>
 <?php include __DIR__ . '/includes/partials/head.php'; ?>
 <body class="page-shell bg-stone-50 text-stone-900 antialiased transition-colors duration-300 dark:bg-stone-950 dark:text-stone-100">
   <?php include __DIR__ . '/includes/partials/header.php'; ?>
   <?php include __DIR__ . '/includes/partials/drawer.php'; ?>
 
-  <main class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
-    <section class="surface-band grid gap-10 px-4 py-6 lg:grid-cols-[0.55fr_1.45fr] lg:items-end lg:px-6">
+  <main class="project-detail-page mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
+    <section class="project-detail-hero grid gap-10 lg:grid-cols-[0.42fr_1.58fr] lg:items-start">
       <div class="lg:pr-6">
         <p class="text-xs uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400"><?= te($detail['kicker'] ?? []) ?: te($project['category_label'] ?? []) . ' · ' . e($project['year'] ?? '') ?></p>
         <h1 class="muted-heading mt-3 text-4xl font-semibold tracking-tight sm:text-5xl"><?= te($project['title'] ?? []) ?></h1>
@@ -47,8 +48,8 @@ $next = ($index >= 0 && $index < count($all_projects) - 1) ? $all_projects[$inde
           </dl>
         <?php endif; ?>
       </div>
-      <a href="<?= e($detail['hero_image'] ?? $project['cover'] ?? '') ?>" data-image-frame class="image-frame surface-card overflow-hidden border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900">
-        <img src="<?= e($detail['hero_image'] ?? $project['cover'] ?? '') ?>" alt="<?= te($detail['hero_alt'] ?? $project['cover_alt'] ?? []) ?>" class="aspect-[16/10] w-full object-cover">
+      <a href="<?= e($detail['hero_image'] ?? $project['cover'] ?? '') ?>" data-image-frame data-lightbox class="image-frame concept-image-link project-hero-image">
+        <img src="<?= e($detail['hero_image'] ?? $project['cover'] ?? '') ?>" alt="<?= te($detail['hero_alt'] ?? $project['cover_alt'] ?? []) ?>">
       </a>
     </section>
 
@@ -102,10 +103,10 @@ $next = ($index >= 0 && $index < count($all_projects) - 1) ? $all_projects[$inde
               <h2 class="surface-title mt-2 text-2xl font-semibold tracking-tight"><?= te($detail['gallery_title'] ?? []) ?></h2>
             </div>
           </div>
-          <div class="grid gap-6 md:grid-cols-2">
+          <div class="concept-gallery project-gallery-grid">
             <?php foreach ($detail['gallery_images'] as $i => $g): ?>
-              <a href="<?= e($g['src'] ?? '') ?>" data-image-frame class="image-frame surface-card overflow-hidden border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900<?= $i === count($detail['gallery_images']) - 1 && count($detail['gallery_images']) % 2 === 1 ? ' md:col-span-2' : '' ?>">
-                <img src="<?= e($g['src'] ?? '') ?>" alt="<?= te($g['alt'] ?? []) ?>" class="<?= $i === count($detail['gallery_images']) - 1 && count($detail['gallery_images']) % 2 === 1 ? 'aspect-[16/8]' : 'aspect-[5/4]' ?> w-full object-cover">
+              <a href="<?= e($g['src'] ?? '') ?>" data-image-frame data-lightbox class="image-frame concept-image-link concept-gallery-item <?= $i === 0 ? 'concept-wide' : 'concept-small' ?>">
+                <img src="<?= e($g['src'] ?? '') ?>" alt="<?= te($g['alt'] ?? []) ?>" loading="lazy">
               </a>
             <?php endforeach; ?>
           </div>

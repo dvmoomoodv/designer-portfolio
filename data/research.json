@@ -1,0 +1,83 @@
+{
+  "page": {
+    "title":       { "ko": "", "en": "Research" },
+    "description": { "ko": "", "en": "Research archive for media cultural studies, data science, and education/CV notes." }
+  },
+  "hero": {
+    "kicker": { "ko": "", "en": "Research" },
+    "title":  { "ko": "", "en": "Research notes across culture, data, and education." },
+    "body":   { "ko": "", "en": "A reading-led archive that collects essays, references, datasets, learning notes, and CV-oriented research material." }
+  },
+  "filters": [
+    { "id": "all", "label": { "ko": "", "en": "Featured" } },
+    { "id": "media-cultural-studies", "label": { "ko": "", "en": "Media Cultural Studies" } },
+    { "id": "data-science", "label": { "ko": "", "en": "Data Science" } },
+    { "id": "edu-cv", "label": { "ko": "", "en": "Edu / CV" } }
+  ],
+  "items": [
+    {
+      "id": "r01",
+      "category_id": "media-cultural-studies",
+      "category_label": { "ko": "", "en": "Media Cultural Studies" },
+      "title": { "ko": "", "en": "Animation industry notes and visual culture references" },
+      "excerpt": { "ko": "", "en": "Collected reading on animation news, box office discourse, fandom, distribution, and the way moving-image culture circulates online." },
+      "meta": { "ko": "", "en": "Reading archive · 2026" },
+      "thumbnail": "./assets/images/project-01.svg",
+      "thumbnail_alt": { "ko": "", "en": "Media cultural studies research thumbnail" },
+      "source_url": "https://www.cartoonbrew.com/box-office-report"
+    },
+    {
+      "id": "r02",
+      "category_id": "media-cultural-studies",
+      "category_label": { "ko": "", "en": "Media Cultural Studies" },
+      "title": { "ko": "", "en": "Platform aesthetics and audience memory" },
+      "excerpt": { "ko": "", "en": "Notes on how streaming platforms, trailers, fan edits, and review media reshape the memory of animation and character design." },
+      "meta": { "ko": "", "en": "Essay note · 2025" },
+      "thumbnail": "./assets/images/detail-01.svg",
+      "thumbnail_alt": { "ko": "", "en": "Platform aesthetics research thumbnail" },
+      "source_url": ""
+    },
+    {
+      "id": "r03",
+      "category_id": "data-science",
+      "category_label": { "ko": "", "en": "Data Science" },
+      "title": { "ko": "", "en": "Dataset thinking for visual archives" },
+      "excerpt": { "ko": "", "en": "A practical research track for tagging images, comparing references, reading metadata, and building small datasets from portfolio material." },
+      "meta": { "ko": "", "en": "Data note · 2026" },
+      "thumbnail": "./assets/images/project-02.svg",
+      "thumbnail_alt": { "ko": "", "en": "Data science research thumbnail" },
+      "source_url": ""
+    },
+    {
+      "id": "r04",
+      "category_id": "data-science",
+      "category_label": { "ko": "", "en": "Data Science" },
+      "title": { "ko": "", "en": "Research workflow: collect, classify, compare" },
+      "excerpt": { "ko": "", "en": "Workflow notes for turning visual references into structured collections that support concept art, writing, and portfolio development." },
+      "meta": { "ko": "", "en": "Workflow · 2025" },
+      "thumbnail": "./assets/images/detail-02.svg",
+      "thumbnail_alt": { "ko": "", "en": "Research workflow thumbnail" },
+      "source_url": ""
+    },
+    {
+      "id": "r05",
+      "category_id": "edu-cv",
+      "category_label": { "ko": "", "en": "Edu / CV" },
+      "title": { "ko": "", "en": "Education, CV, and research positioning" },
+      "excerpt": { "ko": "", "en": "A compact index for education history, CV framing, academic interests, and professional research statements." },
+      "meta": { "ko": "", "en": "CV note · 2026" },
+      "thumbnail": "./assets/images/project-06.svg",
+      "thumbnail_alt": { "ko": "", "en": "Education and CV research thumbnail" },
+      "source_url": "./resume.php"
+    }
+  ],
+  "sidebar": {
+    "kicker": { "ko": "", "en": "Research Index" },
+    "title":  { "ko": "", "en": "Three lanes" },
+    "items": [
+      { "id": "s1", "label": { "ko": "", "en": "Media Cultural Studies" } },
+      { "id": "s2", "label": { "ko": "", "en": "Data Science" } },
+      { "id": "s3", "label": { "ko": "", "en": "Edu / CV" } }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "page": {
+    "title":       { "ko": "", "en": "Doodle & Scribble" },
+    "description": { "ko": "", "en": "A casual archive of drawing studies, scribbles, thumbnails, notes, and rough ideas." }
+  },
+  "hero": {
+    "kicker": { "ko": "", "en": "Doodle & Scribble" },
+    "title":  { "ko": "", "en": "Loose drawings, rough studies, and visual notes." },
+    "body":   { "ko": "", "en": "A lighter archive for sketches, quick observations, small visual experiments, thumbnails, and unfinished ideas that still help the work grow." }
+  },
+  "filters": [
+    { "id": "all", "label": { "ko": "", "en": "Featured" } },
+    { "id": "doodle", "label": { "ko": "", "en": "Doodle" } },
+    { "id": "scribble", "label": { "ko": "", "en": "Scribble" } }
+  ],
+  "items": [
+    { "id": "d01", "category_id": "doodle", "category_label": { "ko": "", "en": "Doodle" }, "title": { "ko": "", "en": "Gesture warmups" }, "year": "2026", "image": "./assets/images/project-01.svg", "image_alt": { "ko": "", "en": "Gesture drawing study placeholder" } },
+    { "id": "d02", "category_id": "scribble", "category_label": { "ko": "", "en": "Scribble" }, "title": { "ko": "", "en": "Loose morning marks" }, "year": "2026", "image": "./assets/images/detail-01.svg", "image_alt": { "ko": "", "en": "Loose scribble placeholder" } },
+    { "id": "d03", "category_id": "doodle", "category_label": { "ko": "", "en": "Doodle" }, "title": { "ko": "", "en": "Storyboard thumbnail notes" }, "year": "2025", "image": "./assets/images/project-02.svg", "image_alt": { "ko": "", "en": "Storyboard thumbnail note placeholder" } },
+    { "id": "d04", "category_id": "scribble", "category_label": { "ko": "", "en": "Scribble" }, "title": { "ko": "", "en": "Character face trials" }, "year": "2025", "image": "./assets/images/detail-02.svg", "image_alt": { "ko": "", "en": "Character sketch placeholder" } },
+    { "id": "d05", "category_id": "doodle", "category_label": { "ko": "", "en": "Doodle" }, "title": { "ko": "", "en": "Small prop silhouettes" }, "year": "2025", "image": "./assets/images/project-03.svg", "image_alt": { "ko": "", "en": "Object sketch placeholder" } },
+    { "id": "d06", "category_id": "doodle", "category_label": { "ko": "", "en": "Doodle" }, "title": { "ko": "", "en": "Shape and balance study" }, "year": "2024", "image": "./assets/images/detail-03.svg", "image_alt": { "ko": "", "en": "Shape study placeholder" } },
+    { "id": "d07", "category_id": "scribble", "category_label": { "ko": "", "en": "Scribble" }, "title": { "ko": "", "en": "Margin drawings" }, "year": "2024", "image": "./assets/images/project-04.svg", "image_alt": { "ko": "", "en": "Margin drawing placeholder" } },
+    { "id": "d08", "category_id": "scribble", "category_label": { "ko": "", "en": "Scribble" }, "title": { "ko": "", "en": "Color note fragment" }, "year": "2024", "image": "./assets/images/project-05.svg", "image_alt": { "ko": "", "en": "Color note placeholder" } },
+    { "id": "d09", "category_id": "doodle", "category_label": { "ko": "", "en": "Doodle" }, "title": { "ko": "", "en": "Pose alternatives" }, "year": "2023", "image": "./assets/images/project-06.svg", "image_alt": { "ko": "", "en": "Pose alternatives placeholder" } }
+  ],
+  "pagination": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "→"]
+}

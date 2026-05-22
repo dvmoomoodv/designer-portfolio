@@ -5,7 +5,7 @@ include   __DIR__ . '/_form_renderer.php';
 if (!auth_is_initialized()) { header('Location: ./setup.php'); exit; }
 auth_require();
 
-const EDITABLE_PAGES = ['site', 'index', 'about', 'work', 'projects', 'resume', 'contact'];
+const EDITABLE_PAGES = ['site', 'index', 'about', 'work', 'research', 'photograph', 'doodle', 'projects', 'resume', 'contact'];
 $page = in_array($_GET['page'] ?? '', EDITABLE_PAGES, true) ? (string)$_GET['page'] : '';
 if (!$page) { header('Location: ./index.php'); exit; }
 
@@ -49,6 +49,9 @@ $page_labels = [
     'index'    => '메인 (index.json)',
     'about'    => 'About (about.json)',
     'work'     => 'Work (work.json)',
+    'research' => 'Research (research.json)',
+    'photograph' => 'Photograph (photograph.json)',
+    'doodle'   => 'Doodle & Scribble (doodle.json)',
     'projects' => '프로젝트 목록 (projects.json)',
     'resume'   => 'Resume (resume.json)',
     'contact'  => 'Contact (contact.json)',

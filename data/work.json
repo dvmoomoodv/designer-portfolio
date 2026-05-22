@@ -1,20 +1,19 @@
 {
   "page": {
-    "title":       { "ko": "", "en": "Work" },
-    "description": { "ko": "", "en": "Selected work archive across disciplines and ongoing studies." }
+    "title":       { "ko": "", "en": "Concept Art" },
+    "description": { "ko": "", "en": "Storyboard, concept art, workflow, study, sketch, and CV/Edit archive." }
   },
   "hero": {
-    "kicker": { "ko": "", "en": "Archive" },
-    "title":  { "ko": "", "en": "Selected work across disciplines and ongoing studies." },
-    "body":   { "ko": "", "en": "This archive groups projects by medium, context, and process. The structure is designed to be easy to extend as new work, writing, and sketchbook material are added." }
+    "kicker": { "ko": "", "en": "Concept Art" },
+    "title":  { "ko": "", "en": "Storyboard & Concept Art." },
+    "body":   { "ko": "", "en": "Explore concept art, storyboard, workflow notes, sheets, studies, sketches, and CV/Edit materials." }
   },
   "filters": [
-    { "id": "all",          "label": { "ko": "", "en": "Featured" }            },
-    { "id": "professional", "label": { "ko": "", "en": "Professional Work" }   },
-    { "id": "visual",       "label": { "ko": "", "en": "Visual Development" }  },
-    { "id": "environment",  "label": { "ko": "", "en": "Environment Design" } },
-    { "id": "illustration", "label": { "ko": "", "en": "Illustration" }        },
-    { "id": "sketchbook",   "label": { "ko": "", "en": "Sketchbook" }          },
-    { "id": "experimental", "label": { "ko": "", "en": "Experimental" }        }
+    { "id": "all",                "label": { "ko": "", "en": "Featured" }           },
+    { "id": "storyboard",         "label": { "ko": "", "en": "Storyboard" }         },
+    { "id": "water-flows",        "label": { "ko": "", "en": "Water Flows" }        },
+    { "id": "sheet-tweet",        "label": { "ko": "", "en": "Sheet & Tweet" }      },
+    { "id": "environment-design", "label": { "ko": "", "en": "Environment Design" } },
+    { "id": "edu-cv",             "label": { "ko": "", "en": "Edu / CV" }           }
   ]
 }

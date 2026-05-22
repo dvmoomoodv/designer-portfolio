@@ -66,77 +66,59 @@
     "categories": {
         "kicker": {
             "ko": "",
-            "en": "Categories"
+            "en": "Category"
         },
         "title": {
             "ko": "",
-            "en": "Portfolio overview"
+            "en": "Browse by work type"
         },
         "items": [
             {
-                "id": "c1",
+                "id": "storyboard",
+                "href": "./work.php?filter=storyboard",
                 "label": {
                     "ko": "",
-                    "en": "Professional Work"
+                    "en": "Storyboard"
                 },
                 "meta": {
                     "ko": "",
-                    "en": "12 projects"
+                    "en": "Sequential scenes, composition, and narrative planning."
                 }
             },
             {
-                "id": "c2",
+                "id": "sheet-layout",
+                "href": "./work.php?filter=sheet-layout",
                 "label": {
                     "ko": "",
-                    "en": "Visual Development"
+                    "en": "Sheet & Layout"
                 },
                 "meta": {
                     "ko": "",
-                    "en": "08 projects"
+                    "en": "Sheets, model layouts, and visual organization."
                 }
             },
             {
-                "id": "c3",
+                "id": "study",
+                "href": "./work.php?filter=study",
                 "label": {
                     "ko": "",
-                    "en": "Environment Design"
+                    "en": "Study"
                 },
                 "meta": {
                     "ko": "",
-                    "en": "06 projects"
+                    "en": "Practice studies, observations, and visual exercises."
                 }
             },
             {
-                "id": "c4",
+                "id": "sketch",
+                "href": "./work.php?filter=sketch",
                 "label": {
                     "ko": "",
-                    "en": "Illustration"
+                    "en": "Sketch"
                 },
                 "meta": {
                     "ko": "",
-                    "en": "14 works"
-                }
-            },
-            {
-                "id": "c5",
-                "label": {
-                    "ko": "",
-                    "en": "Sketchbook"
-                },
-                "meta": {
-                    "ko": "",
-                    "en": "Ongoing archive"
-                }
-            },
-            {
-                "id": "c6",
-                "label": {
-                    "ko": "",
-                    "en": "Experimental"
-                },
-                "meta": {
-                    "ko": "",
-                    "en": "Research studies"
+                    "en": "Loose drawings, rough ideas, and early explorations."
                 }
             }
         ]

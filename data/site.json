@@ -5,10 +5,68 @@
   },
   "nav": [
     { "id": "index",   "href": "./index.php",   "label": { "ko": "", "en": "Home" } },
-    { "id": "work",    "href": "./work.php",    "label": { "ko": "", "en": "Work" } },
-    { "id": "about",   "href": "./about.php",   "label": { "ko": "", "en": "About" } },
-    { "id": "resume",  "href": "./resume.php",  "label": { "ko": "", "en": "Resume" } },
-    { "id": "contact", "href": "./contact.php", "label": { "ko": "", "en": "Contact" } }
+    {
+      "id": "about",
+      "href": "./about.php",
+      "label": { "ko": "", "en": "About Me" },
+      "children": [
+        { "id": "about-story", "href": "./about.php#story", "label": { "ko": "", "en": "Story" } },
+        { "id": "about-edu",   "href": "./about.php#education", "label": { "ko": "", "en": "Edu" } },
+        { "id": "about-cv",    "href": "./about.php#cv", "label": { "ko": "", "en": "CV" } }
+      ]
+    },
+    {
+      "id": "work",
+      "href": "./work.php",
+      "label": { "ko": "", "en": "Concept Art" },
+      "children": [
+        { "id": "work-storyboard", "href": "./work.php?filter=storyboard", "label": { "ko": "", "en": "Storyboard" } },
+        { "id": "work-water",      "href": "./work.php?filter=water-flows", "label": { "ko": "", "en": "Water Flows" } },
+        { "id": "work-sheet",      "href": "./work.php?filter=sheet-tweet", "label": { "ko": "", "en": "Sheet & Tweet" } },
+        { "id": "work-env",        "href": "./work.php?filter=environment-design", "label": { "ko": "", "en": "Environment Design" } },
+        { "id": "work-cv",         "href": "./work.php?filter=edu-cv", "label": { "ko": "", "en": "Edu / CV" } }
+      ]
+    },
+    {
+      "id": "research",
+      "href": "./research.php",
+      "label": { "ko": "", "en": "Research" },
+      "children": [
+        { "id": "research-media", "href": "./research.php?filter=media-cultural-studies", "label": { "ko": "", "en": "Media Cultural Studies" } },
+        { "id": "research-data",  "href": "./research.php?filter=data-science", "label": { "ko": "", "en": "Data Science" } },
+        { "id": "research-cv",    "href": "./research.php?filter=edu-cv", "label": { "ko": "", "en": "Edu / CV" } }
+      ]
+    },
+    {
+      "id": "photograph",
+      "href": "./photograph.php",
+      "label": { "ko": "", "en": "Photography" },
+      "children": [
+        { "id": "photo-profile", "href": "./photograph.php?filter=profile", "label": { "ko": "", "en": "Profile" } },
+        { "id": "photo-wedding", "href": "./photograph.php?filter=wedding-couple", "label": { "ko": "", "en": "Wedding / Couple" } },
+        { "id": "photo-family",  "href": "./photograph.php?filter=family-friend", "label": { "ko": "", "en": "Family / Friend" } },
+        { "id": "photo-doc",     "href": "./photograph.php?filter=documentary", "label": { "ko": "", "en": "Documentary" } },
+        { "id": "photo-cv",      "href": "./photograph.php?filter=cv", "label": { "ko": "", "en": "CV" } }
+      ]
+    },
+    {
+      "id": "doodle",
+      "href": "./doodle.php",
+      "label": { "ko": "", "en": "Doodle & Scribble" },
+      "children": [
+        { "id": "doodle-main", "href": "./doodle.php?filter=doodle", "label": { "ko": "", "en": "Doodle" } },
+        { "id": "doodle-scribble", "href": "./doodle.php?filter=scribble", "label": { "ko": "", "en": "Scribble" } }
+      ]
+    },
+    {
+      "id": "contact",
+      "href": "./contact.php",
+      "label": { "ko": "", "en": "Contact" },
+      "children": [
+        { "id": "contact-brand", "href": "./contact.php#brand", "label": { "ko": "", "en": "The Brand" } },
+        { "id": "contact-worked", "href": "./contact.php#worked-with", "label": { "ko": "", "en": "I worked with" } }
+      ]
+    }
   ],
   "footer": {
     "copyright": { "ko": "", "en": "Archive Portfolio © 2026" }

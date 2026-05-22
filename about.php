@@ -6,15 +6,14 @@ $current_nav  = 'about';
 $page_title   = te($data['page']['title']       ?? 'About');
 $page_description = te($data['page']['description'] ?? '');
 $footer_links = [
-    ['href' => './work.php',    'label' => ['ko' => '', 'en' => 'Work']],
+    ['href' => './work.php',    'label' => ['ko' => '', 'en' => 'Concept Art']],
     ['href' => './contact.php', 'label' => ['ko' => '', 'en' => 'Contact']],
 ];
 
 $hero        = $data['hero']        ?? [];
+$side_nav    = $data['side_nav']    ?? [];
 $disciplines = $data['disciplines'] ?? [];
 $experience  = $data['experience']  ?? [];
-$resume_card = $data['resume_card'] ?? [];
-$links_card  = $data['links_card']  ?? [];
 ?>
 <?php include __DIR__ . '/includes/partials/head.php'; ?>
 <body class="page-shell bg-stone-50 text-stone-900 antialiased transition-colors duration-300 dark:bg-stone-950 dark:text-stone-100">
@@ -22,10 +21,20 @@ $links_card  = $data['links_card']  ?? [];
   <?php include __DIR__ . '/includes/partials/drawer.php'; ?>
 
   <main class="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-24">
-    <section class="grid gap-14 lg:grid-cols-[0.7fr_1.3fr]">
+    <section id="story" class="grid gap-14 lg:grid-cols-[0.7fr_1.3fr]">
       <div>
         <p class="text-xs uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400"><?= te($hero['kicker'] ?? []) ?></p>
         <h1 class="muted-heading mt-3 text-4xl font-semibold tracking-tight sm:text-5xl"><?= te($hero['title'] ?? []) ?></h1>
+        <?php if (!empty($side_nav['items'])): ?>
+          <div class="about-mini-nav mt-8">
+            <p><?= te($side_nav['title'] ?? []) ?></p>
+            <ul>
+              <?php foreach ($side_nav['items'] as $item): ?>
+                <li><a href="#<?= e($item['id'] ?? '') ?>" class="surface-link"><?= te($item['label'] ?? []) ?></a></li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        <?php endif; ?>
       </div>
       <div class="space-y-8">
         <?php foreach (($hero['paragraphs'] ?? []) as $i => $p): ?>
@@ -38,7 +47,7 @@ $links_card  = $data['links_card']  ?? [];
       </div>
     </section>
 
-    <section class="surface-band mt-20 grid gap-10 border-y border-stone-200 py-10 lg:grid-cols-3 dark:border-stone-800">
+    <section id="education" class="surface-band mt-20 grid gap-10 border-y border-stone-200 py-10 lg:grid-cols-3 dark:border-stone-800">
       <div>
         <p class="text-xs uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400"><?= te($disciplines['kicker'] ?? []) ?></p>
       </div>
@@ -52,7 +61,7 @@ $links_card  = $data['links_card']  ?? [];
       </div>
     </section>
 
-    <section class="mt-20 grid gap-14 lg:grid-cols-[0.5fr_1fr]">
+    <section id="cv" class="mt-20 grid gap-14 lg:grid-cols-[0.5fr_1fr]">
       <div>
         <p class="text-xs uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400"><?= te($experience['kicker'] ?? []) ?></p>
       </div>
@@ -69,22 +78,6 @@ $links_card  = $data['links_card']  ?? [];
       </div>
     </section>
 
-    <section class="mt-20 grid gap-6 sm:grid-cols-2">
-      <a href="<?= e($resume_card['href'] ?? './resume.php') ?>" class="surface-card border border-stone-200 p-6 transition hover:border-stone-400 dark:border-stone-800 dark:hover:border-stone-600">
-        <p class="text-sm text-stone-500 dark:text-stone-400"><?= te($resume_card['tag'] ?? []) ?></p>
-        <h2 class="surface-title mt-3 text-2xl font-medium"><?= te($resume_card['title'] ?? []) ?></h2>
-        <p class="mt-4 leading-7 text-stone-600 dark:text-stone-300"><?= te($resume_card['body'] ?? []) ?></p>
-      </a>
-      <div class="surface-card border border-stone-200 p-6 dark:border-stone-800">
-        <p class="text-sm text-stone-500 dark:text-stone-400"><?= te($links_card['tag'] ?? []) ?></p>
-        <h2 class="surface-title mt-3 text-2xl font-medium"><?= te($links_card['title'] ?? []) ?></h2>
-        <div class="mt-4 flex flex-wrap gap-4">
-          <?php foreach (($links_card['items'] ?? []) as $l): ?>
-            <a href="<?= e($l['href'] ?? '#') ?>" class="surface-link"><?= te($l['label'] ?? []) ?></a>
-          <?php endforeach; ?>
-        </div>
-      </div>
-    </section>
   </main>
 
   <?php include __DIR__ . '/includes/partials/footer.php'; ?>

@@ -90,7 +90,7 @@ foreach (($selected['project_ids'] ?? []) as $pid) {
           </div>
           <div class="grid gap-4 sm:grid-cols-2">
             <?php foreach (($categories['items'] ?? []) as $c): ?>
-              <a href="./work.php" class="category-tile">
+              <a href="<?= e($c['href'] ?? './work.php') ?>" class="category-tile">
                 <span><?= te($c['label'] ?? []) ?></span>
                 <span class="meta"><?= te($c['meta'] ?? []) ?></span>
               </a>

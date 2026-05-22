@@ -1,45 +1,39 @@
 {
   "page": {
-    "title":       {"ko": "", "en": "About"},
-    "description": {"ko": "", "en": "About page for portfolio archive."}
+    "title":       {"ko": "", "en": "About Me"},
+    "description": {"ko": "", "en": "Rohi's story, education, CV, and experience."}
   },
   "hero": {
-    "kicker": {"ko": "", "en": "About"},
-    "title":  {"ko": "", "en": "A practice centered on archives, images, and digital form."},
+    "kicker": {"ko": "", "en": "About Me"},
+    "title":  {"ko": "", "en": "Rohi's Story"},
     "paragraphs": [
-      {"text": {"ko": "", "en": "I work across creative development, visual research, illustration, and archive-oriented web design. My practice often begins with image systems and extends into interfaces that hold, sequence, and contextualize them."}},
-      {"text": {"ko": "", "en": "The projects collected here range from commissioned visual work to independent studies. Across formats, I am interested in quiet structures, careful pacing, and the relationship between visual material and editorial space."}}
+      {"text": {"ko": "", "en": "I work with concept art, storyboard development, visual research, and archive-oriented image systems. My practice begins with drawing and reference, then expands into sequences that hold stories, roles, and visual direction."}},
+      {"text": {"ko": "", "en": "This page gathers a concise introduction, education, CV, and selected experience so the portfolio can be read as both a personal story and a professional archive."}}
+    ]
+  },
+  "side_nav": {
+    "title": {"ko": "", "en": "About Me"},
+    "items": [
+      {"id": "story", "label": {"ko": "", "en": "My Story"}},
+      {"id": "education", "label": {"ko": "", "en": "Education"}},
+      {"id": "cv", "label": {"ko": "", "en": "CV"}}
     ]
   },
   "disciplines": {
-    "kicker": {"ko": "", "en": "Disciplines"},
+    "kicker": {"ko": "", "en": "Education"},
     "items": [
-      {"id": "d1", "title": {"ko": "", "en": "Creative Development"}, "body": {"ko": "", "en": "Static websites, experimental web presentation, editorial layout systems."}},
-      {"id": "d2", "title": {"ko": "", "en": "Visual Development"},   "body": {"ko": "", "en": "Concept imagery, visual sequencing, presentation structures for archive-based projects."}},
-      {"id": "d3", "title": {"ko": "", "en": "Illustration"},         "body": {"ko": "", "en": "Image-making for books, articles, and independent narrative studies."}},
-      {"id": "d4", "title": {"ko": "", "en": "Research / Writing"},   "body": {"ko": "", "en": "Short essays, process notes, and writing on visual culture, archives, and interface design."}}
+      {"id": "d1", "title": {"ko": "", "en": "Undergraduate"}, "body": {"ko": "", "en": "Foundation in visual art, drawing, composition, and image-making."}},
+      {"id": "d2", "title": {"ko": "", "en": "Master"},        "body": {"ko": "", "en": "Advanced study in concept development, visual research, and project framing."}},
+      {"id": "d3", "title": {"ko": "", "en": "PhD"},           "body": {"ko": "", "en": "Research-oriented practice connecting archives, storytelling, and visual culture."}},
+      {"id": "d4", "title": {"ko": "", "en": "Art School"},    "body": {"ko": "", "en": "Studio-based training in illustration, storyboard, and portfolio development."}},
+      {"id": "d5", "title": {"ko": "", "en": "Data Science"},  "body": {"ko": "", "en": "A complementary track for organizing visual material, research notes, and archive systems."}}
     ]
   },
   "experience": {
-    "kicker": {"ko": "", "en": "Experience"},
+    "kicker": {"ko": "", "en": "CV"},
     "items": [
       {"id": "x1", "title": {"ko": "", "en": "Independent Creative Practice"}, "period": {"ko": "", "en": "2022 – Present"}, "body": {"ko": "", "en": "Developing visual archives, portfolio systems, and image-based narrative projects for personal and commissioned contexts."}},
       {"id": "x2", "title": {"ko": "", "en": "Selected Capabilities"},         "period": {"ko": "", "en": "Ongoing"},         "body": {"ko": "", "en": "Archive design, web prototyping, visual curation, editorial systems, image sequencing, and presentation design."}}
-    ]
-  },
-  "resume_card": {
-    "tag":   {"ko": "", "en": "Resume"},
-    "href":  "./resume.php",
-    "title": {"ko": "", "en": "View resume"},
-    "body":  {"ko": "", "en": "A concise overview of selected experience, skills, and project contexts."}
-  },
-  "links_card": {
-    "tag":   {"ko": "", "en": "Contact"},
-    "title": {"ko": "", "en": "Links"},
-    "items": [
-      {"id": "l1", "href": "mailto:hello@example.com",   "label": {"ko": "", "en": "Email"}},
-      {"id": "l2", "href": "https://www.instagram.com/", "label": {"ko": "", "en": "Instagram"}},
-      {"id": "l3", "href": "https://www.behance.net/",   "label": {"ko": "", "en": "Behance"}}
     ]
   }
 }
