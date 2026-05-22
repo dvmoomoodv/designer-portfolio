@@ -31,7 +31,7 @@ function fr_is_multiline(string $key, $v): bool {
     return is_string($v) && strlen($v) > 100;
 }
 function fr_is_color(string $key, $v): bool {
-    return is_string($v) && preg_match('/color/i', $key) && preg_match('/^#[0-9A-Fa-f]{6}$/', $v);
+    return is_string($v) && preg_match('/color/i', $key);
 }
 function fr_label(string $key): string {
     return ucwords(str_replace(['_', '-'], ' ', $key));
@@ -71,10 +71,11 @@ function render_node(string $path, $v, string $key): void {
 }
 
 function render_color(string $path, string $v, string $label): void {
+    $v = preg_match('/^#[0-9A-Fa-f]{6}$/', $v) ? strtolower($v) : '#ffffff';
     echo '<div><label class="admin-label">' . e($label) . '</label>';
     echo '<div class="flex gap-2">';
     echo '<input class="h-11 w-16 rounded border border-stone-300 bg-white p-1 dark:border-stone-700 dark:bg-stone-900" type="color" value="' . e($v) . '" data-color-picker>';
-    echo '<input class="admin-input" type="text" name="' . e($path) . '" value="' . e($v) . '" data-color-field>';
+    echo '<input class="admin-input" type="text" name="' . e($path) . '" value="' . e($v) . '" pattern="#[0-9A-Fa-f]{6}" maxlength="7" placeholder="#ffffff" data-color-field>';
     echo '</div></div>';
 }
 

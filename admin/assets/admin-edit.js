@@ -5,7 +5,10 @@
   /* ── 폼 변경 감지: 저장 전 페이지 이탈 경고 ── */
   var dirty = false;
   form.addEventListener('input', function () { dirty = true; updateStatus(); });
-  form.addEventListener('submit', function () { dirty = false; });
+  form.addEventListener('submit', function () {
+    normalizeColorFields();
+    dirty = false;
+  });
   window.addEventListener('beforeunload', function (e) {
     if (dirty) { e.preventDefault(); e.returnValue = ''; }
   });
@@ -26,6 +29,14 @@
       if (/^#[0-9A-Fa-f]{6}$/.test(text.value)) picker.value = text.value;
     });
   });
+
+  function normalizeColorFields() {
+    form.querySelectorAll('[data-color-field]').forEach(function (field) {
+      var value = (field.value || '').trim();
+      if (/^[0-9A-Fa-f]{6}$/.test(value)) value = '#' + value;
+      if (/^#[0-9A-Fa-f]{6}$/.test(value)) field.value = value.toLowerCase();
+    });
+  }
 
   document.querySelectorAll('[data-preview-refresh]').forEach(function (btn) {
     btn.addEventListener('click', function () {

@@ -23,8 +23,9 @@ function load_data(string $name): array
 }
 
 /**
- * data/{name}.json 에 배열을 저장. 원자적 쓰기 (tmp + rename) + 파일락.
- * 실패 시 RuntimeException.
+ * data/{name}.json 에 배열을 저장.
+ * 1차: tmp + rename 원자적 저장
+ * 2차: 서버 권한 때문에 tmp 생성이 막힌 경우 기존 파일에 직접 저장
  */
 function save_data(string $name, array $payload): void
 {
@@ -44,15 +45,25 @@ function save_data(string $name, array $payload): void
         throw new RuntimeException('JSON 인코딩 실패: ' . json_last_error_msg());
     }
 
-    $bytes = file_put_contents($tmp, $json, LOCK_EX);
-    if ($bytes === false) {
-        throw new RuntimeException('임시 파일 쓰기 실패: ' . $tmp);
-    }
-    @chmod($tmp, 0644);
-    if (!@rename($tmp, $path)) {
+    $tmpOk = @file_put_contents($tmp, $json, LOCK_EX);
+    if ($tmpOk !== false) {
+        @chmod($tmp, is_file($path) ? (fileperms($path) & 0777) : 0644);
+        if (@rename($tmp, $path)) {
+            clearstatcache(true, $path);
+            return;
+        }
         @unlink($tmp);
-        throw new RuntimeException('데이터 파일 교체 실패: ' . $path);
     }
+
+    $directOk = @file_put_contents($path, $json, LOCK_EX);
+    if ($directOk !== false) {
+        clearstatcache(true, $path);
+        return;
+    }
+
+    throw new RuntimeException(
+        '데이터 저장 실패. 서버에서 data 폴더 또는 JSON 파일 쓰기 권한을 확인해야 합니다: ' . $path
+    );
 }
 
 /**

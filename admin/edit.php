@@ -11,6 +11,7 @@ if (!$page) { header('Location: ./index.php'); exit; }
 
 /* ── 저장 (POST) ── */
 $flash = null;
+$flash_message = '';
 $data  = load_data($page);
 
 /**
@@ -34,13 +35,48 @@ function normalize_post($v) {
     return $out;
 }
 
+function sanitize_design_payload(array $payload, array $existing): array {
+    if (!isset($payload['design']) || !is_array($payload['design'])) {
+        return $payload;
+    }
+    $defaults = function_exists('design_defaults') ? design_defaults() : [
+        'background_color' => '#f8f6f3',
+        'text_color' => '#1c1917',
+        'muted_text_color' => '#57534e',
+        'accent_color' => '#047857',
+        'card_background_color' => '#ffffff',
+    ];
+    foreach ($defaults as $key => $fallback) {
+        $value = strtolower(trim((string)($payload['design'][$key] ?? '')));
+        if (!preg_match('/^#[0-9a-f]{6}$/', $value)) {
+            $value = (string)($existing['design'][$key] ?? $fallback);
+        }
+        if (!preg_match('/^#[0-9a-fA-F]{6}$/', $value)) {
+            $value = $fallback;
+        }
+        $payload['design'][$key] = strtolower($value);
+    }
+    if (isset($payload['design']['apply_to_all_pages'])) {
+        $payload['design']['apply_to_all_pages'] = (string)$payload['design']['apply_to_all_pages'] === '1' ? '1' : '0';
+    }
+    return $payload;
+}
+
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
-    csrf_require_post();
-    $raw  = $_POST['d'] ?? [];
-    $norm = normalize_post($raw);
-    save_data($page, $norm);
-    $data  = $norm;
-    $flash = 'success';
+    try {
+        csrf_require_post();
+        $raw  = $_POST['d'] ?? [];
+        $norm = normalize_post($raw);
+        $norm = sanitize_design_payload($norm, $data);
+        save_data($page, $norm);
+        $data  = $norm;
+        $flash = 'success';
+        $flash_message = '✓ 저장되었습니다.';
+    } catch (Throwable $e) {
+        error_log('Admin save failed [' . $page . ']: ' . $e->getMessage());
+        $flash = 'error';
+        $flash_message = '저장 실패: ' . $e->getMessage();
+    }
 }
 
 /* ── 뷰 ── */
@@ -89,7 +125,9 @@ include __DIR__ . '/_layout_head.php';
 </div>
 
 <?php if ($flash === 'success'): ?>
-  <div class="admin-flash admin-flash--success mb-6">✓ 저장되었습니다.</div>
+  <div class="admin-flash admin-flash--success mb-6"><?= e($flash_message) ?></div>
+<?php elseif ($flash === 'error'): ?>
+  <div class="admin-flash admin-flash--error mb-6"><?= e($flash_message) ?></div>
 <?php endif; ?>
 
 <form method="post" id="editForm" autocomplete="off">
