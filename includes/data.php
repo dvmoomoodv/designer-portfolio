@@ -97,3 +97,56 @@ function category_label(string $id): array
     }
     return $map[$id] ?? ['ko' => '', 'en' => $id];
 }
+
+function active_filter_from(array $filters): string
+{
+    $requested = isset($_GET['filter']) ? (string)$_GET['filter'] : 'all';
+    $ids = array_map(static fn($f) => (string)($f['id'] ?? ''), $filters);
+    return in_array($requested, $ids, true) ? $requested : 'all';
+}
+
+function filter_by_category(array $items, string $filter): array
+{
+    if ($filter === 'all') {
+        return array_values($items);
+    }
+    return array_values(array_filter($items, static fn($item) => (string)($item['category_id'] ?? '') === $filter));
+}
+
+function pagination_settings(array $data, int $defaultPerPage = 12): array
+{
+    $p = is_array($data['pagination'] ?? null) ? $data['pagination'] : [];
+    $enabled = (string)($p['enabled'] ?? '1') !== '0';
+    $perPage = max(1, min(48, (int)($p['per_page'] ?? $defaultPerPage)));
+    $page = max(1, (int)($_GET['page'] ?? 1));
+    return ['enabled' => $enabled, 'per_page' => $perPage, 'page' => $page];
+}
+
+function paginate_array(array $items, array $settings): array
+{
+    if (!$settings['enabled']) {
+        return ['items' => $items, 'page' => 1, 'total_pages' => 1, 'total' => count($items)];
+    }
+    $total = count($items);
+    $totalPages = max(1, (int)ceil($total / $settings['per_page']));
+    $page = min((int)$settings['page'], $totalPages);
+    $offset = ($page - 1) * (int)$settings['per_page'];
+    return [
+        'items' => array_slice($items, $offset, (int)$settings['per_page']),
+        'page' => $page,
+        'total_pages' => $totalPages,
+        'total' => $total,
+    ];
+}
+
+function page_url(array $extra): string
+{
+    $query = array_merge($_GET, $extra);
+    foreach ($query as $key => $value) {
+        if ($value === null || $value === '' || $value === 'all' && $key === 'filter' || $value === 1 && $key === 'page') {
+            unset($query[$key]);
+        }
+    }
+    $path = basename(parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: 'index.php');
+    return './' . $path . ($query ? '?' . http_build_query($query) : '');
+}

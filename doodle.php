@@ -14,7 +14,10 @@ $footer_links = [
 $hero       = $data['hero']       ?? [];
 $filters    = $data['filters']    ?? [];
 $items      = $data['items']      ?? [];
-$pagination = $data['pagination'] ?? [];
+$active_filter = active_filter_from($filters);
+$items = filter_by_category($items, $active_filter);
+$pager = paginate_array($items, pagination_settings($data, 8));
+$items = $pager['items'];
 ?>
 <?php include __DIR__ . '/includes/partials/head.php'; ?>
 <body class="page-shell bg-stone-50 text-stone-900 antialiased transition-colors duration-300 dark:bg-stone-950 dark:text-stone-100">
@@ -33,7 +36,8 @@ $pagination = $data['pagination'] ?? [];
     <section class="surface-band mt-14 border-y border-stone-200 px-4 py-7 dark:border-stone-800 sm:px-5">
       <div class="flex flex-wrap gap-4" aria-label="Doodle and Scribble categories">
         <?php foreach ($filters as $i => $f): ?>
-          <button type="button" data-filter="<?= e($f['id'] ?? '') ?>" class="filter-pill<?= $i === 0 ? ' is-active' : '' ?>"><?= te($f['label'] ?? []) ?></button>
+          <?php $fid = (string)($f['id'] ?? ''); ?>
+          <a href="<?= e(page_url(['filter' => $fid, 'page' => 1])) ?>" data-filter="<?= e($fid) ?>" class="filter-pill<?= $fid === $active_filter ? ' is-active' : '' ?>"><?= te($f['label'] ?? []) ?></a>
         <?php endforeach; ?>
       </div>
     </section>
@@ -53,11 +57,11 @@ $pagination = $data['pagination'] ?? [];
         <?php endforeach; ?>
       </div>
 
-      <?php if ($pagination): ?>
-        <nav class="doodle-pagination" aria-label="Doodle pagination preview">
-          <?php foreach ($pagination as $i => $page): ?>
-            <span class="<?= $i === 0 ? 'is-active' : '' ?>"><?= e($page) ?></span>
-          <?php endforeach; ?>
+      <?php if ($pager['total_pages'] > 1): ?>
+        <nav class="archive-pagination" aria-label="Doodle pagination">
+          <?php for ($page = 1; $page <= $pager['total_pages']; $page++): ?>
+            <a href="<?= e(page_url(['page' => $page])) ?>" class="<?= $page === $pager['page'] ? 'is-active' : '' ?>"><?= e($page) ?></a>
+          <?php endfor; ?>
         </nav>
       <?php endif; ?>
     </section>

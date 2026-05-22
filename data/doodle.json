@@ -13,6 +13,7 @@
     { "id": "doodle", "label": { "ko": "", "en": "Doodle" } },
     { "id": "scribble", "label": { "ko": "", "en": "Scribble" } }
   ],
+  "pagination": { "enabled": "1", "per_page": "8" },
   "items": [
     { "id": "d01", "category_id": "doodle", "category_label": { "ko": "", "en": "Doodle" }, "title": { "ko": "", "en": "Gesture warmups" }, "year": "2026", "image": "./assets/images/project-01.svg", "image_alt": { "ko": "", "en": "Gesture drawing study placeholder" } },
     { "id": "d02", "category_id": "scribble", "category_label": { "ko": "", "en": "Scribble" }, "title": { "ko": "", "en": "Loose morning marks" }, "year": "2026", "image": "./assets/images/detail-01.svg", "image_alt": { "ko": "", "en": "Loose scribble placeholder" } },
@@ -23,6 +24,5 @@
     { "id": "d07", "category_id": "scribble", "category_label": { "ko": "", "en": "Scribble" }, "title": { "ko": "", "en": "Margin drawings" }, "year": "2024", "image": "./assets/images/project-04.svg", "image_alt": { "ko": "", "en": "Margin drawing placeholder" } },
     { "id": "d08", "category_id": "scribble", "category_label": { "ko": "", "en": "Scribble" }, "title": { "ko": "", "en": "Color note fragment" }, "year": "2024", "image": "./assets/images/project-05.svg", "image_alt": { "ko": "", "en": "Color note placeholder" } },
     { "id": "d09", "category_id": "doodle", "category_label": { "ko": "", "en": "Doodle" }, "title": { "ko": "", "en": "Pose alternatives" }, "year": "2023", "image": "./assets/images/project-06.svg", "image_alt": { "ko": "", "en": "Pose alternatives placeholder" } }
-  ],
-  "pagination": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "→"]
+  ]
 }

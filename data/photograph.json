@@ -16,6 +16,7 @@
     { "id": "documentary", "label": { "ko": "", "en": "Documentary" } },
     { "id": "cv", "label": { "ko": "", "en": "CV" } }
   ],
+  "pagination": { "enabled": "1", "per_page": "6" },
   "items": [
     {
       "id": "ph01",

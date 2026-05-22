@@ -80,7 +80,9 @@ include __DIR__ . '/_layout_head.php';
     <h1 class="mt-2 text-3xl font-semibold tracking-tight"><?= e($page_labels[$page] ?? $page) ?></h1>
     <p class="mt-1 text-sm text-stone-500 dark:text-stone-400">텍스트, 메뉴, 목록, 이미지 경로를 수정할 수 있습니다. 이미지 업로드 후에도 하단 <strong>저장</strong> 버튼을 눌러야 반영됩니다.</p>
   </div>
-  <div class="flex gap-3">
+  <div class="flex flex-wrap gap-3">
+    <button type="button" class="admin-btn admin-btn--ghost text-sm" data-expand-all>전체 펼치기</button>
+    <button type="button" class="admin-btn admin-btn--ghost text-sm" data-collapse-all>전체 접기</button>
     <a href="../<?= e($preview_map[$page] ?? 'index.php') ?>" target="_blank"
        class="admin-btn admin-btn--ghost text-sm">↗ 미리보기</a>
   </div>
@@ -94,7 +96,8 @@ include __DIR__ . '/_layout_head.php';
   <?= csrf_field() ?>
   <div class="space-y-4">
     <?php foreach ($data as $section_key => $section_val): ?>
-      <details class="admin-card" open>
+      <?php $open = in_array($section_key, ['page', 'hero', 'pagination'], true); ?>
+      <details class="admin-card"<?= $open ? ' open' : '' ?>>
         <summary class="flex cursor-pointer select-none items-center justify-between gap-4 p-5 list-none">
           <span class="font-semibold tracking-wide"><?= e(fr_label($section_key)) ?></span>
           <span class="text-xs text-stone-400 transition-transform" data-chevron>▾</span>

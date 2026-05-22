@@ -22,6 +22,18 @@
     });
   });
 
+  document.querySelectorAll('[data-expand-all]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      form.querySelectorAll('details').forEach(function (d) { d.open = true; });
+    });
+  });
+
+  document.querySelectorAll('[data-collapse-all]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      form.querySelectorAll('details').forEach(function (d) { d.open = false; });
+    });
+  });
+
   /* ── 제출 전: obj-list 인덱스 재정렬 ── */
   form.addEventListener('submit', function () {
     form.querySelectorAll('[data-obj-list]').forEach(function (container) {
@@ -80,6 +92,7 @@
     if (existing.length === 0) return; // 템플릿 없음
 
     var clone = existing[existing.length - 1].cloneNode(true);
+    clone.open = true;
     var newIdx = existing.length;
     var escaped = basePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 

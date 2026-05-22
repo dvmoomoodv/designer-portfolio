@@ -15,5 +15,6 @@
     { "id": "sheet-tweet",        "label": { "ko": "", "en": "Sheet & Tweet" }      },
     { "id": "environment-design", "label": { "ko": "", "en": "Environment Design" } },
     { "id": "edu-cv",             "label": { "ko": "", "en": "Edu / CV" }           }
-  ]
+  ],
+  "pagination": { "enabled": "1", "per_page": "6" }
 }

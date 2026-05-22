@@ -14,6 +14,10 @@ $footer_links = [
 $hero    = $data['hero']    ?? [];
 $filters = $data['filters'] ?? [];
 $items   = $data['items']   ?? [];
+$active_filter = active_filter_from($filters);
+$items = filter_by_category($items, $active_filter);
+$pager = paginate_array($items, pagination_settings($data, 5));
+$items = $pager['items'];
 $sidebar = $data['sidebar'] ?? [];
 ?>
 <?php include __DIR__ . '/includes/partials/head.php'; ?>
@@ -33,7 +37,8 @@ $sidebar = $data['sidebar'] ?? [];
     <section class="surface-band mt-14 border-y border-stone-200 px-4 py-7 dark:border-stone-800 sm:px-5">
       <div class="flex flex-wrap gap-4" aria-label="Research categories">
         <?php foreach ($filters as $i => $f): ?>
-          <button type="button" data-filter="<?= e($f['id'] ?? '') ?>" class="filter-pill<?= $i === 0 ? ' is-active' : '' ?>"><?= te($f['label'] ?? []) ?></button>
+          <?php $fid = (string)($f['id'] ?? ''); ?>
+          <a href="<?= e(page_url(['filter' => $fid, 'page' => 1])) ?>" data-filter="<?= e($fid) ?>" class="filter-pill<?= $fid === $active_filter ? ' is-active' : '' ?>"><?= te($f['label'] ?? []) ?></a>
         <?php endforeach; ?>
       </div>
     </section>
@@ -54,6 +59,13 @@ $sidebar = $data['sidebar'] ?? [];
             </div>
           </article>
         <?php endforeach; ?>
+        <?php if ($pager['total_pages'] > 1): ?>
+          <nav class="archive-pagination" aria-label="Research pagination">
+            <?php for ($page = 1; $page <= $pager['total_pages']; $page++): ?>
+              <a href="<?= e(page_url(['page' => $page])) ?>" class="<?= $page === $pager['page'] ? 'is-active' : '' ?>"><?= e($page) ?></a>
+            <?php endfor; ?>
+          </nav>
+        <?php endif; ?>
       </div>
 
       <aside class="research-sidebar surface-card border border-stone-200 p-5 dark:border-stone-800">

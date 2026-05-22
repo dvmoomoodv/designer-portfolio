@@ -33,6 +33,22 @@ function fr_is_multiline(string $key, $v): bool {
 function fr_label(string $key): string {
     return ucwords(str_replace(['_', '-'], ' ', $key));
 }
+function fr_select_options(string $key): ?array {
+    return match ($key) {
+        'enabled' => ['1' => '사용', '0' => '사용 안 함'],
+        'per_page' => ['3' => '3개씩', '4' => '4개씩', '5' => '5개씩', '6' => '6개씩', '8' => '8개씩', '9' => '9개씩', '12' => '12개씩', '16' => '16개씩', '24' => '24개씩'],
+        default => null,
+    };
+}
+function fr_item_summary(array $item, int $i): string {
+    $title = '';
+    foreach (['title', 'label', 'id', 'category_label'] as $key) {
+        if (!isset($item[$key])) continue;
+        $value = is_array($item[$key]) ? t($item[$key]) : (string)$item[$key];
+        if ($value !== '') { $title = $value; break; }
+    }
+    return '항목 ' . ($i + 1) . ($title !== '' ? ' · ' . $title : '');
+}
 
 /* ────── 진입점 ────── */
 function render_node(string $path, $v, string $key): void {
@@ -41,7 +57,17 @@ function render_node(string $path, $v, string $key): void {
     elseif  (fr_is_scalar_list($v)) render_scalar_list($path, $v, fr_label($key));
     elseif  (is_array($v))          render_assoc($path, $v, fr_label($key));
     elseif  (fr_is_image($v))       render_image($path, (string)$v, fr_label($key));
+    elseif  (fr_select_options($key)) render_select($path, (string)$v, fr_label($key), fr_select_options($key) ?? []);
     else                            render_scalar($path, $v, fr_label($key), $key);
+}
+
+function render_select(string $path, string $v, string $label, array $options): void {
+    echo '<div><label class="admin-label">' . e($label) . '</label>';
+    echo '<select class="admin-input" name="' . e($path) . '">';
+    foreach ($options as $value => $text) {
+        echo '<option value="' . e($value) . '"' . ((string)$value === $v ? ' selected' : '') . '>' . e($text) . '</option>';
+    }
+    echo '</select></div>';
 }
 
 /* ────── i18n 쌍 ────── */
@@ -109,14 +135,15 @@ function render_obj_list(string $path, array $items, string $label): void {
 }
 
 function render_obj_item(string $path, int $i, array $item): void {
-    echo '<div class="relative rounded-lg border border-stone-200 bg-stone-50 p-3 pt-8 dark:border-stone-700 dark:bg-stone-900/60" data-obj-item>';
+    echo '<details class="relative rounded-lg border border-stone-200 bg-stone-50 dark:border-stone-700 dark:bg-stone-900/60" data-obj-item>';
+    echo '<summary class="cursor-pointer select-none p-3 pr-24 text-sm font-medium text-stone-700 dark:text-stone-200">' . e(fr_item_summary($item, $i)) . '</summary>';
     echo '<div class="absolute right-2 top-2 flex gap-1">';
     echo '<button type="button" class="admin-btn admin-btn--ghost px-1.5 py-0.5 text-xs" data-obj-up title="위로">↑</button>';
     echo '<button type="button" class="admin-btn admin-btn--ghost px-1.5 py-0.5 text-xs" data-obj-down title="아래로">↓</button>';
     echo '<button type="button" class="admin-btn admin-btn--ghost px-1.5 py-0.5 text-xs text-red-500 dark:text-red-400" data-obj-delete title="삭제">×</button>';
-    echo '</div><div class="space-y-3">';
+    echo '</div><div class="space-y-3 border-t border-stone-200 p-3 dark:border-stone-700">';
     render_assoc_fields($path . '[' . $i . ']', $item);
-    echo '</div></div>';
+    echo '</div></details>';
 }
 
 /* ────── 연관 배열 (중첩 섹션) ────── */

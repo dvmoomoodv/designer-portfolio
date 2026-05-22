@@ -14,6 +14,7 @@
     { "id": "data-science", "label": { "ko": "", "en": "Data Science" } },
     { "id": "edu-cv", "label": { "ko": "", "en": "Edu / CV" } }
   ],
+  "pagination": { "enabled": "1", "per_page": "5" },
   "items": [
     {
       "id": "r01",
