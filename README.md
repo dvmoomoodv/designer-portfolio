@@ -10,7 +10,26 @@ Rohigraphy Archive Portfolio is a PHP-based visual portfolio and archive website
 
 This project is not just a static portfolio page. It includes a lightweight admin dashboard that allows content editing, image slot management, project updates, multilingual portfolio presentation, page design controls, SEO settings, and archive management through structured JSON data.
 
+Rohigraphy Archive Portfolio is a lightweight portfolio CMS for multidisciplinary creators, combining photography, documentary work, concept art, research notes, data fluency, and media-cultural studies in one editable archive.
+
 The current version uses PHP templates and JSON content files for simple deployment and easy operation. In the future, the content system is planned to be migrated to a web database-backed structure for stronger scalability, search, filtering, media management, and long-term content operations.
+
+## Main Topics
+
+- Photography
+- Documentary photography
+- Snapshot photography
+- Natural photography
+- Concept Art
+- Concept Design
+- Storyboarding
+- Research
+- Cultural Studies
+- Media Studies
+- Media Cultural Studies
+- Data Science
+- Data Fluency
+- Qualitative research
 
 ## Overview
 
@@ -101,6 +120,7 @@ designer-portfolio/
 ├── admin/          # Admin dashboard and content editors
 ├── assets/         # CSS, JavaScript, images, uploaded assets
 ├── data/           # JSON-based content data
+├── html/           # Archived legacy static HTML pages
 ├── includes/       # Shared PHP components and layout files
 ├── index.php       # Main home page
 ├── about.php       # About page
