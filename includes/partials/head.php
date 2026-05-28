@@ -7,22 +7,44 @@
  *
  * 기존 정적 사이트의 head 영역(테마 부트스트랩 + Tailwind 설정 + custom.css)을 그대로 보존한다.
  */
-$page_title       = $page_title       ?? te(site_data()['meta']['default_title']       ?? 'Archive Portfolio');
-$page_description = $page_description ?? te(site_data()['meta']['default_description'] ?? '');
+$site_data        = site_data();
+$site_meta        = $site_data['meta'] ?? [];
+$page_title       = $page_title       ?? te($site_meta['default_title']       ?? 'Archive Portfolio');
+$page_description = $page_description ?? te($site_meta['default_description'] ?? '');
+$site_name        = te($site_meta['site_name'] ?? $site_meta['default_title'] ?? 'Archive Portfolio');
+$seo_keywords     = (string)($site_meta['keywords'] ?? '');
+$seo_robots       = (string)($site_meta['robots'] ?? 'index, follow');
 $lang             = current_lang();
 $site_design      = resolved_design([]);
 $font_url         = (string)($site_design['font_url'] ?? '');
 $font_family      = preg_replace('/[^A-Za-z0-9 _-]+/', '', (string)($site_design['font_family'] ?? '')) ?: 'Inter';
 $font_ext         = strtolower(pathinfo($font_url, PATHINFO_EXTENSION));
 $font_format      = $font_ext === 'woff2' ? 'woff2' : ($font_ext === 'woff' ? 'woff' : ($font_ext === 'otf' ? 'opentype' : 'truetype'));
+$scheme           = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+$host             = $_SERVER['HTTP_HOST'] ?? 'rohigraphy.co.kr';
+$uri              = strtok($_SERVER['REQUEST_URI'] ?? '/index.php', '#') ?: '/index.php';
+$canonical_url    = $scheme . '://' . $host . $uri;
 ?>
 <!DOCTYPE html>
 <html lang="<?= e($lang) ?>" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= $page_title ?></title>
-  <meta name="description" content="<?= $page_description ?>">
+  <title><?= e($page_title) ?></title>
+  <meta name="description" content="<?= e($page_description) ?>">
+  <?php if ($seo_keywords !== ''): ?>
+    <meta name="keywords" content="<?= e($seo_keywords) ?>">
+  <?php endif; ?>
+  <meta name="robots" content="<?= e($seo_robots) ?>">
+  <link rel="canonical" href="<?= e($canonical_url) ?>">
+  <meta property="og:site_name" content="<?= e($site_name) ?>">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="<?= e($page_title) ?>">
+  <meta property="og:description" content="<?= e($page_description) ?>">
+  <meta property="og:url" content="<?= e($canonical_url) ?>">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<?= e($page_title) ?>">
+  <meta name="twitter:description" content="<?= e($page_description) ?>">
   <script>
     (function () {
       var savedTheme = localStorage.getItem('theme');

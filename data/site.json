@@ -266,6 +266,12 @@
         "default_description": {
             "ko": "",
             "en": "Editorial-style portfolio archive featuring selected work, notes, and visual research."
-        }
+        },
+        "site_name": {
+            "ko": "",
+            "en": "Rohigraphy Archive Portfolio"
+        },
+        "keywords": "사진, 스냅사진, 자연사진, 다큐사진, Photography, Documentary, Photographer, 연구, 문화연구, 미디어문화연구, 미디어 연구, 데이터 사이언스, Data Science, 데이터 플루언시, Data Fluency, research, 질적 연구, Qualitative research, Cultural Studies, Media Studies, Media Cultural Studies, Concept Art, Concept Design, Storyboard, Storyboarding, movie, animation",
+        "robots": "index, follow"
     }
 }

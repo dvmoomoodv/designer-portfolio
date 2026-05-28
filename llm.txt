@@ -1,0 +1,44 @@
+# Rohigraphy Archive Portfolio
+
+Rohigraphy Archive Portfolio is a visual portfolio and archive covering photography, documentary photography, natural photography, snapshot photography, research, media cultural studies, data science, qualitative research, cultural studies, concept art, concept design, storyboard, movie, and animation-related visual work.
+
+## Main Topics
+
+- Photography
+- Documentary photography
+- Photographer portfolio
+- Snapshot photography
+- Natural photography
+- Research
+- Cultural Studies
+- Media Studies
+- Media Cultural Studies
+- Data Science
+- Data Fluency
+- Qualitative research
+- Concept Art
+- Concept Design
+- Storyboard and Storyboarding
+- Movie and animation visual development
+
+## Korean Keywords
+
+사진, 스냅사진, 자연사진, 다큐사진, 연구, 문화연구, 미디어문화연구, 미디어 연구, 데이터 사이언스, 데이터 플루언시, 질적 연구
+
+## English Keywords
+
+Photography, Documentary, Photographer, Data Science, Data Fluency, research, Qualitative research, Cultural Studies, Media Studies, Media Cultural Studies, Concept Art, Concept Design, Storyboard, Storyboarding, movie, animation
+
+## Site Sections
+
+- Home: introduction and selected portfolio archive.
+- About Me: story, education, CV, and personal background.
+- Concept Art: concept art, concept design, storyboard, movie, and animation-oriented visual work.
+- Research: cultural studies, media studies, media cultural studies, data science, data fluency, and qualitative research archive.
+- Photography: photography, snapshot photography, natural photography, documentary photography, profile, wedding/couple, family/friend, and CV image archive.
+- Doodle & Scribble: rough sketches, doodles, visual notes, and informal drawing archive.
+- Contact: inquiry, collaboration, brand, and visual reference information.
+
+## Recommended Summary
+
+This website is a portfolio archive for Rohigraphy, combining photography, documentary image work, research, media cultural studies, data science, qualitative research, concept art, concept design, storyboarding, movie, and animation-related visual development.
