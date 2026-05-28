@@ -14,7 +14,14 @@
         "text_color": "#1c1917",
         "muted_text_color": "#57534e",
         "accent_color": "#047857",
-        "card_background_color": "#ffffff"
+        "card_background_color": "#ffffff",
+        "dark_background_color": "#0f0f10",
+        "dark_text_color": "#f5f5f4",
+        "dark_muted_text_color": "#c4beb8",
+        "dark_accent_color": "#34d399",
+        "dark_card_background_color": "#1c1917",
+        "dark_header_background_color": "#0f0f10",
+        "dark_header_text_color": "#e7e5e4"
     },
     "hero": {
         "kicker": {
@@ -111,17 +118,35 @@
         "items": [
             {
                 "id": "cimg1",
-                "title": { "ko": "", "en": "Studio note" },
-                "caption": { "ko": "", "en": "A visual placeholder for contact or collaboration context." },
+                "title": {
+                    "ko": "",
+                    "en": "Studio note"
+                },
+                "caption": {
+                    "ko": "",
+                    "en": "A visual placeholder for contact or collaboration context."
+                },
                 "image": "./assets/images/project-01.svg",
-                "image_alt": { "ko": "", "en": "Contact visual placeholder" }
+                "image_alt": {
+                    "ko": "",
+                    "en": "Contact visual placeholder"
+                }
             },
             {
                 "id": "cimg2",
-                "title": { "ko": "", "en": "Collaboration reference" },
-                "caption": { "ko": "", "en": "Add client, brand, or project reference images here." },
+                "title": {
+                    "ko": "",
+                    "en": "Collaboration reference"
+                },
+                "caption": {
+                    "ko": "",
+                    "en": "Add client, brand, or project reference images here."
+                },
                 "image": "./assets/images/project-02.svg",
-                "image_alt": { "ko": "", "en": "Collaboration visual placeholder" }
+                "image_alt": {
+                    "ko": "",
+                    "en": "Collaboration visual placeholder"
+                }
             }
         ]
     }

@@ -14,7 +14,14 @@
         "text_color": "#1c1917",
         "muted_text_color": "#57534e",
         "accent_color": "#047857",
-        "card_background_color": "#ffffff"
+        "card_background_color": "#ffffff",
+        "dark_background_color": "#0f0f10",
+        "dark_text_color": "#f5f5f4",
+        "dark_muted_text_color": "#c4beb8",
+        "dark_accent_color": "#34d399",
+        "dark_card_background_color": "#1c1917",
+        "dark_header_background_color": "#0f0f10",
+        "dark_header_text_color": "#e7e5e4"
     },
     "layout": {
         "hero_layout": "image_right",

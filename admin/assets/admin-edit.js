@@ -45,6 +45,12 @@
     });
   });
 
+  document.querySelectorAll('[data-preview-theme]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      setPreviewTheme(btn.dataset.previewTheme || 'light');
+    });
+  });
+
   var previewFrame = document.querySelector('[data-admin-preview]');
   if (previewFrame) previewFrame.addEventListener('load', applyHomePreviewColors);
 
@@ -65,13 +71,30 @@
       '--home-accent': fieldValue('d[design][accent_color]'),
       '--home-card': fieldValue('d[design][card_background_color]'),
       '--header-bg': fieldValue('d[design][header_background_color]'),
-      '--header-text': fieldValue('d[design][header_text_color]')
+      '--header-text': fieldValue('d[design][header_text_color]'),
+      '--dark-home-bg': fieldValue('d[design][dark_background_color]'),
+      '--dark-home-text': fieldValue('d[design][dark_text_color]'),
+      '--dark-home-muted': fieldValue('d[design][dark_muted_text_color]'),
+      '--dark-home-accent': fieldValue('d[design][dark_accent_color]'),
+      '--dark-home-card': fieldValue('d[design][dark_card_background_color]'),
+      '--dark-header-bg': fieldValue('d[design][dark_header_background_color]'),
+      '--dark-header-text': fieldValue('d[design][dark_header_text_color]')
     };
     Object.keys(map).forEach(function (key) {
       if (/^#[0-9A-Fa-f]{6}$/.test(map[key])) body.style.setProperty(key, map[key]);
     });
     var font = fieldValue('d[design][font_family]');
     if (font) body.style.setProperty('--site-font', "'" + font.replace(/'/g, '') + "'");
+  }
+
+  function setPreviewTheme(theme) {
+    var iframe = document.querySelector('[data-admin-preview]');
+    if (!iframe || !iframe.contentDocument) return;
+    var root = iframe.contentDocument.documentElement;
+    root.classList.toggle('dark', theme === 'dark');
+    root.dataset.theme = theme;
+    root.style.colorScheme = theme;
+    applyHomePreviewColors();
   }
 
   /* ── details 토글: 화살표 회전 ── */

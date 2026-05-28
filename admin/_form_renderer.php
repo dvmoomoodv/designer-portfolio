@@ -37,7 +37,49 @@ function fr_is_color(string $key, $v): bool {
     return is_string($v) && preg_match('/color/i', $key);
 }
 function fr_label(string $key): string {
+    $labels = [
+        'apply_to_all_pages' => '전체/페이지별 적용 방식',
+        'background_color' => '페이지 배경',
+        'text_color' => '기본 글자',
+        'muted_text_color' => '보조 글자',
+        'accent_color' => '포인트 색',
+        'card_background_color' => '카드/박스 배경',
+        'header_background_color' => '헤더 배경',
+        'header_text_color' => '헤더 글자/메뉴',
+        'dark_background_color' => '다크 페이지 배경',
+        'dark_text_color' => '다크 기본 글자',
+        'dark_muted_text_color' => '다크 보조 글자',
+        'dark_accent_color' => '다크 포인트 색',
+        'dark_card_background_color' => '다크 카드/박스 배경',
+        'dark_header_background_color' => '다크 헤더 배경',
+        'dark_header_text_color' => '다크 헤더 글자/메뉴',
+        'font_family' => '폰트 이름',
+        'font_url' => '폰트 파일',
+    ];
+    if (isset($labels[$key])) return $labels[$key];
     return ucwords(str_replace(['_', '-'], ' ', $key));
+}
+function fr_help(string $key): string {
+    $help = [
+        'apply_to_all_pages' => '전체 적용을 선택하면 모든 페이지가 사이트 공통 Design 값을 따릅니다. 페이지별 사용을 선택하면 각 페이지 Design 값이 우선됩니다.',
+        'background_color' => '데이모드에서 페이지 전체 배경색입니다.',
+        'text_color' => '데이모드에서 제목과 주요 글자색입니다.',
+        'muted_text_color' => '데이모드에서 설명문, 보조 텍스트 색입니다.',
+        'accent_color' => '데이모드에서 hover, 강조, 포인트에 쓰입니다.',
+        'card_background_color' => '데이모드에서 카드/박스/밴드 배경에 쓰입니다.',
+        'header_background_color' => '데이모드에서 상단 고정 메뉴 바 배경색입니다.',
+        'header_text_color' => '데이모드에서 상단 로고, 메뉴, 아이콘 글자색입니다.',
+        'dark_background_color' => '다크모드에서 페이지 전체 배경색입니다.',
+        'dark_text_color' => '다크모드에서 제목과 주요 글자색입니다.',
+        'dark_muted_text_color' => '다크모드에서 설명문, 보조 텍스트 색입니다.',
+        'dark_accent_color' => '다크모드에서 hover, 강조, 포인트에 쓰입니다.',
+        'dark_card_background_color' => '다크모드에서 카드/박스/밴드 배경에 쓰입니다.',
+        'dark_header_background_color' => '다크모드에서 상단 고정 메뉴 바 배경색입니다.',
+        'dark_header_text_color' => '다크모드에서 상단 로고, 메뉴, 아이콘 글자색입니다.',
+        'font_family' => '사이트에 적용할 폰트 이름입니다. 업로드 폰트를 쓰려면 폰트 파일의 이름과 맞춰주세요.',
+        'font_url' => '업로드한 woff2/woff/ttf/otf 파일 경로입니다.',
+    ];
+    return $help[$key] ?? '';
 }
 function fr_select_options(string $key): ?array {
     switch ($key) {
@@ -75,6 +117,7 @@ function render_node(string $path, $v, string $key): void {
     if      (fr_is_i18n($v))        render_i18n($path, $v, fr_label($key));
     elseif  (fr_is_obj_list($v))    render_obj_list($path, $v, fr_label($key));
     elseif  (fr_is_scalar_list($v)) render_scalar_list($path, $v, fr_label($key));
+    elseif  (is_array($v) && $key === 'design') render_design($path, $v, fr_label($key));
     elseif  (is_array($v))          render_assoc($path, $v, fr_label($key));
     elseif  (fr_is_color($key, $v)) render_color($path, (string)$v, fr_label($key));
     elseif  (fr_is_font($key, $v))  render_font($path, (string)$v, fr_label($key));
@@ -84,29 +127,38 @@ function render_node(string $path, $v, string $key): void {
 }
 
 function render_font(string $path, string $v, string $label): void {
+    $key = preg_replace('/^.*\[([^\]]+)\]$/', '$1', $path);
     echo '<div><label class="admin-label">' . e($label) . ' <span class="font-normal normal-case text-xs text-stone-400">(woff2/woff/ttf/otf)</span></label>';
     echo '<div class="flex gap-2">';
     echo '<input class="admin-input" type="text" name="' . e($path) . '" value="' . e($v) . '" data-file-path>';
     echo '<button type="button" class="admin-btn admin-btn--ghost text-xs" data-upload-trigger data-upload-kind="font" data-upload-target="' . e($path) . '">↑ 폰트 업로드</button>';
-    echo '</div></div>';
+    echo '</div>';
+    if (fr_help($key) !== '') echo '<p class="admin-help">' . e(fr_help($key)) . '</p>';
+    echo '</div>';
 }
 
 function render_color(string $path, string $v, string $label): void {
     $v = preg_match('/^#[0-9A-Fa-f]{6}$/', $v) ? strtolower($v) : '#ffffff';
+    $key = preg_replace('/^.*\[([^\]]+)\]$/', '$1', $path);
     echo '<div><label class="admin-label">' . e($label) . '</label>';
     echo '<div class="flex gap-2">';
     echo '<input class="h-11 w-16 rounded border border-stone-300 bg-white p-1 dark:border-stone-700 dark:bg-stone-900" type="color" value="' . e($v) . '" data-color-picker>';
     echo '<input class="admin-input" type="text" name="' . e($path) . '" value="' . e($v) . '" pattern="#[0-9A-Fa-f]{6}" maxlength="7" placeholder="#ffffff" data-color-field>';
-    echo '</div></div>';
+    echo '</div>';
+    if (fr_help($key) !== '') echo '<p class="admin-help">' . e(fr_help($key)) . '</p>';
+    echo '</div>';
 }
 
 function render_select(string $path, string $v, string $label, array $options): void {
+    $key = preg_replace('/^.*\[([^\]]+)\]$/', '$1', $path);
     echo '<div><label class="admin-label">' . e($label) . '</label>';
     echo '<select class="admin-input" name="' . e($path) . '">';
     foreach ($options as $value => $text) {
         echo '<option value="' . e($value) . '"' . ((string)$value === $v ? ' selected' : '') . '>' . e($text) . '</option>';
     }
-    echo '</select></div>';
+    echo '</select>';
+    if (fr_help($key) !== '') echo '<p class="admin-help">' . e(fr_help($key)) . '</p>';
+    echo '</div>';
 }
 
 /* ────── i18n 쌍 ────── */
@@ -186,6 +238,40 @@ function render_obj_item(string $path, int $i, array $item): void {
 }
 
 /* ────── 연관 배열 (중첩 섹션) ────── */
+function render_design_group(string $path, array $obj, string $title, string $desc, array $keys): void {
+    echo '<div class="admin-design-group">';
+    echo '<div class="mb-3">';
+    echo '<p class="text-sm font-semibold text-stone-800 dark:text-stone-100">' . e($title) . '</p>';
+    echo '<p class="mt-1 text-xs leading-5 text-stone-500 dark:text-stone-400">' . e($desc) . '</p>';
+    echo '</div>';
+    echo '<div class="grid gap-3 md:grid-cols-2">';
+    foreach ($keys as $key) {
+        if (array_key_exists($key, $obj)) {
+            render_node($path . '[' . $key . ']', $obj[$key], $key);
+        }
+    }
+    echo '</div></div>';
+}
+
+function render_design(string $path, array $v, string $label): void {
+    echo '<div class="rounded border border-stone-100 p-3 dark:border-stone-800">';
+    echo '<div class="mb-4 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm leading-6 text-emerald-950 dark:border-emerald-900/60 dark:bg-emerald-950/25 dark:text-emerald-100">';
+    echo '<p class="font-semibold">Design 설정 구조</p>';
+    echo '<p class="mt-1">데이모드 색상과 다크모드 색상을 따로 저장합니다. 사이트 상단의 테마 버튼을 누르면 현재 모드에 맞는 색상 세트가 즉시 적용됩니다.</p>';
+    echo '<p class="mt-1">헤더 색상은 페이지 배경과 별도입니다. 상단 메뉴 바만 바꾸려면 헤더 배경/헤더 글자 항목만 수정하세요.</p>';
+    echo '</div>';
+    echo '<div class="space-y-4">';
+    if (array_key_exists('apply_to_all_pages', $v)) {
+        render_design_group($path, $v, '전체 적용 방식', '전체 페이지를 한 번에 통일할지, 각 페이지별 Design을 사용할지 선택합니다.', ['apply_to_all_pages']);
+    }
+    render_design_group($path, $v, '데이모드 · 페이지 색상', '밝은 모드에서 페이지 본문에 적용되는 색상입니다.', ['background_color', 'text_color', 'muted_text_color', 'accent_color', 'card_background_color']);
+    render_design_group($path, $v, '데이모드 · 헤더 색상', '밝은 모드에서 상단 고정 메뉴 바에만 적용됩니다.', ['header_background_color', 'header_text_color']);
+    render_design_group($path, $v, '다크모드 · 페이지 색상', '어두운 모드에서 페이지 본문에 적용되는 색상입니다.', ['dark_background_color', 'dark_text_color', 'dark_muted_text_color', 'dark_accent_color', 'dark_card_background_color']);
+    render_design_group($path, $v, '다크모드 · 헤더 색상', '어두운 모드에서 상단 고정 메뉴 바에만 적용됩니다.', ['dark_header_background_color', 'dark_header_text_color']);
+    render_design_group($path, $v, '폰트 설정', '업로드한 폰트를 전체 사이트에 적용합니다.', ['font_family', 'font_url']);
+    echo '</div></div>';
+}
+
 function render_assoc(string $path, array $v, string $label): void {
     echo '<div class="rounded border border-stone-100 p-3 dark:border-stone-800">';
     echo '<p class="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-stone-400">' . e($label) . '</p>';

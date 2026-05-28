@@ -1,46 +1,180 @@
 {
-  "page": {
-    "title":       {"ko": "", "en": "About Me"},
-    "description": {"ko": "", "en": "Rohi's story, education, CV, and experience."}
-  },
-  "design": {
-    "background_color": "#f8f6f3",
-    "text_color": "#1c1917",
-    "muted_text_color": "#57534e",
-    "accent_color": "#047857",
-    "card_background_color": "#ffffff"
-  },
-  "hero": {
-    "kicker": {"ko": "", "en": "About Me"},
-    "title":  {"ko": "", "en": "Rohi's Story"},
-    "paragraphs": [
-      {"text": {"ko": "", "en": "I work with concept art, storyboard development, visual research, and archive-oriented image systems. My practice begins with drawing and reference, then expands into sequences that hold stories, roles, and visual direction."}},
-      {"text": {"ko": "", "en": "This page gathers a concise introduction, education, CV, and selected experience so the portfolio can be read as both a personal story and a professional archive."}}
-    ]
-  },
-  "side_nav": {
-    "title": {"ko": "", "en": "About Me"},
-    "items": [
-      {"id": "story", "label": {"ko": "", "en": "My Story"}},
-      {"id": "education", "label": {"ko": "", "en": "Education"}},
-      {"id": "cv", "label": {"ko": "", "en": "CV"}}
-    ]
-  },
-  "disciplines": {
-    "kicker": {"ko": "", "en": "Education"},
-    "items": [
-      {"id": "d1", "title": {"ko": "", "en": "Undergraduate"}, "body": {"ko": "", "en": "Foundation in visual art, drawing, composition, and image-making."}},
-      {"id": "d2", "title": {"ko": "", "en": "Master"},        "body": {"ko": "", "en": "Advanced study in concept development, visual research, and project framing."}},
-      {"id": "d3", "title": {"ko": "", "en": "PhD"},           "body": {"ko": "", "en": "Research-oriented practice connecting archives, storytelling, and visual culture."}},
-      {"id": "d4", "title": {"ko": "", "en": "Art School"},    "body": {"ko": "", "en": "Studio-based training in illustration, storyboard, and portfolio development."}},
-      {"id": "d5", "title": {"ko": "", "en": "Data Science"},  "body": {"ko": "", "en": "A complementary track for organizing visual material, research notes, and archive systems."}}
-    ]
-  },
-  "experience": {
-    "kicker": {"ko": "", "en": "CV"},
-    "items": [
-      {"id": "x1", "title": {"ko": "", "en": "Independent Creative Practice"}, "period": {"ko": "", "en": "2022 – Present"}, "body": {"ko": "", "en": "Developing visual archives, portfolio systems, and image-based narrative projects for personal and commissioned contexts."}},
-      {"id": "x2", "title": {"ko": "", "en": "Selected Capabilities"},         "period": {"ko": "", "en": "Ongoing"},         "body": {"ko": "", "en": "Archive design, web prototyping, visual curation, editorial systems, image sequencing, and presentation design."}}
-    ]
-  }
+    "page": {
+        "title": {
+            "ko": "",
+            "en": "About Me"
+        },
+        "description": {
+            "ko": "",
+            "en": "Rohi's story, education, CV, and experience."
+        }
+    },
+    "design": {
+        "background_color": "#f8f6f3",
+        "text_color": "#1c1917",
+        "muted_text_color": "#57534e",
+        "accent_color": "#047857",
+        "card_background_color": "#ffffff",
+        "dark_background_color": "#0f0f10",
+        "dark_text_color": "#f5f5f4",
+        "dark_muted_text_color": "#c4beb8",
+        "dark_accent_color": "#34d399",
+        "dark_card_background_color": "#1c1917",
+        "dark_header_background_color": "#0f0f10",
+        "dark_header_text_color": "#e7e5e4"
+    },
+    "hero": {
+        "kicker": {
+            "ko": "",
+            "en": "About Me"
+        },
+        "title": {
+            "ko": "",
+            "en": "Rohi's Story"
+        },
+        "paragraphs": [
+            {
+                "text": {
+                    "ko": "",
+                    "en": "I work with concept art, storyboard development, visual research, and archive-oriented image systems. My practice begins with drawing and reference, then expands into sequences that hold stories, roles, and visual direction."
+                }
+            },
+            {
+                "text": {
+                    "ko": "",
+                    "en": "This page gathers a concise introduction, education, CV, and selected experience so the portfolio can be read as both a personal story and a professional archive."
+                }
+            }
+        ]
+    },
+    "side_nav": {
+        "title": {
+            "ko": "",
+            "en": "About Me"
+        },
+        "items": [
+            {
+                "id": "story",
+                "label": {
+                    "ko": "",
+                    "en": "My Story"
+                }
+            },
+            {
+                "id": "education",
+                "label": {
+                    "ko": "",
+                    "en": "Education"
+                }
+            },
+            {
+                "id": "cv",
+                "label": {
+                    "ko": "",
+                    "en": "CV"
+                }
+            }
+        ]
+    },
+    "disciplines": {
+        "kicker": {
+            "ko": "",
+            "en": "Education"
+        },
+        "items": [
+            {
+                "id": "d1",
+                "title": {
+                    "ko": "",
+                    "en": "Undergraduate"
+                },
+                "body": {
+                    "ko": "",
+                    "en": "Foundation in visual art, drawing, composition, and image-making."
+                }
+            },
+            {
+                "id": "d2",
+                "title": {
+                    "ko": "",
+                    "en": "Master"
+                },
+                "body": {
+                    "ko": "",
+                    "en": "Advanced study in concept development, visual research, and project framing."
+                }
+            },
+            {
+                "id": "d3",
+                "title": {
+                    "ko": "",
+                    "en": "PhD"
+                },
+                "body": {
+                    "ko": "",
+                    "en": "Research-oriented practice connecting archives, storytelling, and visual culture."
+                }
+            },
+            {
+                "id": "d4",
+                "title": {
+                    "ko": "",
+                    "en": "Art School"
+                },
+                "body": {
+                    "ko": "",
+                    "en": "Studio-based training in illustration, storyboard, and portfolio development."
+                }
+            },
+            {
+                "id": "d5",
+                "title": {
+                    "ko": "",
+                    "en": "Data Science"
+                },
+                "body": {
+                    "ko": "",
+                    "en": "A complementary track for organizing visual material, research notes, and archive systems."
+                }
+            }
+        ]
+    },
+    "experience": {
+        "kicker": {
+            "ko": "",
+            "en": "CV"
+        },
+        "items": [
+            {
+                "id": "x1",
+                "title": {
+                    "ko": "",
+                    "en": "Independent Creative Practice"
+                },
+                "period": {
+                    "ko": "",
+                    "en": "2022 – Present"
+                },
+                "body": {
+                    "ko": "",
+                    "en": "Developing visual archives, portfolio systems, and image-based narrative projects for personal and commissioned contexts."
+                }
+            },
+            {
+                "id": "x2",
+                "title": {
+                    "ko": "",
+                    "en": "Selected Capabilities"
+                },
+                "period": {
+                    "ko": "",
+                    "en": "Ongoing"
+                },
+                "body": {
+                    "ko": "",
+                    "en": "Archive design, web prototyping, visual curation, editorial systems, image sequencing, and presentation design."
+                }
+            }
+        ]
+    }
 }

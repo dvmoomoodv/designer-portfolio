@@ -83,6 +83,25 @@
 }
 .dark .admin-label { color: rgb(168 162 158); }
 
+.admin-help {
+  margin-top: 0.35rem;
+  color: rgb(120 113 108);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+.dark .admin-help { color: rgb(168 162 158); }
+
+.admin-design-group {
+  border: 1px solid rgb(231 229 228);
+  border-radius: 12px;
+  background: rgba(250, 250, 249, 0.72);
+  padding: 1rem;
+}
+.dark .admin-design-group {
+  border-color: rgb(41 37 36);
+  background: rgba(12, 10, 9, 0.28);
+}
+
 .admin-flash {
   padding: 0.75rem 1rem;
   border-radius: 8px;

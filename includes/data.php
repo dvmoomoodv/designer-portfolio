@@ -177,6 +177,13 @@ function design_defaults(): array
         'card_background_color' => '#ffffff',
         'header_background_color' => '#f8f6f3',
         'header_text_color' => '#44403c',
+        'dark_background_color' => '#0f0f10',
+        'dark_text_color' => '#f5f5f4',
+        'dark_muted_text_color' => '#c4beb8',
+        'dark_accent_color' => '#34d399',
+        'dark_card_background_color' => '#1c1917',
+        'dark_header_background_color' => '#0f0f10',
+        'dark_header_text_color' => '#e7e5e4',
         'font_family' => 'Inter',
         'font_url' => '',
     ];
@@ -206,7 +213,7 @@ function page_design_style(array $pageData = []): string
 {
     $d = resolved_design($pageData);
     return sprintf(
-        '--home-bg:%s;--home-text:%s;--home-muted:%s;--home-accent:%s;--home-card:%s;--header-bg:%s;--header-text:%s;--site-font:%s;',
+        '--home-bg:%s;--home-text:%s;--home-muted:%s;--home-accent:%s;--home-card:%s;--header-bg:%s;--header-text:%s;--dark-home-bg:%s;--dark-home-text:%s;--dark-home-muted:%s;--dark-home-accent:%s;--dark-home-card:%s;--dark-header-bg:%s;--dark-header-text:%s;--site-font:%s;',
         $d['background_color'],
         $d['text_color'],
         $d['muted_text_color'],
@@ -214,6 +221,13 @@ function page_design_style(array $pageData = []): string
         $d['card_background_color'],
         $d['header_background_color'],
         $d['header_text_color'],
+        $d['dark_background_color'],
+        $d['dark_text_color'],
+        $d['dark_muted_text_color'],
+        $d['dark_accent_color'],
+        $d['dark_card_background_color'],
+        $d['dark_header_background_color'],
+        $d['dark_header_text_color'],
         "'" . str_replace("'", '', $d['font_family']) . "'"
     );
 }

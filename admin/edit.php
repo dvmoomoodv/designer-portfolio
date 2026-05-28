@@ -111,6 +111,9 @@ $preview_map = [
 ];
 
 $common_guide = [
+    '라이트 모드 색상은 Background/Text/Muted/Accent/Card/Header 항목에 저장됩니다.',
+    '다크 모드 색상은 Dark Background/Dark Text/Dark Muted/Dark Accent/Dark Card/Dark Header 항목에 저장됩니다.',
+    '상단 테마 버튼을 누르면 개별 페이지 색상이 지정되어 있어도 현재 설정된 라이트/다크 모드 색상 세트가 즉시 적용됩니다.',
     '색상은 #ffffff 형식의 6자리 HEX 값만 저장됩니다. 잘못된 값은 기존값 또는 기본값으로 자동 보정됩니다.',
     '이미지는 업로드 후에도 반드시 저장 버튼을 눌러야 실제 데이터에 반영됩니다.',
     '목록 항목은 추가, 삭제, 위/아래 이동 후 저장하면 순서가 그대로 사이트에 반영됩니다.',
@@ -124,6 +127,7 @@ $page_guides = [
             'Brand는 상단 로고 텍스트에 반영됩니다.',
             'Nav는 상단 큰 메뉴와 드롭다운 소항목에 반영됩니다. href 값은 ./page.php 또는 ./page.php?filter=id 형식으로 입력하세요.',
             'Design의 Apply To All Pages를 전체 적용으로 바꾸면 모든 페이지가 site의 색상 기준을 따릅니다.',
+            'Apply To All Pages가 전체 적용이면 라이트/다크 모드 색상 모두 site의 Design 기준으로 통일됩니다.',
             'Font Family와 Font Url을 설정하면 전체 사이트 폰트가 바뀝니다. Font Url은 폰트 업로드 버튼으로 넣을 수 있습니다.',
             'Header Background/Text Color는 웹사이트 상단 메뉴 바 색상에 반영됩니다.',
         ],
@@ -291,9 +295,13 @@ include __DIR__ . '/_layout_head.php';
   <div class="mb-3 flex flex-wrap items-center justify-between gap-3">
     <div>
       <h2 class="text-lg font-semibold">미리보기</h2>
-      <p class="text-sm text-stone-500 dark:text-stone-400">저장 후 새로고침하면 실제 반영 화면을 확인할 수 있습니다. Home 색상은 입력 중에도 아래 화면에 바로 반영됩니다.</p>
+      <p class="text-sm text-stone-500 dark:text-stone-400">저장 후 새로고침하면 실제 반영 화면을 확인할 수 있습니다. 색상은 입력 중에도 아래 화면에 바로 반영됩니다.</p>
     </div>
-    <button type="button" class="admin-btn admin-btn--ghost text-sm" data-preview-refresh>미리보기 새로고침</button>
+    <div class="flex flex-wrap gap-2">
+      <button type="button" class="admin-btn admin-btn--ghost text-sm" data-preview-theme="light">데이모드로 보기</button>
+      <button type="button" class="admin-btn admin-btn--ghost text-sm" data-preview-theme="dark">다크모드로 보기</button>
+      <button type="button" class="admin-btn admin-btn--ghost text-sm" data-preview-refresh>미리보기 새로고침</button>
+    </div>
   </div>
   <iframe src="../<?= e($preview_map[$page] ?? 'index.php') ?>" data-admin-preview class="h-[520px] w-full rounded-lg border border-stone-200 bg-white dark:border-stone-800"></iframe>
 </section>

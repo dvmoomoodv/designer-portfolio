@@ -1,59 +1,147 @@
 {
-  "page": {
-    "title":       { "ko": "", "en": "Concept Art" },
-    "description": { "ko": "", "en": "Storyboard, concept art, workflow, study, sketch, and CV/Edit archive." }
-  },
-  "design": {
-    "background_color": "#f8f6f3",
-    "text_color": "#1c1917",
-    "muted_text_color": "#57534e",
-    "accent_color": "#047857",
-    "card_background_color": "#ffffff"
-  },
-  "hero": {
-    "kicker": { "ko": "", "en": "Concept Art" },
-    "title":  { "ko": "", "en": "Storyboard & Concept Art." },
-    "body":   { "ko": "", "en": "Explore concept art, storyboard, workflow notes, sheets, studies, sketches, and CV/Edit materials." }
-  },
-  "filters": [
-    { "id": "all",                "label": { "ko": "", "en": "Featured" }           },
-    { "id": "storyboard",         "label": { "ko": "", "en": "Storyboard" }         },
-    { "id": "water-flows",        "label": { "ko": "", "en": "Water Flows" }        },
-    { "id": "sheet-tweet",        "label": { "ko": "", "en": "Sheet & Tweet" }      },
-    { "id": "environment-design", "label": { "ko": "", "en": "Environment Design" } },
-    { "id": "edu-cv",             "label": { "ko": "", "en": "Edu / CV" }           }
-  ],
-  "pagination": { "enabled": "1", "per_page": "6" },
-  "items": [
-    {
-      "id": "ca01",
-      "category_id": "storyboard",
-      "category_label": { "ko": "", "en": "Storyboard" },
-      "title": { "ko": "", "en": "Storyboard Study" },
-      "year": "2026",
-      "image": "./assets/images/project-01.svg",
-      "image_alt": { "ko": "", "en": "Storyboard concept image" },
-      "link": "./project.php?id=p01"
+    "page": {
+        "title": {
+            "ko": "",
+            "en": "Concept Art"
+        },
+        "description": {
+            "ko": "",
+            "en": "Storyboard, concept art, workflow, study, sketch, and CV/Edit archive."
+        }
     },
-    {
-      "id": "ca02",
-      "category_id": "water-flows",
-      "category_label": { "ko": "", "en": "Water Flows" },
-      "title": { "ko": "", "en": "Water Flows" },
-      "year": "2026",
-      "image": "./assets/images/project-02.svg",
-      "image_alt": { "ko": "", "en": "Water flows concept image" },
-      "link": "./project.php?id=p02"
+    "design": {
+        "background_color": "#f8f6f3",
+        "text_color": "#1c1917",
+        "muted_text_color": "#57534e",
+        "accent_color": "#047857",
+        "card_background_color": "#ffffff",
+        "dark_background_color": "#0f0f10",
+        "dark_text_color": "#f5f5f4",
+        "dark_muted_text_color": "#c4beb8",
+        "dark_accent_color": "#34d399",
+        "dark_card_background_color": "#1c1917",
+        "dark_header_background_color": "#0f0f10",
+        "dark_header_text_color": "#e7e5e4"
     },
-    {
-      "id": "ca03",
-      "category_id": "environment-design",
-      "category_label": { "ko": "", "en": "Environment Design" },
-      "title": { "ko": "", "en": "Environment Design" },
-      "year": "2025",
-      "image": "./assets/images/project-03.svg",
-      "image_alt": { "ko": "", "en": "Environment design concept image" },
-      "link": "./project.php?id=p03"
-    }
-  ]
+    "hero": {
+        "kicker": {
+            "ko": "",
+            "en": "Concept Art"
+        },
+        "title": {
+            "ko": "",
+            "en": "Storyboard & Concept Art."
+        },
+        "body": {
+            "ko": "",
+            "en": "Explore concept art, storyboard, workflow notes, sheets, studies, sketches, and CV/Edit materials."
+        }
+    },
+    "filters": [
+        {
+            "id": "all",
+            "label": {
+                "ko": "",
+                "en": "Featured"
+            }
+        },
+        {
+            "id": "storyboard",
+            "label": {
+                "ko": "",
+                "en": "Storyboard"
+            }
+        },
+        {
+            "id": "water-flows",
+            "label": {
+                "ko": "",
+                "en": "Water Flows"
+            }
+        },
+        {
+            "id": "sheet-tweet",
+            "label": {
+                "ko": "",
+                "en": "Sheet & Tweet"
+            }
+        },
+        {
+            "id": "environment-design",
+            "label": {
+                "ko": "",
+                "en": "Environment Design"
+            }
+        },
+        {
+            "id": "edu-cv",
+            "label": {
+                "ko": "",
+                "en": "Edu / CV"
+            }
+        }
+    ],
+    "pagination": {
+        "enabled": "1",
+        "per_page": "6"
+    },
+    "items": [
+        {
+            "id": "ca01",
+            "category_id": "storyboard",
+            "category_label": {
+                "ko": "",
+                "en": "Storyboard"
+            },
+            "title": {
+                "ko": "",
+                "en": "Storyboard Study"
+            },
+            "year": "2026",
+            "image": "./assets/images/project-01.svg",
+            "image_alt": {
+                "ko": "",
+                "en": "Storyboard concept image"
+            },
+            "link": "./project.php?id=p01"
+        },
+        {
+            "id": "ca02",
+            "category_id": "water-flows",
+            "category_label": {
+                "ko": "",
+                "en": "Water Flows"
+            },
+            "title": {
+                "ko": "",
+                "en": "Water Flows"
+            },
+            "year": "2026",
+            "image": "./assets/images/project-02.svg",
+            "image_alt": {
+                "ko": "",
+                "en": "Water flows concept image"
+            },
+            "link": "./project.php?id=p02"
+        },
+        {
+            "id": "ca03",
+            "category_id": "environment-design",
+            "category_label": {
+                "ko": "",
+                "en": "Environment Design"
+            },
+            "title": {
+                "ko": "",
+                "en": "Environment Design"
+            },
+            "year": "2025",
+            "image": "./assets/images/project-03.svg",
+            "image_alt": {
+                "ko": "",
+                "en": "Environment design concept image"
+            },
+            "link": "./project.php?id=p03"
+        }
+    ]
 }

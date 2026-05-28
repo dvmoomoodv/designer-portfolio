@@ -49,9 +49,21 @@ body {
   font-family: var(--site-font, Inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
+.dark .page-shell[style] {
+  background:
+    radial-gradient(circle at top, color-mix(in srgb, var(--dark-home-accent, #34d399) 12%, transparent), transparent 36%),
+    var(--dark-home-bg, #0f0f10);
+  color: var(--dark-home-text, #f5f5f4);
+}
+
 .page-shell[style] .site-header {
   background-color: color-mix(in srgb, var(--header-bg, #f8f6f3) 86%, transparent);
   color: var(--header-text, #44403c);
+}
+
+.dark .page-shell[style] .site-header {
+  background-color: color-mix(in srgb, var(--dark-header-bg, #0f0f10) 86%, transparent);
+  color: var(--dark-header-text, #e7e5e4);
 }
 
 .page-shell[style] .header-brand,
@@ -60,16 +72,34 @@ body {
   color: var(--header-text, #44403c);
 }
 
+.dark .page-shell[style] .header-brand,
+.dark .page-shell[style] .nav-link,
+.dark .page-shell[style] .header-icon-button {
+  color: var(--dark-header-text, #e7e5e4);
+}
+
 .page-shell[style] .muted-heading,
 .page-shell[style] .surface-title,
 .home-page .home-hero-title {
   color: var(--home-text, #1c1917) !important;
 }
 
+.dark .page-shell[style] .muted-heading,
+.dark .page-shell[style] .surface-title,
+.dark .home-page .home-hero-title {
+  color: var(--dark-home-text, #f5f5f4) !important;
+}
+
 .page-shell[style] .meta-link:hover,
 .page-shell[style] .surface-link:hover,
 .home-page .home-hero-kicker {
   color: var(--home-accent, #047857) !important;
+}
+
+.dark .page-shell[style] .meta-link:hover,
+.dark .page-shell[style] .surface-link:hover,
+.dark .home-page .home-hero-kicker {
+  color: var(--dark-home-accent, #34d399) !important;
 }
 
 .page-shell[style] .muted-copy,
@@ -80,11 +110,26 @@ body {
   color: var(--home-muted, #57534e) !important;
 }
 
+.dark .page-shell[style] .muted-copy,
+.dark .page-shell[style] .category-tile .meta,
+.dark .page-shell[style] .text-stone-500,
+.dark .page-shell[style] .text-stone-600,
+.dark .home-page .home-muted {
+  color: var(--dark-home-muted, #c4beb8) !important;
+}
+
 .page-shell[style] .surface-card,
 .page-shell[style] .surface-band,
 .page-shell[style] .surface-subtle,
 .page-shell[style] .category-tile {
   background-color: color-mix(in srgb, var(--home-card, #ffffff) 82%, transparent);
+}
+
+.dark .page-shell[style] .surface-card,
+.dark .page-shell[style] .surface-band,
+.dark .page-shell[style] .surface-subtle,
+.dark .page-shell[style] .category-tile {
+  background-color: color-mix(in srgb, var(--dark-home-card, #1c1917) 82%, transparent);
 }
 
 .site-header {

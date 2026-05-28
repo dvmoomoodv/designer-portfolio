@@ -1,47 +1,141 @@
 {
-  "page": {
-    "title":       { "ko": "", "en": "Resume" },
-    "description": { "ko": "", "en": "Selected experience, capabilities, and working contexts." }
-  },
-  "design": {
-    "background_color": "#f8f6f3",
-    "text_color": "#1c1917",
-    "muted_text_color": "#57534e",
-    "accent_color": "#047857",
-    "card_background_color": "#ffffff"
-  },
-  "hero": {
-    "kicker": { "ko": "", "en": "Resume" },
-    "title":  { "ko": "", "en": "Selected experience, capabilities, and working contexts." },
-    "body":   { "ko": "", "en": "This page is structured as a concise, editable summary for future replacement with a formal CV or downloadable file. It keeps the portfolio navigation coherent while remaining easy to update by hand." }
-  },
-  "experience": {
-    "kicker": { "ko": "", "en": "Experience" },
-    "items": [
-      { "id": "x1",
-        "title":  { "ko": "", "en": "Independent Creative Developer" },
-        "period": { "ko": "", "en": "2022 – Present" },
-        "body":   { "ko": "", "en": "Designed and built editorial-style portfolio sites, archival interfaces, and visual presentation systems using lightweight front-end tools." }
-      },
-      { "id": "x2",
-        "title":  { "ko": "", "en": "Visual Development / Illustration" },
-        "period": { "ko": "", "en": "Selected projects" },
-        "body":   { "ko": "", "en": "Developed image systems, concept studies, and illustrations for research-driven, cultural, and narrative projects." }
-      }
-    ]
-  },
-  "capabilities": {
-    "kicker": { "ko": "", "en": "Capabilities" },
-    "items": [
-      { "id": "k1", "title": { "ko": "", "en": "Front-end" },       "body": { "ko": "", "en": "Semantic HTML, CSS systems, Tailwind CDN workflows, vanilla JavaScript." } },
-      { "id": "k2", "title": { "ko": "", "en": "Design" },          "body": { "ko": "", "en": "Editorial layout, archive structures, typography hierarchy, image-led interface design." } },
-      { "id": "k3", "title": { "ko": "", "en": "Visual Practice" }, "body": { "ko": "", "en": "Visual development, illustration, sequential image studies, concept framing." } },
-      { "id": "k4", "title": { "ko": "", "en": "Tools" },           "body": { "ko": "", "en": "Figma, Photoshop, Illustrator, lightweight static site authoring." } }
-    ]
-  },
-  "contact_card": {
-    "tag":     { "ko": "", "en": "Contact" },
-    "address": "hello@example.com",
-    "body":    { "ko": "", "en": "This placeholder resume page can later be replaced with a PDF link, detailed CV, or a more formal experience listing." }
-  }
+    "page": {
+        "title": {
+            "ko": "",
+            "en": "Resume"
+        },
+        "description": {
+            "ko": "",
+            "en": "Selected experience, capabilities, and working contexts."
+        }
+    },
+    "design": {
+        "background_color": "#f8f6f3",
+        "text_color": "#1c1917",
+        "muted_text_color": "#57534e",
+        "accent_color": "#047857",
+        "card_background_color": "#ffffff",
+        "dark_background_color": "#0f0f10",
+        "dark_text_color": "#f5f5f4",
+        "dark_muted_text_color": "#c4beb8",
+        "dark_accent_color": "#34d399",
+        "dark_card_background_color": "#1c1917",
+        "dark_header_background_color": "#0f0f10",
+        "dark_header_text_color": "#e7e5e4"
+    },
+    "hero": {
+        "kicker": {
+            "ko": "",
+            "en": "Resume"
+        },
+        "title": {
+            "ko": "",
+            "en": "Selected experience, capabilities, and working contexts."
+        },
+        "body": {
+            "ko": "",
+            "en": "This page is structured as a concise, editable summary for future replacement with a formal CV or downloadable file. It keeps the portfolio navigation coherent while remaining easy to update by hand."
+        }
+    },
+    "experience": {
+        "kicker": {
+            "ko": "",
+            "en": "Experience"
+        },
+        "items": [
+            {
+                "id": "x1",
+                "title": {
+                    "ko": "",
+                    "en": "Independent Creative Developer"
+                },
+                "period": {
+                    "ko": "",
+                    "en": "2022 – Present"
+                },
+                "body": {
+                    "ko": "",
+                    "en": "Designed and built editorial-style portfolio sites, archival interfaces, and visual presentation systems using lightweight front-end tools."
+                }
+            },
+            {
+                "id": "x2",
+                "title": {
+                    "ko": "",
+                    "en": "Visual Development / Illustration"
+                },
+                "period": {
+                    "ko": "",
+                    "en": "Selected projects"
+                },
+                "body": {
+                    "ko": "",
+                    "en": "Developed image systems, concept studies, and illustrations for research-driven, cultural, and narrative projects."
+                }
+            }
+        ]
+    },
+    "capabilities": {
+        "kicker": {
+            "ko": "",
+            "en": "Capabilities"
+        },
+        "items": [
+            {
+                "id": "k1",
+                "title": {
+                    "ko": "",
+                    "en": "Front-end"
+                },
+                "body": {
+                    "ko": "",
+                    "en": "Semantic HTML, CSS systems, Tailwind CDN workflows, vanilla JavaScript."
+                }
+            },
+            {
+                "id": "k2",
+                "title": {
+                    "ko": "",
+                    "en": "Design"
+                },
+                "body": {
+                    "ko": "",
+                    "en": "Editorial layout, archive structures, typography hierarchy, image-led interface design."
+                }
+            },
+            {
+                "id": "k3",
+                "title": {
+                    "ko": "",
+                    "en": "Visual Practice"
+                },
+                "body": {
+                    "ko": "",
+                    "en": "Visual development, illustration, sequential image studies, concept framing."
+                }
+            },
+            {
+                "id": "k4",
+                "title": {
+                    "ko": "",
+                    "en": "Tools"
+                },
+                "body": {
+                    "ko": "",
+                    "en": "Figma, Photoshop, Illustrator, lightweight static site authoring."
+                }
+            }
+        ]
+    },
+    "contact_card": {
+        "tag": {
+            "ko": "",
+            "en": "Contact"
+        },
+        "address": "hello@example.com",
+        "body": {
+            "ko": "",
+            "en": "This placeholder resume page can later be replaced with a PDF link, detailed CV, or a more formal experience listing."
+        }
+    }
 }
