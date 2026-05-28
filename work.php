@@ -14,10 +14,25 @@ $footer_links = [
 
 $hero    = $data['hero']    ?? [];
 $filters = $data['filters'] ?? [];
+$work_items = $data['items'] ?? [];
+if (!$work_items) {
+    foreach ($projects as $p) {
+        $work_items[] = [
+            'id' => $p['id'] ?? '',
+            'category_id' => $p['category_id'] ?? '',
+            'category_label' => $p['category_label'] ?? ['ko' => '', 'en' => ''],
+            'title' => $p['title'] ?? ['ko' => '', 'en' => ''],
+            'year' => $p['year'] ?? '',
+            'image' => $p['cover'] ?? '',
+            'image_alt' => $p['cover_alt'] ?? ['ko' => '', 'en' => ''],
+            'link' => './project.php?id=' . rawurlencode((string)($p['id'] ?? '')),
+        ];
+    }
+}
 $active_filter = active_filter_from($filters);
-$projects = filter_by_category($projects, $active_filter);
-$pager = paginate_array($projects, pagination_settings($data, 6));
-$projects = $pager['items'];
+$work_items = filter_by_category($work_items, $active_filter);
+$pager = paginate_array($work_items, pagination_settings($data, 6));
+$work_items = $pager['items'];
 $gallery_classes = ['concept-wide', 'concept-small', 'concept-small', 'concept-wide', 'concept-small', 'concept-small'];
 ?>
 <?php include __DIR__ . '/includes/partials/head.php'; ?>
@@ -45,15 +60,15 @@ $gallery_classes = ['concept-wide', 'concept-small', 'concept-small', 'concept-w
 
     <section class="mt-12">
       <div class="concept-gallery">
-        <?php foreach ($projects as $i => $p): ?>
+        <?php foreach ($work_items as $i => $p): ?>
           <?php $layout = $gallery_classes[$i % count($gallery_classes)]; ?>
           <article data-category="<?= e($p['category_id'] ?? '') ?>" class="work-card concept-gallery-item <?= e($layout) ?>">
-            <a href="<?= e($p['cover'] ?? '') ?>" data-image-frame data-lightbox class="image-frame concept-image-link">
-              <img src="<?= e($p['cover'] ?? '') ?>" alt="<?= te($p['cover_alt'] ?? []) ?>" loading="lazy">
+            <a href="<?= e($p['image'] ?? '') ?>" data-image-frame data-lightbox class="image-frame concept-image-link">
+              <img src="<?= e($p['image'] ?? '') ?>" alt="<?= te($p['image_alt'] ?? []) ?>" loading="lazy">
             </a>
             <div class="concept-caption mt-3 flex items-start justify-between gap-4">
               <div>
-                <h2 class="surface-title text-lg font-medium"><a href="./project.php?id=<?= e($p['id'] ?? '') ?>" class="surface-link"><?= te($p['title'] ?? []) ?></a></h2>
+                <h2 class="surface-title text-lg font-medium"><a href="<?= e($p['link'] ?? '#') ?>" class="surface-link"><?= te($p['title'] ?? []) ?></a></h2>
                 <p class="mt-1 text-sm text-stone-500 dark:text-stone-400"><?= te($p['category_label'] ?? []) ?></p>
               </div>
               <span class="text-sm text-stone-500 dark:text-stone-400"><?= e($p['year'] ?? '') ?></span>

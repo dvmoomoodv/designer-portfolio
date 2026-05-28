@@ -26,6 +26,9 @@ function fr_is_scalar_list($v): bool {
 function fr_is_image($v): bool {
     return is_string($v) && (bool)preg_match('/\.(jpe?g|png|gif|webp|svg)($|\?)/i', $v);
 }
+function fr_is_font(string $key, $v): bool {
+    return is_string($v) && preg_match('/font_url/i', $key);
+}
 function fr_is_multiline(string $key, $v): bool {
     if (preg_match('/body|description|paragraph|text|overview/i', $key)) return true;
     return is_string($v) && strlen($v) > 100;
@@ -44,6 +47,15 @@ function fr_select_options(string $key): ?array {
             return ['1' => '사용', '0' => '사용 안 함'];
         case 'per_page':
             return ['3' => '3개씩', '4' => '4개씩', '5' => '5개씩', '6' => '6개씩', '8' => '8개씩', '9' => '9개씩', '12' => '12개씩', '16' => '16개씩', '24' => '24개씩'];
+        case 'hero_layout':
+            return ['image_right' => '이미지 오른쪽', 'image_left' => '이미지 왼쪽', 'image_top' => '이미지 위', 'text_only' => '텍스트만'];
+        case 'selected_columns':
+        case 'notes_columns':
+            return ['2' => '2열', '3' => '3열', '4' => '4열'];
+        case 'category_columns':
+            return ['1' => '1열', '2' => '2열', '3' => '3열'];
+        case 'section_spacing':
+            return ['compact' => '좁게', 'normal' => '기본'];
         default:
             return null;
     }
@@ -65,9 +77,18 @@ function render_node(string $path, $v, string $key): void {
     elseif  (fr_is_scalar_list($v)) render_scalar_list($path, $v, fr_label($key));
     elseif  (is_array($v))          render_assoc($path, $v, fr_label($key));
     elseif  (fr_is_color($key, $v)) render_color($path, (string)$v, fr_label($key));
+    elseif  (fr_is_font($key, $v))  render_font($path, (string)$v, fr_label($key));
     elseif  (fr_is_image($v))       render_image($path, (string)$v, fr_label($key));
     elseif  (fr_select_options($key)) render_select($path, (string)$v, fr_label($key), fr_select_options($key) ?? []);
     else                            render_scalar($path, $v, fr_label($key), $key);
+}
+
+function render_font(string $path, string $v, string $label): void {
+    echo '<div><label class="admin-label">' . e($label) . ' <span class="font-normal normal-case text-xs text-stone-400">(woff2/woff/ttf/otf)</span></label>';
+    echo '<div class="flex gap-2">';
+    echo '<input class="admin-input" type="text" name="' . e($path) . '" value="' . e($v) . '" data-file-path>';
+    echo '<button type="button" class="admin-btn admin-btn--ghost text-xs" data-upload-trigger data-upload-kind="font" data-upload-target="' . e($path) . '">↑ 폰트 업로드</button>';
+    echo '</div></div>';
 }
 
 function render_color(string $path, string $v, string $label): void {
@@ -120,7 +141,7 @@ function render_image(string $path, string $v, string $label): void {
     echo '<div class="flex items-start gap-3">';
     if ($v) echo '<img src="' . e($v) . '" class="h-14 w-14 flex-shrink-0 rounded object-cover border border-stone-200 dark:border-stone-800" alt="preview">';
     echo '<div class="flex-1 space-y-1">';
-    echo '<input class="admin-input" type="text" name="' . e($path) . '" value="' . e($v) . '" data-image-path>';
+    echo '<input class="admin-input" type="text" name="' . e($path) . '" value="' . e($v) . '" data-image-path data-file-path>';
     echo '<button type="button" class="admin-btn admin-btn--ghost text-xs" data-upload-trigger data-upload-target="' . e($path) . '">↑ 이미지 업로드</button>';
     echo '</div></div></div>';
 }

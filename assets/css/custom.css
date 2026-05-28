@@ -19,7 +19,7 @@ html[data-theme="dark"] {
 }
 
 body {
-  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--site-font, Inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 .page-shell {
@@ -46,6 +46,18 @@ body {
     radial-gradient(circle at top, color-mix(in srgb, var(--home-accent, #047857) 12%, transparent), transparent 36%),
     var(--home-bg, #f8f6f3);
   color: var(--home-text, #1c1917);
+  font-family: var(--site-font, Inter), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.page-shell[style] .site-header {
+  background-color: color-mix(in srgb, var(--header-bg, #f8f6f3) 86%, transparent);
+  color: var(--header-text, #44403c);
+}
+
+.page-shell[style] .header-brand,
+.page-shell[style] .nav-link,
+.page-shell[style] .header-icon-button {
+  color: var(--header-text, #44403c);
 }
 
 .page-shell[style] .muted-heading,
@@ -76,8 +88,9 @@ body {
 }
 
 .site-header {
-  background-color: rgba(248, 246, 243, 0.85);
+  background-color: color-mix(in srgb, var(--header-bg, #f8f6f3) 86%, transparent);
   border-color: rgba(231, 229, 228, 0.8);
+  color: var(--header-text, #44403c);
 }
 
 .dark .site-header {

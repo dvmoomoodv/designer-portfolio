@@ -63,11 +63,15 @@
       '--home-text': fieldValue('d[design][text_color]'),
       '--home-muted': fieldValue('d[design][muted_text_color]'),
       '--home-accent': fieldValue('d[design][accent_color]'),
-      '--home-card': fieldValue('d[design][card_background_color]')
+      '--home-card': fieldValue('d[design][card_background_color]'),
+      '--header-bg': fieldValue('d[design][header_background_color]'),
+      '--header-text': fieldValue('d[design][header_text_color]')
     };
     Object.keys(map).forEach(function (key) {
       if (/^#[0-9A-Fa-f]{6}$/.test(map[key])) body.style.setProperty(key, map[key]);
     });
+    var font = fieldValue('d[design][font_family]');
+    if (font) body.style.setProperty('--site-font', "'" + font.replace(/'/g, '') + "'");
   }
 
   /* ── details 토글: 화살표 회전 ── */
@@ -192,13 +196,14 @@
     e.preventDefault();
 
     var targetName = btn.dataset.uploadTarget;
+    var kind = btn.dataset.uploadKind || 'image';
     var input = document.createElement('input');
     input.type = 'file';
-    input.accept = 'image/jpeg,image/png,image/gif,image/webp,image/svg+xml';
+    input.accept = kind === 'font' ? '.woff2,.woff,.ttf,.otf' : 'image/jpeg,image/png,image/gif,image/webp,image/svg+xml';
     input.addEventListener('change', function () {
       var file = input.files[0];
       if (!file) return;
-      uploadFile(file, targetName, btn);
+      uploadFile(file, targetName, btn, kind);
     });
     input.click();
   });
@@ -208,10 +213,11 @@
     return el ? el.value : '';
   }
 
-  function uploadFile(file, targetName, triggerBtn) {
+  function uploadFile(file, targetName, triggerBtn, kind) {
     var fd = new FormData();
     fd.append('file', file);
     fd.append('csrf_token', getCsrfToken());
+    fd.append('kind', kind || 'image');
 
     triggerBtn.disabled = true;
     triggerBtn.textContent = '업로드 중…';
@@ -222,7 +228,7 @@
         if (!data.ok) throw new Error(data.error || '업로드 실패');
 
         // input[name=targetName] 값 갱신
-        var field = form.querySelector('[name="' + escHtml(targetName) + '"][data-image-path]');
+        var field = form.querySelector('[name="' + escHtml(targetName) + '"][data-file-path]');
         if (field) {
           field.value = data.url;
           // 미리보기 갱신

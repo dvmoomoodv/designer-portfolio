@@ -47,14 +47,18 @@ function sanitize_design_payload(array $payload, array $existing): array {
         'card_background_color' => '#ffffff',
     ];
     foreach ($defaults as $key => $fallback) {
-        $value = strtolower(trim((string)($payload['design'][$key] ?? '')));
-        if (!preg_match('/^#[0-9a-f]{6}$/', $value)) {
-            $value = (string)($existing['design'][$key] ?? $fallback);
+        if (strpos($key, 'color') !== false) {
+            $value = strtolower(trim((string)($payload['design'][$key] ?? '')));
+            if (!preg_match('/^#[0-9a-f]{6}$/', $value)) {
+                $value = (string)($existing['design'][$key] ?? $fallback);
+            }
+            if (!preg_match('/^#[0-9a-fA-F]{6}$/', $value)) {
+                $value = $fallback;
+            }
+            $payload['design'][$key] = strtolower($value);
+            continue;
         }
-        if (!preg_match('/^#[0-9a-fA-F]{6}$/', $value)) {
-            $value = $fallback;
-        }
-        $payload['design'][$key] = strtolower($value);
+        $payload['design'][$key] = trim((string)($payload['design'][$key] ?? ($existing['design'][$key] ?? $fallback)));
     }
     if (isset($payload['design']['apply_to_all_pages'])) {
         $payload['design']['apply_to_all_pages'] = (string)$payload['design']['apply_to_all_pages'] === '1' ? '1' : '0';
@@ -120,6 +124,8 @@ $page_guides = [
             'Brand는 상단 로고 텍스트에 반영됩니다.',
             'Nav는 상단 큰 메뉴와 드롭다운 소항목에 반영됩니다. href 값은 ./page.php 또는 ./page.php?filter=id 형식으로 입력하세요.',
             'Design의 Apply To All Pages를 전체 적용으로 바꾸면 모든 페이지가 site의 색상 기준을 따릅니다.',
+            'Font Family와 Font Url을 설정하면 전체 사이트 폰트가 바뀝니다. Font Url은 폰트 업로드 버튼으로 넣을 수 있습니다.',
+            'Header Background/Text Color는 웹사이트 상단 메뉴 바 색상에 반영됩니다.',
         ],
     ],
     'index' => [
@@ -129,6 +135,7 @@ $page_guides = [
             'Hero image는 메인 첫 화면 우측 이미지에 반영됩니다.',
             'Selected Work의 project_ids는 projects.json에 있는 프로젝트 id와 같아야 표시됩니다.',
             'Categories의 href는 클릭 시 이동할 페이지/필터 주소입니다.',
+            'Layout에서 히어로 이미지 위치, 카드 컬럼 수, 섹션 간격을 조절할 수 있습니다.',
         ],
     ],
     'about' => [
@@ -144,7 +151,8 @@ $page_guides = [
         'items' => [
             'Filters의 id는 프로젝트 category_id와 같아야 필터가 정상 작동합니다.',
             'Pagination의 Per Page는 한 페이지에 보일 프로젝트 수입니다.',
-            '실제 카드 내용은 Projects 편집 화면에서 수정합니다.',
+            'Items는 Concept Art 화면에 표시되는 이미지 카드입니다. 각 item image에서 사진 업로드가 가능합니다.',
+            'Project 상세 페이지까지 연결하려면 item의 link를 ./project.php?id=프로젝트ID 형식으로 입력하세요.',
         ],
     ],
     'research' => [
@@ -193,6 +201,7 @@ $page_guides = [
             'Email address는 mailto 링크로 사용됩니다.',
             'Social items의 href는 외부 링크 주소입니다. https:// 포함을 권장합니다.',
             'Brand와 Worked With는 상단 Contact 드롭다운의 소항목 앵커와 연결됩니다.',
+            'Visual Items는 Contact 하단 이미지 카드 영역입니다. 각 item image에서 사진 업로드가 가능합니다.',
         ],
     ],
 ];

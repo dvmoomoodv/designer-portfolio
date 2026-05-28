@@ -98,5 +98,31 @@
             "ko": "",
             "en": "Available for selected collaborations, visual research, concept development, editorial image systems, and portfolio-oriented projects."
         }
+    },
+    "visual_items": {
+        "kicker": {
+            "ko": "",
+            "en": "Contact Images"
+        },
+        "title": {
+            "ko": "",
+            "en": "Visual notes and collaboration references"
+        },
+        "items": [
+            {
+                "id": "cimg1",
+                "title": { "ko": "", "en": "Studio note" },
+                "caption": { "ko": "", "en": "A visual placeholder for contact or collaboration context." },
+                "image": "./assets/images/project-01.svg",
+                "image_alt": { "ko": "", "en": "Contact visual placeholder" }
+            },
+            {
+                "id": "cimg2",
+                "title": { "ko": "", "en": "Collaboration reference" },
+                "caption": { "ko": "", "en": "Add client, brand, or project reference images here." },
+                "image": "./assets/images/project-02.svg",
+                "image_alt": { "ko": "", "en": "Collaboration visual placeholder" }
+            }
+        ]
     }
 }

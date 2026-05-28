@@ -16,6 +16,13 @@
         "accent_color": "#047857",
         "card_background_color": "#ffffff"
     },
+    "layout": {
+        "hero_layout": "image_right",
+        "selected_columns": "3",
+        "category_columns": "2",
+        "notes_columns": "3",
+        "section_spacing": "normal"
+    },
     "hero": {
         "kicker": {
             "ko": "",

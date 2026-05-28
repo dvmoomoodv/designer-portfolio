@@ -175,6 +175,10 @@ function design_defaults(): array
         'muted_text_color' => '#57534e',
         'accent_color' => '#047857',
         'card_background_color' => '#ffffff',
+        'header_background_color' => '#f8f6f3',
+        'header_text_color' => '#44403c',
+        'font_family' => 'Inter',
+        'font_url' => '',
     ];
 }
 
@@ -189,7 +193,11 @@ function resolved_design(array $pageData = []): array
         $base = array_merge($base, $pageDesign);
     }
     foreach ($defaults as $key => $fallback) {
-        $base[$key] = hex_color($base[$key] ?? null, $fallback);
+        if (strpos($key, 'color') !== false) {
+            $base[$key] = hex_color($base[$key] ?? null, $fallback);
+        } else {
+            $base[$key] = is_string($base[$key] ?? null) ? (string)$base[$key] : $fallback;
+        }
     }
     return $base;
 }
@@ -198,11 +206,14 @@ function page_design_style(array $pageData = []): string
 {
     $d = resolved_design($pageData);
     return sprintf(
-        '--home-bg:%s;--home-text:%s;--home-muted:%s;--home-accent:%s;--home-card:%s;',
+        '--home-bg:%s;--home-text:%s;--home-muted:%s;--home-accent:%s;--home-card:%s;--header-bg:%s;--header-text:%s;--site-font:%s;',
         $d['background_color'],
         $d['text_color'],
         $d['muted_text_color'],
         $d['accent_color'],
-        $d['card_background_color']
+        $d['card_background_color'],
+        $d['header_background_color'],
+        $d['header_text_color'],
+        "'" . str_replace("'", '', $d['font_family']) . "'"
     );
 }

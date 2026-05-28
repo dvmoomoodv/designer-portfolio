@@ -16,6 +16,7 @@ $social  = $data['social']  ?? [];
 $inquiry = $data['inquiry'] ?? [];
 $brand   = $data['brand']   ?? [];
 $worked  = $data['worked_with'] ?? [];
+$visual_items = $data['visual_items'] ?? [];
 ?>
 <?php include __DIR__ . '/includes/partials/head.php'; ?>
 <body class="page-shell bg-stone-50 text-stone-900 antialiased transition-colors duration-300 dark:bg-stone-950 dark:text-stone-100" style="<?= e(page_design_style($data)) ?>">
@@ -59,6 +60,28 @@ $worked  = $data['worked_with'] ?? [];
         <p class="mt-3 leading-8 text-stone-600 dark:text-stone-300"><?= te($worked['body'] ?? []) ?></p>
       </div>
     </section>
+
+    <?php if (!empty($visual_items['items'])): ?>
+      <section class="mt-20">
+        <div class="section-divider mb-8 border-b border-stone-200 pb-5 dark:border-stone-800">
+          <p class="text-xs uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400"><?= te($visual_items['kicker'] ?? []) ?></p>
+          <h2 class="surface-title mt-2 text-2xl font-semibold tracking-tight"><?= te($visual_items['title'] ?? []) ?></h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+          <?php foreach (($visual_items['items'] ?? []) as $item): ?>
+            <article class="surface-card overflow-hidden border border-stone-200 dark:border-stone-800">
+              <a href="<?= e($item['image'] ?? '') ?>" data-image-frame data-lightbox class="image-frame block">
+                <img src="<?= e($item['image'] ?? '') ?>" alt="<?= te($item['image_alt'] ?? []) ?>" class="aspect-[4/3] w-full object-cover" loading="lazy">
+              </a>
+              <div class="p-5">
+                <h3 class="surface-title text-lg font-medium"><?= te($item['title'] ?? []) ?></h3>
+                <p class="mt-2 leading-7 text-stone-600 dark:text-stone-300"><?= te($item['caption'] ?? []) ?></p>
+              </div>
+            </article>
+          <?php endforeach; ?>
+        </div>
+      </section>
+    <?php endif; ?>
   </main>
 
   <?php include __DIR__ . '/includes/partials/footer.php'; ?>

@@ -15,6 +15,21 @@ $hero          = $data['hero']          ?? [];
 $selected      = $data['selected_work'] ?? [];
 $categories    = $data['categories']    ?? [];
 $notes         = $data['notes']         ?? [];
+$layout        = $data['layout']        ?? [];
+
+$hero_layout = (string)($layout['hero_layout'] ?? 'image_right');
+$hero_grid_class = $hero_layout === 'image_left'
+    ? 'grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end'
+    : ($hero_layout === 'image_top' ? 'grid gap-10' : 'grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end');
+$hero_image_first = $hero_layout === 'image_left' || $hero_layout === 'image_top';
+$hero_hide_image = $hero_layout === 'text_only';
+$spacing_class = (string)($layout['section_spacing'] ?? 'normal') === 'compact' ? 'py-12 lg:py-16' : 'py-20 lg:py-28';
+$selected_cols = max(2, min(4, (int)($layout['selected_columns'] ?? 3)));
+$category_cols = max(1, min(3, (int)($layout['category_columns'] ?? 2)));
+$notes_cols = max(1, min(4, (int)($layout['notes_columns'] ?? 3)));
+$selected_grid_class = 'grid gap-8 md:grid-cols-2 ' . ($selected_cols >= 4 ? 'xl:grid-cols-4' : 'xl:grid-cols-3');
+$category_grid_class = 'grid gap-4 ' . ($category_cols >= 3 ? 'sm:grid-cols-2 xl:grid-cols-3' : ($category_cols === 2 ? 'sm:grid-cols-2' : ''));
+$notes_grid_class = 'grid gap-6 ' . ($notes_cols >= 4 ? 'md:grid-cols-2 xl:grid-cols-4' : ($notes_cols === 2 ? 'md:grid-cols-2' : ($notes_cols === 1 ? '' : 'lg:grid-cols-3')));
 
 $selected_projects = [];
 foreach (($selected['project_ids'] ?? []) as $pid) {
@@ -32,7 +47,14 @@ foreach (($selected['project_ids'] ?? []) as $pid) {
 
     <main>
       <section class="mx-auto max-w-7xl px-6 pb-20 pt-16 lg:px-10 lg:pb-28 lg:pt-24">
-        <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+        <div class="<?= e($hero_grid_class) ?>">
+          <?php if ($hero_image_first && !$hero_hide_image): ?>
+            <div class="lg:pl-12">
+              <a href="<?= e($hero['image'] ?? '#') ?>" data-image-frame class="image-frame surface-card overflow-hidden border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900">
+                <img src="<?= e($hero['image'] ?? '') ?>" alt="<?= te($hero['image_alt'] ?? []) ?>" class="h-full w-full object-cover transition duration-700 hover:scale-[1.02]">
+              </a>
+            </div>
+          <?php endif; ?>
           <div class="max-w-3xl">
             <p class="home-hero-kicker mb-4 text-xs uppercase tracking-[0.24em] text-stone-500 dark:text-stone-400"><?= te($hero['kicker'] ?? []) ?></p>
             <h1 class="home-hero-title muted-heading max-w-4xl text-4xl font-semibold tracking-tight text-stone-900 sm:text-5xl lg:text-6xl dark:text-stone-100"><?= te($hero['title'] ?? []) ?></h1>
@@ -48,15 +70,17 @@ foreach (($selected['project_ids'] ?? []) as $pid) {
               </div>
             <?php endif; ?>
           </div>
-          <div class="lg:pl-12">
-            <a href="<?= e($hero['image'] ?? '#') ?>" data-image-frame class="image-frame surface-card overflow-hidden border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900">
-              <img src="<?= e($hero['image'] ?? '') ?>" alt="<?= te($hero['image_alt'] ?? []) ?>" class="h-full w-full object-cover transition duration-700 hover:scale-[1.02]">
-            </a>
-          </div>
+          <?php if (!$hero_image_first && !$hero_hide_image): ?>
+            <div class="lg:pl-12">
+              <a href="<?= e($hero['image'] ?? '#') ?>" data-image-frame class="image-frame surface-card overflow-hidden border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900">
+                <img src="<?= e($hero['image'] ?? '') ?>" alt="<?= te($hero['image_alt'] ?? []) ?>" class="h-full w-full object-cover transition duration-700 hover:scale-[1.02]">
+              </a>
+            </div>
+          <?php endif; ?>
         </div>
       </section>
 
-      <section class="surface-subtle mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section class="surface-subtle mx-auto max-w-7xl px-6 <?= e($spacing_class) ?> lg:px-10">
         <div class="section-divider mb-10 flex items-end justify-between gap-6 border-b border-stone-200 pb-5 dark:border-stone-800">
           <div>
             <p class="text-xs uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400"><?= te($selected['kicker'] ?? []) ?></p>
@@ -64,7 +88,7 @@ foreach (($selected['project_ids'] ?? []) as $pid) {
           </div>
           <a href="./work.php" class="meta-link text-sm"><?= te($selected['view_all_label'] ?? []) ?></a>
         </div>
-        <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div class="<?= e($selected_grid_class) ?>">
           <?php foreach ($selected_projects as $p): ?>
             <article class="group space-y-4">
               <a href="<?= e($p['cover'] ?? '') ?>" data-image-frame class="image-frame surface-card block overflow-hidden border border-stone-200 bg-stone-100 dark:border-stone-800 dark:bg-stone-900">
@@ -82,13 +106,13 @@ foreach (($selected['project_ids'] ?? []) as $pid) {
         </div>
       </section>
 
-      <section class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section class="mx-auto max-w-7xl px-6 <?= e($spacing_class) ?> lg:px-10">
         <div class="surface-band grid gap-10 border-y border-stone-200 py-12 lg:grid-cols-[0.7fr_1.3fr] dark:border-stone-800">
           <div>
             <p class="text-xs uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400"><?= te($categories['kicker'] ?? []) ?></p>
             <h2 class="surface-title mt-2 text-2xl font-semibold tracking-tight"><?= te($categories['title'] ?? []) ?></h2>
           </div>
-          <div class="grid gap-4 sm:grid-cols-2">
+          <div class="<?= e($category_grid_class) ?>">
             <?php foreach (($categories['items'] ?? []) as $c): ?>
               <a href="<?= e($c['href'] ?? './work.php') ?>" class="category-tile">
                 <span><?= te($c['label'] ?? []) ?></span>
@@ -99,7 +123,7 @@ foreach (($selected['project_ids'] ?? []) as $pid) {
         </div>
       </section>
 
-      <section class="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-28">
+      <section class="mx-auto max-w-7xl px-6 <?= e($spacing_class) ?> lg:px-10">
         <div class="section-divider mb-10 flex items-end justify-between gap-6 border-b border-stone-200 pb-5 dark:border-stone-800">
           <div>
             <p class="text-xs uppercase tracking-[0.22em] text-stone-500 dark:text-stone-400"><?= te($notes['kicker'] ?? []) ?></p>
@@ -107,7 +131,7 @@ foreach (($selected['project_ids'] ?? []) as $pid) {
           </div>
           <a href="./about.php" class="meta-link text-sm"><?= te($notes['view_all_label'] ?? []) ?></a>
         </div>
-        <div class="grid gap-6 lg:grid-cols-3">
+        <div class="<?= e($notes_grid_class) ?>">
           <?php foreach (($notes['items'] ?? []) as $n): ?>
             <article class="surface-card border border-stone-200 p-6 transition hover:border-stone-400 dark:border-stone-800 dark:hover:border-stone-600">
               <p class="text-sm text-stone-500 dark:text-stone-400"><?= te($n['tag'] ?? []) ?></p>

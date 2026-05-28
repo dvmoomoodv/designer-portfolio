@@ -10,6 +10,11 @@
 $page_title       = $page_title       ?? te(site_data()['meta']['default_title']       ?? 'Archive Portfolio');
 $page_description = $page_description ?? te(site_data()['meta']['default_description'] ?? '');
 $lang             = current_lang();
+$site_design      = resolved_design([]);
+$font_url         = (string)($site_design['font_url'] ?? '');
+$font_family      = preg_replace('/[^A-Za-z0-9 _-]+/', '', (string)($site_design['font_family'] ?? '')) ?: 'Inter';
+$font_ext         = strtolower(pathinfo($font_url, PATHINFO_EXTENSION));
+$font_format      = $font_ext === 'woff2' ? 'woff2' : ($font_ext === 'woff' ? 'woff' : ($font_ext === 'otf' ? 'opentype' : 'truetype'));
 ?>
 <!DOCTYPE html>
 <html lang="<?= e($lang) ?>" class="scroll-smooth">
@@ -49,5 +54,14 @@ $lang             = current_lang();
     };
   </script>
   <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+  <?php if ($font_url !== ''): ?>
+    <style>
+      @font-face {
+        font-family: '<?= e($font_family) ?>';
+        src: url('<?= e($font_url) ?>') format('<?= e($font_format) ?>');
+        font-display: swap;
+      }
+    </style>
+  <?php endif; ?>
   <link rel="stylesheet" href="./assets/css/custom.css">
 </head>

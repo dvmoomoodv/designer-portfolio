@@ -3,6 +3,7 @@
  * POST /admin/api/upload.php
  *  헤더: X-CSRF-Token 또는 POST csrf_token
  *  파일: $_FILES['file']
+ *  kind=image|font
  *  응답: {"ok":true,"url":"./assets/images/uploads/...","filename":"..."}
  *       {"ok":false,"error":"..."}
  */
@@ -10,7 +11,7 @@ require_once __DIR__ . '/../../includes/bootstrap.php';
 
 header('Content-Type: application/json; charset=utf-8');
 
-function json_err(string $msg, int $code = 400): never {
+function json_err(string $msg, int $code = 400): void {
     http_response_code($code);
     echo json_encode(['ok' => false, 'error' => $msg]);
     exit;
@@ -34,6 +35,7 @@ if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
 }
 
 $file     = $_FILES['file'];
+$kind     = (string)($_POST['kind'] ?? 'image');
 $maxBytes = 10 * 1024 * 1024; // 10 MB
 if ($file['size'] > $maxBytes) {
     json_err('파일이 너무 큽니다 (최대 10 MB).');
@@ -44,32 +46,51 @@ $finfo    = finfo_open(FILEINFO_MIME_TYPE);
 $mime     = finfo_file($finfo, $file['tmp_name']);
 finfo_close($finfo);
 
-const ALLOWED_MIMES = [
-    'image/jpeg' => 'jpg',
-    'image/png'  => 'png',
-    'image/gif'  => 'gif',
-    'image/webp' => 'webp',
-    'image/svg+xml' => 'svg',
+$allowed = [
+    'image' => [
+        'image/jpeg' => 'jpg',
+        'image/png'  => 'png',
+        'image/gif'  => 'gif',
+        'image/webp' => 'webp',
+        'image/svg+xml' => 'svg',
+    ],
+    'font' => [
+        'font/woff2' => 'woff2',
+        'font/woff' => 'woff',
+        'application/font-woff' => 'woff',
+        'application/x-font-woff' => 'woff',
+        'application/octet-stream' => 'woff2',
+        'font/ttf' => 'ttf',
+        'application/x-font-ttf' => 'ttf',
+        'font/otf' => 'otf',
+        'application/x-font-otf' => 'otf',
+    ],
 ];
-if (!isset(ALLOWED_MIMES[$mime])) {
+$originalExt = strtolower(pathinfo((string)($file['name'] ?? ''), PATHINFO_EXTENSION));
+if ($kind === 'font' && in_array($originalExt, ['woff2', 'woff', 'ttf', 'otf'], true)) {
+    $ext = $originalExt;
+} elseif (isset($allowed[$kind][$mime])) {
+    $ext = $allowed[$kind][$mime];
+} else {
     json_err("허용되지 않는 파일 형식: {$mime}");
 }
 
 /* ── 저장 ── */
-if (!is_dir(UPLOAD_DIR)) {
-    if (!@mkdir(UPLOAD_DIR, 0755, true) && !is_dir(UPLOAD_DIR)) {
+$targetDir = $kind === 'font' ? FONT_UPLOAD_DIR : UPLOAD_DIR;
+$targetUrl = $kind === 'font' ? FONT_UPLOAD_URL : UPLOAD_URL;
+if (!is_dir($targetDir)) {
+    if (!@mkdir($targetDir, 0755, true) && !is_dir($targetDir)) {
         json_err('업로드 디렉터리 생성 실패.', 500);
     }
 }
 
-$ext      = ALLOWED_MIMES[$mime];
 $newName  = date('Ymd_His') . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
-$dest     = UPLOAD_DIR . '/' . $newName;
+$dest     = $targetDir . '/' . $newName;
 
 if (!move_uploaded_file($file['tmp_name'], $dest)) {
     json_err('파일 저장 실패.', 500);
 }
 @chmod($dest, 0644);
 
-$url = UPLOAD_URL . '/' . $newName;
+$url = $targetUrl . '/' . $newName;
 echo json_encode(['ok' => true, 'url' => $url, 'filename' => $newName]);

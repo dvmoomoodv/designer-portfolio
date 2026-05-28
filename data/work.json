@@ -23,5 +23,37 @@
     { "id": "environment-design", "label": { "ko": "", "en": "Environment Design" } },
     { "id": "edu-cv",             "label": { "ko": "", "en": "Edu / CV" }           }
   ],
-  "pagination": { "enabled": "1", "per_page": "6" }
+  "pagination": { "enabled": "1", "per_page": "6" },
+  "items": [
+    {
+      "id": "ca01",
+      "category_id": "storyboard",
+      "category_label": { "ko": "", "en": "Storyboard" },
+      "title": { "ko": "", "en": "Storyboard Study" },
+      "year": "2026",
+      "image": "./assets/images/project-01.svg",
+      "image_alt": { "ko": "", "en": "Storyboard concept image" },
+      "link": "./project.php?id=p01"
+    },
+    {
+      "id": "ca02",
+      "category_id": "water-flows",
+      "category_label": { "ko": "", "en": "Water Flows" },
+      "title": { "ko": "", "en": "Water Flows" },
+      "year": "2026",
+      "image": "./assets/images/project-02.svg",
+      "image_alt": { "ko": "", "en": "Water flows concept image" },
+      "link": "./project.php?id=p02"
+    },
+    {
+      "id": "ca03",
+      "category_id": "environment-design",
+      "category_label": { "ko": "", "en": "Environment Design" },
+      "title": { "ko": "", "en": "Environment Design" },
+      "year": "2025",
+      "image": "./assets/images/project-03.svg",
+      "image_alt": { "ko": "", "en": "Environment design concept image" },
+      "link": "./project.php?id=p03"
+    }
+  ]
 }

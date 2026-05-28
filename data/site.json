@@ -9,7 +9,11 @@
     "text_color": "#1c1917",
     "muted_text_color": "#57534e",
     "accent_color": "#047857",
-    "card_background_color": "#ffffff"
+    "card_background_color": "#ffffff",
+    "header_background_color": "#f8f6f3",
+    "header_text_color": "#44403c",
+    "font_family": "Inter",
+    "font_url": ""
   },
   "nav": [
     { "id": "index",   "href": "./index.php",   "label": { "ko": "", "en": "Home" } },

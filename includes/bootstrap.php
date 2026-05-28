@@ -14,6 +14,8 @@ if (!defined('APP_ROOT')) {
 define('DATA_DIR',     APP_ROOT . '/data');
 define('UPLOAD_DIR',   APP_ROOT . '/assets/images/uploads');
 define('UPLOAD_URL',   './assets/images/uploads');
+define('FONT_UPLOAD_DIR', APP_ROOT . '/assets/fonts/uploads');
+define('FONT_UPLOAD_URL', './assets/fonts/uploads');
 define('AUTH_FILE',    DATA_DIR . '/auth.json');
 
 ini_set('display_errors', '0');
