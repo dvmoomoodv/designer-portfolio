@@ -2,6 +2,8 @@
 
 English documentation: [README.md](./README.md)
 
+라이브 사이트: [http://rohigraphy.co.kr:63478/](http://rohigraphy.co.kr:63478/)
+
 비주얼 크리에이터, 사진가, 연구자, 콘셉트 아티스트를 위한 가벼운 PHP 기반 포트폴리오 CMS입니다.
 
 Rohigraphy Archive Portfolio는 사진, 연구, 콘셉트 아트, 스토리보드, 미디어문화연구를 함께 다루는 PHP 기반 비주얼 포트폴리오이자 아카이브 웹사이트입니다. 이 프로젝트는 범용 템플릿이 아니라, 스냅사진 작가이자 여러 시각 작업을 함께 다루는 한 개인과 하나의 개인 브랜드를 위해 제작되었습니다.
@@ -106,6 +108,10 @@ designer-portfolio/
 ## 배포
 
 이 프로젝트는 PHP를 지원하는 웹 서버에 배포할 수 있습니다.
+
+현재 라이브 배포 주소:
+
+- [http://rohigraphy.co.kr:63478/](http://rohigraphy.co.kr:63478/)
 
 기본 요구사항은 다음과 같습니다.
 

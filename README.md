@@ -2,6 +2,8 @@
 
 Korean documentation: [README.ko.md](./README.ko.md)
 
+Live site: [http://rohigraphy.co.kr:63478/](http://rohigraphy.co.kr:63478/)
+
 A lightweight PHP-based portfolio CMS for visual creators, photographers, researchers, and concept artists.
 
 Rohigraphy Archive Portfolio is a PHP-based visual portfolio and archive website for photography, research, concept art, storyboarding, and media-cultural studies. It is built for a single individual and personal brand: a snapshot photographer and multidisciplinary creator who needs an actual maintainable portfolio, not just a static design mockup.
@@ -114,6 +116,10 @@ designer-portfolio/
 ## Deployment
 
 This project can be deployed on any PHP-supported web server.
+
+Current live deployment:
+
+- [http://rohigraphy.co.kr:63478/](http://rohigraphy.co.kr:63478/)
 
 Basic requirements:
 
