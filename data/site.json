@@ -27,7 +27,8 @@
         "brand_accent_color": "#047857",
         "dark_brand_accent_color": "#34d399",
         "header_padding_y": "1.25rem",
-        "show_brand_main": "1"
+        "show_brand_main": "1",
+        "font_apply_target": "logo"
     },
     "nav": [
         {
