@@ -42,6 +42,12 @@ function fr_is_color(string $key, $v): bool {
 }
 function fr_label(string $key): string {
     $labels = [
+        'brand' => '브랜드 텍스트',
+        'logo' => '로고 설정',
+        'design' => '디자인 설정',
+        'nav' => '상단 메뉴 / 드롭다운',
+        'footer' => '푸터',
+        'meta' => 'SEO / 파비콘 / LLMs 설정',
         'apply_to_all_pages' => '전체/페이지별 적용 방식',
         'background_color' => '페이지 배경',
         'text_color' => '기본 글자',
@@ -76,6 +82,7 @@ function fr_label(string $key): string {
         'keywords' => 'SEO 키워드',
         'robots' => '검색엔진 노출 설정',
         'use_image' => '이미지 로고 사용',
+        'logo_image' => '로고 이미지',
         'image_width' => '로고 이미지 너비',
         'image' => '이미지',
         'image_alt' => '이미지 설명',
@@ -119,6 +126,7 @@ function fr_help(string $key): string {
         'keywords' => '검색엔진 참고용 키워드입니다. 쉼표로 구분해서 입력하세요.',
         'robots' => '검색엔진 수집 정책입니다. 보통 index, follow를 사용합니다.',
         'use_image' => '텍스트 로고 대신 업로드한 이미지 로고를 사용할지 선택합니다.',
+        'logo_image' => '상단 헤더에 표시할 로고 이미지입니다. 업로드 후 이미지 로고 사용을 켜고 저장하세요.',
         'image_width' => '로고 이미지 표시 너비입니다. 예: 120px, 9rem',
     ];
     return $help[$key] ?? '';

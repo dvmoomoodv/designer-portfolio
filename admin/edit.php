@@ -145,6 +145,8 @@ $page_guides = [
         'title' => '사이트 공통 / 메뉴 저장 기준',
         'items' => [
             'Brand는 상단 로고 텍스트에 반영됩니다.',
+            'Logo 섹션에서 사용자가 직접 로고 이미지를 업로드할 수 있습니다. image에 업로드 후 use_image를 이미지 로고 사용으로 바꾸고 저장하세요.',
+            '로고 이미지 크기는 Logo의 image_width에서 120px, 160px 같은 단위로 조절합니다.',
             'Nav는 상단 큰 메뉴와 드롭다운 소항목에 반영됩니다. href 값은 ./page.php 또는 ./page.php?filter=id 형식으로 입력하세요.',
             'Design의 Apply To All Pages를 전체 적용으로 바꾸면 모든 페이지가 site의 색상 기준을 따릅니다.',
             'Apply To All Pages가 전체 적용이면 라이트/다크 모드 색상 모두 site의 Design 기준으로 통일됩니다.',
