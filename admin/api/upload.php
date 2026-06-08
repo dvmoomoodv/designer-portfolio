@@ -17,6 +17,16 @@ function json_err(string $msg, int $code = 400): void {
     exit;
 }
 
+function upload_limit_message(string $kind, int $maxBytes): string {
+    if ($kind === 'image') {
+        return '사진 용량이 너무 큽니다. 파일 1개 최대 용량은 ' . human_bytes($maxBytes) . '입니다.';
+    }
+    if ($kind === 'font') {
+        return '폰트 파일 용량이 너무 큽니다. 파일 1개 최대 용량은 ' . human_bytes($maxBytes) . '입니다.';
+    }
+    return '파일 용량이 너무 큽니다. 파일 1개 최대 용량은 ' . human_bytes($maxBytes) . '입니다.';
+}
+
 /* ── 인증 ── */
 if (!auth_is_initialized() || !auth_is_logged_in()) {
     json_err('Unauthorized', 401);
@@ -45,15 +55,30 @@ if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
 
 $file     = $_FILES['file'];
 $kind     = (string)($_POST['kind'] ?? 'image');
-$maxBytes = 25 * 1024 * 1024; // 25 MB
+if (!in_array($kind, ['image', 'font'], true)) {
+    json_err('허용되지 않는 업로드 종류입니다.');
+}
+$maxBytes = $kind === 'font' ? 25 * 1024 * 1024 : 25 * 1024 * 1024; // 25 MB
 if ($file['size'] > $maxBytes) {
-    json_err('파일이 너무 큽니다 (최대 25 MB).');
+    json_err(upload_limit_message($kind, $maxBytes));
+}
+
+$totalLimitBytes = 100 * 1024 * 1024 * 1024; // 100 GB
+$currentBytes = upload_storage_bytes([UPLOAD_DIR, FONT_UPLOAD_DIR]);
+if ($currentBytes >= $totalLimitBytes) {
+    json_err('전체 업로드 사용량이 100GB 이상입니다. 더 이상 업로드할 수 없습니다. 기존 파일을 정리한 뒤 다시 시도해주세요.', 507);
+}
+if ($currentBytes + (int)$file['size'] > $totalLimitBytes) {
+    json_err('이 파일을 업로드하면 전체 업로드 사용량이 100GB를 초과합니다. 더 이상 업로드할 수 없습니다.', 507);
 }
 
 /* ── MIME 검증 (서버 측 독립 체크) ── */
 $finfo    = finfo_open(FILEINFO_MIME_TYPE);
-$mime     = finfo_file($finfo, $file['tmp_name']);
-finfo_close($finfo);
+$mime     = $finfo ? finfo_file($finfo, $file['tmp_name']) : false;
+if ($finfo) {
+    finfo_close($finfo);
+}
+$mime = is_string($mime) && $mime !== '' ? $mime : 'application/octet-stream';
 
 $allowed = [
     'image' => [
@@ -120,4 +145,32 @@ if (!move_uploaded_file($file['tmp_name'], $dest)) {
 @chmod($dest, 0644);
 
 $url = $targetUrl . '/' . $newName;
-echo json_encode(['ok' => true, 'url' => $url, 'filename' => $newName]);
+$dimensions = [null, null];
+if ($kind === 'image' && $ext !== 'svg') {
+    $info = @getimagesize($dest);
+    if (is_array($info)) {
+        $dimensions = [(int)($info[0] ?? 0), (int)($info[1] ?? 0)];
+    }
+}
+$dbRecorded = media_record_upload([
+    'kind' => $kind,
+    'original_name' => (string)($file['name'] ?? ''),
+    'stored_name' => $newName,
+    'url' => $url,
+    'path' => $dest,
+    'mime' => (string)$mime,
+    'extension' => $ext,
+    'size_bytes' => (int)$file['size'],
+    'width' => $dimensions[0],
+    'height' => $dimensions[1],
+]);
+
+echo json_encode([
+    'ok' => true,
+    'url' => $url,
+    'filename' => $newName,
+    'size_bytes' => (int)$file['size'],
+    'storage_used_bytes' => $currentBytes + (int)$file['size'],
+    'storage_limit_bytes' => $totalLimitBytes,
+    'db_recorded' => $dbRecorded,
+]);

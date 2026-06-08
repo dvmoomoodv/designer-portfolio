@@ -3,6 +3,12 @@ data/auth.json
 
 # 사용자 업로드 이미지 (런타임 생성물)
 assets/images/uploads/
+assets/fonts/uploads/*
+!assets/fonts/uploads/.gitkeep
+
+# 런타임 SQLite DB
+storage/*.sqlite
+storage/*.sqlite-*
 
 # 백업/임시 파일
 data/*.bak

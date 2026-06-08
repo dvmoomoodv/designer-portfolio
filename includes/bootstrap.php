@@ -16,6 +16,8 @@ define('UPLOAD_DIR',   APP_ROOT . '/assets/images/uploads');
 define('UPLOAD_URL',   './assets/images/uploads');
 define('FONT_UPLOAD_DIR', APP_ROOT . '/assets/fonts/uploads');
 define('FONT_UPLOAD_URL', './assets/fonts/uploads');
+define('STORAGE_DIR',  APP_ROOT . '/storage');
+define('DB_PATH',      STORAGE_DIR . '/portfolio.sqlite');
 define('AUTH_FILE',    DATA_DIR . '/auth.json');
 
 ini_set('display_errors', '0');
@@ -34,5 +36,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
 require_once __DIR__ . '/i18n.php';
 require_once __DIR__ . '/data.php';
+require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/csrf.php';
 require_once __DIR__ . '/auth.php';
