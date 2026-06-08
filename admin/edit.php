@@ -66,21 +66,45 @@ function sanitize_design_payload(array $payload, array $existing): array {
     return $payload;
 }
 
-function sync_llms_files(array $payload): void {
+function write_public_text_file(string $path, string $text): bool {
+    $dir = dirname($path);
+    if (!is_dir($dir)) {
+        return false;
+    }
+    $tmp = $path . '.tmp.' . bin2hex(random_bytes(4));
+    if (@file_put_contents($tmp, $text, LOCK_EX) !== false) {
+        @chmod($tmp, is_file($path) ? (fileperms($path) & 0777) : 0644);
+        if (@rename($tmp, $path)) {
+            @chmod($path, 0644);
+            clearstatcache(true, $path);
+            return true;
+        }
+        @unlink($tmp);
+    }
+    if (@file_put_contents($path, $text, LOCK_EX) !== false) {
+        @chmod($path, 0644);
+        clearstatcache(true, $path);
+        return true;
+    }
+    return false;
+}
+
+function sync_llms_files(array $payload): array {
     $text = (string)($payload['meta']['llms_txt'] ?? '');
     if ($text === '') {
-        return;
+        return [];
     }
     $text = str_replace(["\r\n", "\r"], "\n", $text);
     if (substr($text, -1) !== "\n") {
         $text .= "\n";
     }
+    $failed = [];
     foreach ([APP_ROOT . '/llm.txt', APP_ROOT . '/llms.txt'] as $path) {
-        if (@file_put_contents($path, $text, LOCK_EX) === false) {
-            throw new RuntimeException('LLMs 텍스트 파일 저장 실패: ' . basename($path));
+        if (!write_public_text_file($path, $text)) {
+            $failed[] = basename($path);
         }
-        @chmod($path, 0644);
     }
+    return $failed;
 }
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
@@ -90,12 +114,19 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
         $norm = normalize_post($raw);
         $norm = sanitize_design_payload($norm, $data);
         save_data($page, $norm);
+        $llms_failed = [];
         if ($page === 'site') {
-            sync_llms_files($norm);
+            $llms_failed = sync_llms_files($norm);
         }
         $data  = $norm;
-        $flash = 'success';
-        $flash_message = '✓ 저장되었습니다.';
+        if ($llms_failed) {
+            error_log('LLMs sync failed [' . implode(', ', $llms_failed) . ']');
+            $flash = 'warning';
+            $flash_message = '✓ 데이터는 저장되었습니다. 단, 서버 권한 때문에 LLMs 텍스트 파일 동기화가 실패했습니다: ' . implode(', ', $llms_failed);
+        } else {
+            $flash = 'success';
+            $flash_message = '✓ 저장되었습니다.';
+        }
     } catch (Throwable $e) {
         error_log('Admin save failed [' . $page . ']: ' . $e->getMessage());
         $flash = 'error';
@@ -285,6 +316,8 @@ include __DIR__ . '/_layout_head.php';
 
 <?php if ($flash === 'success'): ?>
   <div class="admin-flash admin-flash--success mb-6"><?= e($flash_message) ?></div>
+<?php elseif ($flash === 'warning'): ?>
+  <div class="admin-flash admin-flash--info mb-6"><?= e($flash_message) ?></div>
 <?php elseif ($flash === 'error'): ?>
   <div class="admin-flash admin-flash--error mb-6"><?= e($flash_message) ?></div>
 <?php endif; ?>

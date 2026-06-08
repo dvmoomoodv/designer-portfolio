@@ -119,7 +119,7 @@ function fr_help(string $key): string {
         'font_apply_target' => '업로드 폰트를 어디에 적용할지 선택합니다. 로고와 상단 메뉴는 항상 안전한 기본 폰트로 보호됩니다.',
         'favicon_url' => '브라우저 탭, 북마크 등에 표시되는 작은 아이콘입니다. ico/png/svg/webp 권장.',
         'og_image' => '카카오톡, SNS, 메신저 공유 시 보이는 대표 이미지입니다. 1200x630 비율 권장.',
-        'llms_txt' => 'AI/LLM이 사이트를 이해하기 쉽게 제공하는 공개 텍스트입니다. 저장 시 /llm.txt와 /llms.txt에 같이 반영됩니다.',
+        'llms_txt' => 'AI/LLM이 사이트를 이해하기 쉽게 제공하는 공개 텍스트입니다. 저장 시 /llm.txt와 /llms.txt에 같이 반영되며, 서버 권한 문제로 동기화가 실패해도 JSON 저장은 유지됩니다.',
         'default_title' => '페이지별 타이틀이 없을 때 사용하는 기본 브라우저/검색 결과 제목입니다.',
         'default_description' => '페이지별 설명이 없을 때 사용하는 기본 검색 결과 설명입니다.',
         'site_name' => 'Open Graph, SNS 공유 등에 표시되는 사이트 이름입니다.',
