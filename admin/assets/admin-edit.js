@@ -296,6 +296,10 @@
         var field = form.querySelector('[name="' + escHtml(targetName) + '"][data-file-path]');
         if (field) {
           field.value = data.url;
+          if (targetName === 'd[logo][image]') {
+            var logoMode = form.querySelector('[name="d[logo][use_image]"]');
+            if (logoMode) logoMode.value = '1';
+          }
           // 미리보기 갱신
           var preview = field.closest('div').previousElementSibling;
           if (preview && preview.tagName === 'IMG') {

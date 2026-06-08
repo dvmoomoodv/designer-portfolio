@@ -100,8 +100,8 @@ function fr_help(string $key): string {
         'card_background_color' => '데이모드에서 카드/박스/밴드 배경에 쓰입니다.',
         'header_background_color' => '데이모드에서 상단 고정 메뉴 바 배경색입니다.',
         'header_text_color' => '데이모드에서 상단 로고, 메뉴, 아이콘 글자색입니다.',
-        'brand_script_text' => '상단에 크게 보이는 rohigraphy 텍스트입니다. 너무 튀면 짧게 바꾸거나 크기를 줄이세요.',
-        'brand_script_size' => '상단 로고 스크립트 크기입니다. 예: 0.9rem, 1rem, 1.2rem',
+        'brand_script_text' => '이전 텍스트 로고 호환용 값입니다. 현재 헤더 로고는 이미지 로고를 사용합니다.',
+        'brand_script_size' => '이전 텍스트 로고 호환용 값입니다. 현재 헤더 로고는 이미지 크기 값으로 조절합니다.',
         'brand_main_size' => 'ARCHIVE PORTFOLIO 같은 보조 브랜드 텍스트 크기입니다.',
         'brand_accent_color' => '데이모드 로고 스크립트 색상입니다.',
         'header_padding_y' => '헤더 위아래 여백입니다. UI가 커 보이면 compact 또는 0.75rem을 선택하세요.',
@@ -116,7 +116,7 @@ function fr_help(string $key): string {
         'dark_brand_accent_color' => '다크모드 로고 스크립트 색상입니다.',
         'font_family' => '업로드 폰트의 이름입니다. 로고/헤더/메뉴에는 적용되지 않고 본문 또는 제목 영역에만 적용됩니다.',
         'font_url' => '업로드한 woff2/woff/ttf/otf 파일 경로입니다.',
-        'font_apply_target' => '업로드 폰트를 어디에 적용할지 선택합니다. 로고와 상단 메뉴는 항상 안전한 기본 폰트로 보호됩니다.',
+        'font_apply_target' => '업로드 폰트를 어디에 적용할지 선택합니다. 로고, 헤더, 메뉴, 버튼, 카드 UI는 항상 안전한 기본 폰트로 보호됩니다.',
         'favicon_url' => '브라우저 탭, 북마크 등에 표시되는 작은 아이콘입니다. ico/png/svg/webp 권장.',
         'og_image' => '카카오톡, SNS, 메신저 공유 시 보이는 대표 이미지입니다. 1200x630 비율 권장.',
         'llms_txt' => 'AI/LLM이 사이트를 이해하기 쉽게 제공하는 공개 텍스트입니다. 저장 시 /llm.txt와 /llms.txt에 같이 반영되며, 서버 권한 문제로 동기화가 실패해도 JSON 저장은 유지됩니다.',
@@ -125,8 +125,8 @@ function fr_help(string $key): string {
         'site_name' => 'Open Graph, SNS 공유 등에 표시되는 사이트 이름입니다.',
         'keywords' => '검색엔진 참고용 키워드입니다. 쉼표로 구분해서 입력하세요.',
         'robots' => '검색엔진 수집 정책입니다. 보통 index, follow를 사용합니다.',
-        'use_image' => '텍스트 로고 대신 업로드한 이미지 로고를 사용할지 선택합니다.',
-        'logo_image' => '상단 헤더에 표시할 로고 이미지입니다. 업로드 후 이미지 로고 사용을 켜고 저장하세요.',
+        'use_image' => '호환용 값입니다. 현재 헤더는 로고 이미지가 있으면 항상 이미지 로고를 사용합니다.',
+        'logo_image' => '상단 헤더에 표시할 로고 이미지입니다. 텍스트 로고는 사용하지 않습니다.',
         'image_width' => '로고 이미지 표시 너비입니다. 예: 120px, 9rem',
     ];
     return $help[$key] ?? '';
@@ -159,7 +159,7 @@ function fr_select_options(string $key): ?array {
         case 'font_apply_target':
             return ['none' => '적용 안 함', 'content' => '본문만', 'heading' => '제목만', 'both' => '본문 + 제목'];
         case 'use_image':
-            return ['1' => '이미지 로고 사용', '0' => '텍스트 로고 사용'];
+            return ['1' => '이미지 로고 사용'];
         default:
             return null;
     }
@@ -176,6 +176,10 @@ function fr_item_summary(array $item, int $i): string {
 
 /* ────── 진입점 ────── */
 function render_node(string $path, $v, string $key): void {
+    if ($key === 'use_image' && strpos($path, '[logo][use_image]') !== false) {
+        echo '<input type="hidden" name="' . e($path) . '" value="1">';
+        return;
+    }
     if      (fr_is_i18n($v))        render_i18n($path, $v, fr_label($key));
     elseif  (fr_is_obj_list($v))    render_obj_list($path, $v, fr_label($key));
     elseif  (fr_is_scalar_list($v)) render_scalar_list($path, $v, fr_label($key));
@@ -251,6 +255,9 @@ function render_scalar(string $path, $v, string $label, string $key = ''): void 
 
 /* ────── 이미지 경로 ────── */
 function render_image(string $path, string $v, string $label): void {
+    if (strpos($path, '[logo][image]') !== false) {
+        $label = '헤더 로고 이미지';
+    }
     echo '<div><label class="admin-label">' . e($label) . ' <span class="font-normal normal-case text-xs text-stone-400">(이미지 경로)</span></label>';
     echo '<div class="flex items-start gap-3">';
     if ($v) echo '<img src="' . e($v) . '" class="h-14 w-14 flex-shrink-0 rounded object-cover border border-stone-200 dark:border-stone-800" alt="preview">';
@@ -328,10 +335,10 @@ function render_design(string $path, array $v, string $label): void {
     }
     render_design_group($path, $v, '데이모드 · 페이지 색상', '밝은 모드에서 페이지 본문에 적용되는 색상입니다.', ['background_color', 'text_color', 'muted_text_color', 'accent_color', 'card_background_color']);
     render_design_group($path, $v, '데이모드 · 헤더 색상', '밝은 모드에서 상단 고정 메뉴 바에만 적용됩니다.', ['header_background_color', 'header_text_color']);
-    render_design_group($path, $v, '헤더 로고 설정', '상단 rohigraphy 로고 텍스트, 크기, 여백을 조절합니다. UI가 커 보이면 여기서 줄이세요.', ['brand_script_text', 'brand_script_size', 'brand_main_size', 'brand_accent_color', 'dark_brand_accent_color', 'header_padding_y', 'show_brand_main']);
+    render_design_group($path, $v, '헤더 설정', '헤더 여백과 보조 브랜드 텍스트를 조절합니다. 로고는 Logo 섹션의 이미지 로고를 사용합니다.', ['brand_main_size', 'header_padding_y', 'show_brand_main']);
     render_design_group($path, $v, '다크모드 · 페이지 색상', '어두운 모드에서 페이지 본문에 적용되는 색상입니다.', ['dark_background_color', 'dark_text_color', 'dark_muted_text_color', 'dark_accent_color', 'dark_card_background_color']);
     render_design_group($path, $v, '다크모드 · 헤더 색상', '어두운 모드에서 상단 고정 메뉴 바에만 적용됩니다.', ['dark_header_background_color', 'dark_header_text_color']);
-    render_design_group($path, $v, '폰트 설정', '업로드한 폰트를 본문/제목에 적용합니다. 로고와 상단 메뉴는 깨지지 않도록 제외됩니다.', ['font_family', 'font_url', 'font_apply_target']);
+    render_design_group($path, $v, '폰트 설정', '업로드한 폰트는 제한된 본문/제목 영역에만 적용합니다. 로고, 헤더, 메뉴, 버튼, 카드 UI는 깨지지 않도록 제외됩니다.', ['font_family', 'font_url', 'font_apply_target']);
     echo '</div></div>';
 }
 

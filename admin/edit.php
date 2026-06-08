@@ -175,13 +175,13 @@ $page_guides = [
     'site' => [
         'title' => '사이트 공통 / 메뉴 저장 기준',
         'items' => [
-            'Brand는 상단 로고 텍스트에 반영됩니다.',
-            'Logo 섹션에서 사용자가 직접 로고 이미지를 업로드할 수 있습니다. image에 업로드 후 use_image를 이미지 로고 사용으로 바꾸고 저장하세요.',
+            'Brand는 이미지 로고 아래 보조 텍스트에 반영됩니다.',
+            'Logo 섹션에서 사용자가 직접 헤더 로고 이미지를 업로드할 수 있습니다. 텍스트 로고는 사용하지 않고 이미지 로고를 기본으로 사용합니다.',
             '로고 이미지 크기는 Logo의 image_width에서 120px, 160px 같은 단위로 조절합니다.',
             'Nav는 상단 큰 메뉴와 드롭다운 소항목에 반영됩니다. href 값은 ./page.php 또는 ./page.php?filter=id 형식으로 입력하세요.',
             'Design의 Apply To All Pages를 전체 적용으로 바꾸면 모든 페이지가 site의 색상 기준을 따릅니다.',
             'Apply To All Pages가 전체 적용이면 라이트/다크 모드 색상 모두 site의 Design 기준으로 통일됩니다.',
-            'Font Family와 Font Url을 설정하면 전체 사이트 폰트가 바뀝니다. Font Url은 폰트 업로드 버튼으로 넣을 수 있습니다.',
+            'Font Family와 Font Url을 설정해도 헤더, 메뉴, 버튼, 카드 UI에는 적용하지 않고 제한된 본문/제목 영역에만 적용합니다.',
             'Header Background/Text Color는 웹사이트 상단 메뉴 바 색상에 반영됩니다.',
         ],
     ],
@@ -326,7 +326,7 @@ include __DIR__ . '/_layout_head.php';
   <?= csrf_field() ?>
   <div class="space-y-4">
     <?php foreach ($data as $section_key => $section_val): ?>
-      <?php $open = in_array($section_key, ['page', 'design', 'hero', 'pagination'], true); ?>
+      <?php $open = in_array($section_key, ['page', 'logo', 'design', 'hero', 'pagination'], true); ?>
       <details class="admin-card"<?= $open ? ' open' : '' ?>>
         <summary class="flex cursor-pointer select-none items-center justify-between gap-4 p-5 list-none">
           <span class="font-semibold tracking-wide"><?= e(fr_label($section_key)) ?></span>
