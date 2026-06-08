@@ -6,6 +6,9 @@ $current_nav = $current_nav ?? '';
 $site        = site_data();
 $nav_items   = $site['nav'] ?? [];
 $brand       = $site['brand'] ?? ['ko' => '', 'en' => 'ARCHIVE PORTFOLIO'];
+$design      = resolved_design([]);
+$brand_script = trim((string)($design['brand_script_text'] ?? 'rohigraphy')) ?: 'rohigraphy';
+$show_brand_main = (string)($design['show_brand_main'] ?? '1') !== '0';
 $current     = current_lang();
 $other_lang  = $current === 'ko' ? 'en' : 'ko';
 $active_filter = isset($_GET['filter']) ? (string)$_GET['filter'] : '';
@@ -22,10 +25,12 @@ foreach (($contact['social']['items'] ?? []) as $link) {
 }
 ?>
 <header class="site-header relative z-30 border-b border-stone-200/80 bg-stone-50/85 backdrop-blur-xl dark:border-stone-800 dark:bg-stone-950/85">
-  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
+  <div class="site-header-inner mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
     <a href="./index.php" class="header-brand" aria-label="Rohigraphy Archive Portfolio">
-      <span class="brand-script">rohigraphy</span>
-      <span class="brand-main"><?= te($brand) ?></span>
+      <span class="brand-script"><?= e($brand_script) ?></span>
+      <?php if ($show_brand_main): ?>
+        <span class="brand-main"><?= te($brand) ?></span>
+      <?php endif; ?>
     </a>
     <nav class="hidden items-center gap-2 lg:gap-4 xl:gap-5 md:flex" aria-label="Primary navigation">
       <?php foreach ($nav_items as $item): ?>

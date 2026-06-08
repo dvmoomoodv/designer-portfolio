@@ -26,6 +26,10 @@ function fr_is_scalar_list($v): bool {
 function fr_is_image($v): bool {
     return is_string($v) && (bool)preg_match('/\.(jpe?g|png|gif|webp|svg)($|\?)/i', $v);
 }
+function fr_is_image_key(string $key): bool {
+    return in_array($key, ['image', 'cover', 'thumbnail', 'poster'], true)
+        || (substr($key, -6) === '_image' && strpos($key, 'alt') === false);
+}
 function fr_is_font(string $key, $v): bool {
     return is_string($v) && preg_match('/font_url/i', $key);
 }
@@ -46,6 +50,12 @@ function fr_label(string $key): string {
         'card_background_color' => '카드/박스 배경',
         'header_background_color' => '헤더 배경',
         'header_text_color' => '헤더 글자/메뉴',
+        'brand_script_text' => '로고 스크립트 텍스트',
+        'brand_script_size' => '로고 스크립트 크기',
+        'brand_main_size' => '브랜드 보조 텍스트 크기',
+        'brand_accent_color' => '로고 포인트 색',
+        'header_padding_y' => '헤더 상하 여백',
+        'show_brand_main' => '브랜드 보조 텍스트 표시',
         'dark_background_color' => '다크 페이지 배경',
         'dark_text_color' => '다크 기본 글자',
         'dark_muted_text_color' => '다크 보조 글자',
@@ -53,6 +63,7 @@ function fr_label(string $key): string {
         'dark_card_background_color' => '다크 카드/박스 배경',
         'dark_header_background_color' => '다크 헤더 배경',
         'dark_header_text_color' => '다크 헤더 글자/메뉴',
+        'dark_brand_accent_color' => '다크 로고 포인트 색',
         'font_family' => '폰트 이름',
         'font_url' => '폰트 파일',
     ];
@@ -69,6 +80,12 @@ function fr_help(string $key): string {
         'card_background_color' => '데이모드에서 카드/박스/밴드 배경에 쓰입니다.',
         'header_background_color' => '데이모드에서 상단 고정 메뉴 바 배경색입니다.',
         'header_text_color' => '데이모드에서 상단 로고, 메뉴, 아이콘 글자색입니다.',
+        'brand_script_text' => '상단에 크게 보이는 rohigraphy 텍스트입니다. 너무 튀면 짧게 바꾸거나 크기를 줄이세요.',
+        'brand_script_size' => '상단 로고 스크립트 크기입니다. 예: 0.9rem, 1rem, 1.2rem',
+        'brand_main_size' => 'ARCHIVE PORTFOLIO 같은 보조 브랜드 텍스트 크기입니다.',
+        'brand_accent_color' => '데이모드 로고 스크립트 색상입니다.',
+        'header_padding_y' => '헤더 위아래 여백입니다. UI가 커 보이면 compact 또는 0.75rem을 선택하세요.',
+        'show_brand_main' => '보조 브랜드 텍스트를 숨기면 상단 로고 영역이 더 단순해집니다.',
         'dark_background_color' => '다크모드에서 페이지 전체 배경색입니다.',
         'dark_text_color' => '다크모드에서 제목과 주요 글자색입니다.',
         'dark_muted_text_color' => '다크모드에서 설명문, 보조 텍스트 색입니다.',
@@ -76,6 +93,7 @@ function fr_help(string $key): string {
         'dark_card_background_color' => '다크모드에서 카드/박스/밴드 배경에 쓰입니다.',
         'dark_header_background_color' => '다크모드에서 상단 고정 메뉴 바 배경색입니다.',
         'dark_header_text_color' => '다크모드에서 상단 로고, 메뉴, 아이콘 글자색입니다.',
+        'dark_brand_accent_color' => '다크모드 로고 스크립트 색상입니다.',
         'font_family' => '사이트에 적용할 폰트 이름입니다. 업로드 폰트를 쓰려면 폰트 파일의 이름과 맞춰주세요.',
         'font_url' => '업로드한 woff2/woff/ttf/otf 파일 경로입니다.',
     ];
@@ -98,6 +116,14 @@ function fr_select_options(string $key): ?array {
             return ['1' => '1열', '2' => '2열', '3' => '3열'];
         case 'section_spacing':
             return ['compact' => '좁게', 'normal' => '기본'];
+        case 'brand_script_size':
+            return ['0.8rem' => '작게', '0.98rem' => '기본', '1.15rem' => '크게', '1.35rem' => '매우 크게'];
+        case 'brand_main_size':
+            return ['0.58rem' => '작게', '0.72rem' => '기본', '0.86rem' => '크게'];
+        case 'header_padding_y':
+            return ['0.65rem' => '좁게', '0.9rem' => '약간 좁게', '1.25rem' => '기본', '1.6rem' => '넓게'];
+        case 'show_brand_main':
+            return ['1' => '표시', '0' => '숨김'];
         default:
             return null;
     }
@@ -121,7 +147,7 @@ function render_node(string $path, $v, string $key): void {
     elseif  (is_array($v))          render_assoc($path, $v, fr_label($key));
     elseif  (fr_is_color($key, $v)) render_color($path, (string)$v, fr_label($key));
     elseif  (fr_is_font($key, $v))  render_font($path, (string)$v, fr_label($key));
-    elseif  (fr_is_image($v))       render_image($path, (string)$v, fr_label($key));
+    elseif  (fr_is_image($v) || fr_is_image_key($key)) render_image($path, (string)$v, fr_label($key));
     elseif  (fr_select_options($key)) render_select($path, (string)$v, fr_label($key), fr_select_options($key) ?? []);
     else                            render_scalar($path, $v, fr_label($key), $key);
 }
@@ -266,6 +292,7 @@ function render_design(string $path, array $v, string $label): void {
     }
     render_design_group($path, $v, '데이모드 · 페이지 색상', '밝은 모드에서 페이지 본문에 적용되는 색상입니다.', ['background_color', 'text_color', 'muted_text_color', 'accent_color', 'card_background_color']);
     render_design_group($path, $v, '데이모드 · 헤더 색상', '밝은 모드에서 상단 고정 메뉴 바에만 적용됩니다.', ['header_background_color', 'header_text_color']);
+    render_design_group($path, $v, '헤더 로고 설정', '상단 rohigraphy 로고 텍스트, 크기, 여백을 조절합니다. UI가 커 보이면 여기서 줄이세요.', ['brand_script_text', 'brand_script_size', 'brand_main_size', 'brand_accent_color', 'dark_brand_accent_color', 'header_padding_y', 'show_brand_main']);
     render_design_group($path, $v, '다크모드 · 페이지 색상', '어두운 모드에서 페이지 본문에 적용되는 색상입니다.', ['dark_background_color', 'dark_text_color', 'dark_muted_text_color', 'dark_accent_color', 'dark_card_background_color']);
     render_design_group($path, $v, '다크모드 · 헤더 색상', '어두운 모드에서 상단 고정 메뉴 바에만 적용됩니다.', ['dark_header_background_color', 'dark_header_text_color']);
     render_design_group($path, $v, '폰트 설정', '업로드한 폰트를 전체 사이트에 적용합니다.', ['font_family', 'font_url']);

@@ -31,7 +31,16 @@ if (!csrf_verify($token)) {
 /* ── 파일 유효성 ── */
 if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
     $err = $_FILES['file']['error'] ?? UPLOAD_ERR_NO_FILE;
-    json_err('Upload error: ' . $err);
+    $messages = [
+        UPLOAD_ERR_INI_SIZE => '서버 업로드 제한보다 파일이 큽니다. php.ini upload_max_filesize를 확인하세요.',
+        UPLOAD_ERR_FORM_SIZE => '폼 업로드 제한보다 파일이 큽니다.',
+        UPLOAD_ERR_PARTIAL => '파일이 일부만 업로드되었습니다. 다시 시도해주세요.',
+        UPLOAD_ERR_NO_FILE => '업로드할 파일이 없습니다.',
+        UPLOAD_ERR_NO_TMP_DIR => '서버 임시 업로드 폴더가 없습니다.',
+        UPLOAD_ERR_CANT_WRITE => '서버가 업로드 파일을 저장할 수 없습니다. 폴더 권한을 확인하세요.',
+        UPLOAD_ERR_EXTENSION => '서버 확장 기능이 업로드를 중단했습니다.',
+    ];
+    json_err($messages[$err] ?? ('Upload error: ' . $err));
 }
 
 $file     = $_FILES['file'];
@@ -49,7 +58,9 @@ finfo_close($finfo);
 $allowed = [
     'image' => [
         'image/jpeg' => 'jpg',
+        'image/pjpeg' => 'jpg',
         'image/png'  => 'png',
+        'image/x-png' => 'png',
         'image/gif'  => 'gif',
         'image/webp' => 'webp',
         'image/svg+xml' => 'svg',
@@ -69,10 +80,12 @@ $allowed = [
 $originalExt = strtolower(pathinfo((string)($file['name'] ?? ''), PATHINFO_EXTENSION));
 if ($kind === 'font' && in_array($originalExt, ['woff2', 'woff', 'ttf', 'otf'], true)) {
     $ext = $originalExt;
+} elseif ($kind === 'image' && in_array($originalExt, ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'], true)) {
+    $ext = $originalExt === 'jpeg' ? 'jpg' : $originalExt;
 } elseif (isset($allowed[$kind][$mime])) {
     $ext = $allowed[$kind][$mime];
 } else {
-    json_err("허용되지 않는 파일 형식: {$mime}");
+    json_err("허용되지 않는 파일 형식: {$mime} / .{$originalExt}");
 }
 
 /* ── 저장 ── */
@@ -82,6 +95,9 @@ if (!is_dir($targetDir)) {
     if (!@mkdir($targetDir, 0755, true) && !is_dir($targetDir)) {
         json_err('업로드 디렉터리 생성 실패.', 500);
     }
+}
+if (!is_writable($targetDir)) {
+    json_err('업로드 폴더에 쓰기 권한이 없습니다: ' . basename($targetDir), 500);
 }
 
 $newName  = date('Ymd_His') . '_' . bin2hex(random_bytes(4)) . '.' . $ext;

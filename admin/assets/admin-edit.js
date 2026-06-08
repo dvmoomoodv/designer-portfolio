@@ -72,6 +72,8 @@
       '--home-card': fieldValue('d[design][card_background_color]'),
       '--header-bg': fieldValue('d[design][header_background_color]'),
       '--header-text': fieldValue('d[design][header_text_color]'),
+      '--brand-accent': fieldValue('d[design][brand_accent_color]'),
+      '--dark-brand-accent': fieldValue('d[design][dark_brand_accent_color]'),
       '--dark-home-bg': fieldValue('d[design][dark_background_color]'),
       '--dark-home-text': fieldValue('d[design][dark_text_color]'),
       '--dark-home-muted': fieldValue('d[design][dark_muted_text_color]'),
@@ -85,6 +87,18 @@
     });
     var font = fieldValue('d[design][font_family]');
     if (font) body.style.setProperty('--site-font', "'" + font.replace(/'/g, '') + "'");
+    var scriptSize = fieldValue('d[design][brand_script_size]');
+    if (scriptSize) body.style.setProperty('--brand-script-size', scriptSize);
+    var mainSize = fieldValue('d[design][brand_main_size]');
+    if (mainSize) body.style.setProperty('--brand-main-size', mainSize);
+    var headerPadding = fieldValue('d[design][header_padding_y]');
+    if (headerPadding) body.style.setProperty('--header-padding-y', headerPadding);
+    var scriptText = fieldValue('d[design][brand_script_text]');
+    var brandScript = iframe.contentDocument.querySelector('.brand-script');
+    if (brandScript && scriptText) brandScript.textContent = scriptText;
+    var brandMain = iframe.contentDocument.querySelector('.brand-main');
+    var showMain = fieldValue('d[design][show_brand_main]');
+    if (brandMain && showMain !== '') brandMain.style.display = showMain === '0' ? 'none' : '';
   }
 
   function setPreviewTheme(theme) {

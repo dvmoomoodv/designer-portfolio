@@ -138,6 +138,11 @@ body {
   color: var(--header-text, #44403c);
 }
 
+.site-header-inner {
+  padding-top: var(--header-padding-y, 1.25rem);
+  padding-bottom: var(--header-padding-y, 1.25rem);
+}
+
 .dark .site-header {
   background-color: rgba(15, 15, 16, 0.86);
   border-color: rgba(41, 37, 36, 0.96);
@@ -154,16 +159,16 @@ body {
 }
 
 .brand-script {
-  color: rgb(4 120 87);
+  color: var(--brand-accent, #047857);
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: 0.98rem;
+  font-size: var(--brand-script-size, 0.98rem);
   font-style: italic;
   font-weight: 700;
   letter-spacing: 0.02em;
 }
 
 .brand-main {
-  font-size: 0.72rem;
+  font-size: var(--brand-main-size, 0.72rem);
   font-weight: 600;
   letter-spacing: 0.24em;
 }
@@ -181,7 +186,7 @@ body {
 }
 
 .dark .brand-script {
-  color: rgb(52 211 153);
+  color: var(--dark-brand-accent, #34d399);
 }
 
 .header-icon-button {

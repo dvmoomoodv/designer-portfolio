@@ -20,7 +20,14 @@
         "dark_accent_color": "#34d399",
         "dark_card_background_color": "#1c1917",
         "dark_header_background_color": "#0f0f10",
-        "dark_header_text_color": "#e7e5e4"
+        "dark_header_text_color": "#e7e5e4",
+        "brand_script_text": "rohigraphy",
+        "brand_script_size": "0.98rem",
+        "brand_main_size": "0.72rem",
+        "brand_accent_color": "#047857",
+        "dark_brand_accent_color": "#34d399",
+        "header_padding_y": "1.25rem",
+        "show_brand_main": "1"
     },
     "nav": [
         {
