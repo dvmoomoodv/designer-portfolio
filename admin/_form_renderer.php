@@ -114,9 +114,9 @@ function fr_help(string $key): string {
         'dark_header_background_color' => '다크모드에서 상단 고정 메뉴 바 배경색입니다.',
         'dark_header_text_color' => '다크모드에서 상단 로고, 메뉴, 아이콘 글자색입니다.',
         'dark_brand_accent_color' => '다크모드 로고 스크립트 색상입니다.',
-        'font_family' => '업로드 폰트의 이름입니다. 화면이 깨지면 폰트 적용 범위를 로고만 또는 적용 안 함으로 바꾸세요.',
+        'font_family' => '업로드 폰트의 이름입니다. 로고/헤더/메뉴에는 적용되지 않고 본문 또는 제목 영역에만 적용됩니다.',
         'font_url' => '업로드한 woff2/woff/ttf/otf 파일 경로입니다.',
-        'font_apply_target' => '업로드 폰트를 어디에 적용할지 선택합니다. 장식용 폰트는 전체 본문에 적용하면 UI가 깨질 수 있습니다.',
+        'font_apply_target' => '업로드 폰트를 어디에 적용할지 선택합니다. 로고와 상단 메뉴는 항상 안전한 기본 폰트로 보호됩니다.',
         'favicon_url' => '브라우저 탭, 북마크 등에 표시되는 작은 아이콘입니다. ico/png/svg/webp 권장.',
         'og_image' => '카카오톡, SNS, 메신저 공유 시 보이는 대표 이미지입니다. 1200x630 비율 권장.',
         'llms_txt' => 'AI/LLM이 사이트를 이해하기 쉽게 제공하는 공개 텍스트입니다. 저장 시 /llm.txt와 /llms.txt에 같이 반영됩니다.',
@@ -157,7 +157,7 @@ function fr_select_options(string $key): ?array {
         case 'show_brand_main':
             return ['1' => '표시', '0' => '숨김'];
         case 'font_apply_target':
-            return ['none' => '적용 안 함', 'logo' => '로고만', 'heading' => '제목만', 'body' => '전체 본문'];
+            return ['none' => '적용 안 함', 'content' => '본문만', 'heading' => '제목만', 'both' => '본문 + 제목'];
         case 'use_image':
             return ['1' => '이미지 로고 사용', '0' => '텍스트 로고 사용'];
         default:
@@ -331,7 +331,7 @@ function render_design(string $path, array $v, string $label): void {
     render_design_group($path, $v, '헤더 로고 설정', '상단 rohigraphy 로고 텍스트, 크기, 여백을 조절합니다. UI가 커 보이면 여기서 줄이세요.', ['brand_script_text', 'brand_script_size', 'brand_main_size', 'brand_accent_color', 'dark_brand_accent_color', 'header_padding_y', 'show_brand_main']);
     render_design_group($path, $v, '다크모드 · 페이지 색상', '어두운 모드에서 페이지 본문에 적용되는 색상입니다.', ['dark_background_color', 'dark_text_color', 'dark_muted_text_color', 'dark_accent_color', 'dark_card_background_color']);
     render_design_group($path, $v, '다크모드 · 헤더 색상', '어두운 모드에서 상단 고정 메뉴 바에만 적용됩니다.', ['dark_header_background_color', 'dark_header_text_color']);
-    render_design_group($path, $v, '폰트 설정', '업로드한 폰트를 어디에 적용할지 선택합니다. UI가 깨지면 로고만 또는 적용 안 함으로 되돌리세요.', ['font_family', 'font_url', 'font_apply_target']);
+    render_design_group($path, $v, '폰트 설정', '업로드한 폰트를 본문/제목에 적용합니다. 로고와 상단 메뉴는 깨지지 않도록 제외됩니다.', ['font_family', 'font_url', 'font_apply_target']);
     echo '</div></div>';
 }
 

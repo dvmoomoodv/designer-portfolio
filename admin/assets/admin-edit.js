@@ -86,11 +86,12 @@
       if (/^#[0-9A-Fa-f]{6}$/.test(map[key])) body.style.setProperty(key, map[key]);
     });
     var font = fieldValue('d[design][font_family]');
-    var target = fieldValue('d[design][font_apply_target]') || 'logo';
+    var target = fieldValue('d[design][font_apply_target]') || 'content';
+    if (target === 'logo' || target === 'body') target = 'content';
     var safeFont = font ? "'" + font.replace(/'/g, '') + "'" : 'Inter';
-    body.style.setProperty('--site-font', target === 'body' ? safeFont : 'Inter');
-    body.style.setProperty('--heading-font', target === 'heading' ? safeFont : 'inherit');
-    body.style.setProperty('--brand-font', target === 'logo' ? safeFont : "Georgia, 'Times New Roman', serif");
+    body.style.setProperty('--site-font', target === 'content' || target === 'both' ? safeFont : 'Inter');
+    body.style.setProperty('--heading-font', target === 'heading' || target === 'both' ? safeFont : 'Inter');
+    body.style.setProperty('--brand-font', "Georgia, 'Times New Roman', serif");
     var scriptSize = fieldValue('d[design][brand_script_size]');
     if (scriptSize) body.style.setProperty('--brand-script-size', scriptSize);
     var mainSize = fieldValue('d[design][brand_main_size]');

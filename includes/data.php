@@ -193,7 +193,7 @@ function design_defaults(): array
         'dark_brand_accent_color' => '#34d399',
         'font_family' => 'Inter',
         'font_url' => '',
-        'font_apply_target' => 'logo',
+        'font_apply_target' => 'content',
     ];
 }
 
@@ -221,10 +221,13 @@ function page_design_style(array $pageData = []): string
 {
     $d = resolved_design($pageData);
     $fontName = "'" . str_replace("'", '', $d['font_family']) . "'";
-    $fontTarget = (string)($d['font_apply_target'] ?? 'logo');
-    $bodyFont = $fontTarget === 'body' ? $fontName : 'Inter';
-    $headingFont = $fontTarget === 'heading' ? $fontName : 'inherit';
-    $brandFont = $fontTarget === 'logo' ? $fontName : "Georgia, 'Times New Roman', serif";
+    $fontTarget = (string)($d['font_apply_target'] ?? 'content');
+    if ($fontTarget === 'logo' || $fontTarget === 'body') {
+        $fontTarget = 'content';
+    }
+    $bodyFont = ($fontTarget === 'content' || $fontTarget === 'both') ? $fontName : 'Inter';
+    $headingFont = ($fontTarget === 'heading' || $fontTarget === 'both') ? $fontName : 'Inter';
+    $brandFont = "Georgia, 'Times New Roman', serif";
     return sprintf(
         '--home-bg:%s;--home-text:%s;--home-muted:%s;--home-accent:%s;--home-card:%s;--header-bg:%s;--header-text:%s;--brand-accent:%s;--brand-script-size:%s;--brand-main-size:%s;--header-padding-y:%s;--dark-home-bg:%s;--dark-home-text:%s;--dark-home-muted:%s;--dark-home-accent:%s;--dark-home-card:%s;--dark-header-bg:%s;--dark-header-text:%s;--dark-brand-accent:%s;--site-font:%s;--heading-font:%s;--brand-font:%s;',
         $d['background_color'],
