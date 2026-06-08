@@ -9,11 +9,14 @@
  */
 $site_data        = site_data();
 $site_meta        = $site_data['meta'] ?? [];
+$site_logo        = $site_data['logo'] ?? [];
 $page_title       = $page_title       ?? te($site_meta['default_title']       ?? 'Archive Portfolio');
 $page_description = $page_description ?? te($site_meta['default_description'] ?? '');
 $site_name        = te($site_meta['site_name'] ?? $site_meta['default_title'] ?? 'Archive Portfolio');
 $seo_keywords     = (string)($site_meta['keywords'] ?? '');
 $seo_robots       = (string)($site_meta['robots'] ?? 'index, follow');
+$favicon_url      = (string)($site_meta['favicon_url'] ?? '');
+$og_image         = (string)($site_meta['og_image'] ?? '');
 $lang             = current_lang();
 $site_design      = resolved_design([]);
 $font_url         = (string)($site_design['font_url'] ?? '');
@@ -36,15 +39,25 @@ $canonical_url    = $scheme . '://' . $host . $uri;
     <meta name="keywords" content="<?= e($seo_keywords) ?>">
   <?php endif; ?>
   <meta name="robots" content="<?= e($seo_robots) ?>">
+  <?php if ($favicon_url !== ''): ?>
+    <link rel="icon" href="<?= e($favicon_url) ?>">
+    <link rel="shortcut icon" href="<?= e($favicon_url) ?>">
+  <?php endif; ?>
   <link rel="canonical" href="<?= e($canonical_url) ?>">
   <meta property="og:site_name" content="<?= e($site_name) ?>">
   <meta property="og:type" content="website">
   <meta property="og:title" content="<?= e($page_title) ?>">
   <meta property="og:description" content="<?= e($page_description) ?>">
   <meta property="og:url" content="<?= e($canonical_url) ?>">
+  <?php if ($og_image !== ''): ?>
+    <meta property="og:image" content="<?= e($og_image) ?>">
+  <?php endif; ?>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="<?= e($page_title) ?>">
   <meta name="twitter:description" content="<?= e($page_description) ?>">
+  <?php if ($og_image !== ''): ?>
+    <meta name="twitter:image" content="<?= e($og_image) ?>">
+  <?php endif; ?>
   <script>
     (function () {
       var savedTheme = localStorage.getItem('theme');

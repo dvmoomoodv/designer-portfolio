@@ -279,6 +279,18 @@
             "en": "Rohigraphy Archive Portfolio"
         },
         "keywords": "사진, 스냅사진, 자연사진, 다큐사진, Photography, Documentary, Photographer, 연구, 문화연구, 미디어문화연구, 미디어 연구, 데이터 사이언스, Data Science, 데이터 플루언시, Data Fluency, research, 질적 연구, Qualitative research, Cultural Studies, Media Studies, Media Cultural Studies, Concept Art, Concept Design, Storyboard, Storyboarding, movie, animation",
-        "robots": "index, follow"
+        "robots": "index, follow",
+        "favicon_url": "",
+        "og_image": "",
+        "llms_txt": "# Rohigraphy Archive Portfolio\n\nRohigraphy Archive Portfolio is a visual portfolio and archive covering photography, documentary photography, natural photography, snapshot photography, research, media cultural studies, data science, qualitative research, cultural studies, concept art, concept design, storyboard, movie, and animation-related visual work.\n\n## Main Topics\n\n- Photography\n- Documentary photography\n- Photographer portfolio\n- Snapshot photography\n- Natural photography\n- Research\n- Cultural Studies\n- Media Studies\n- Media Cultural Studies\n- Data Science\n- Data Fluency\n- Qualitative research\n- Concept Art\n- Concept Design\n- Storyboard and Storyboarding\n- Movie and animation visual development\n\n## Korean Keywords\n\n사진, 스냅사진, 자연사진, 다큐사진, 연구, 문화연구, 미디어문화연구, 미디어 연구, 데이터 사이언스, 데이터 플루언시, 질적 연구\n\n## English Keywords\n\nPhotography, Documentary, Photographer, Data Science, Data Fluency, research, Qualitative research, Cultural Studies, Media Studies, Media Cultural Studies, Concept Art, Concept Design, Storyboard, Storyboarding, movie, animation\n\n## Site Sections\n\n- Home: introduction and selected portfolio archive.\n- About Me: story, education, CV, and personal background.\n- Concept Art: concept art, concept design, storyboard, movie, and animation-oriented visual work.\n- Research: cultural studies, media studies, media cultural studies, data science, data fluency, and qualitative research archive.\n- Photography: photography, snapshot photography, natural photography, documentary photography, profile, wedding/couple, family/friend, and CV image archive.\n- Doodle & Scribble: rough sketches, doodles, visual notes, and informal drawing archive.\n- Contact: inquiry, collaboration, brand, and visual reference information.\n\n## Recommended Summary\n\nThis website is a portfolio archive for Rohigraphy, combining photography, documentary image work, research, media cultural studies, data science, qualitative research, concept art, concept design, storyboarding, movie, and animation-related visual development."
+    },
+    "logo": {
+        "use_image": "0",
+        "image": "",
+        "image_alt": {
+            "ko": "",
+            "en": "Rohigraphy logo"
+        },
+        "image_width": "140px"
     }
 }

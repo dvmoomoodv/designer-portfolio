@@ -45,9 +45,9 @@ if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
 
 $file     = $_FILES['file'];
 $kind     = (string)($_POST['kind'] ?? 'image');
-$maxBytes = 10 * 1024 * 1024; // 10 MB
+$maxBytes = 25 * 1024 * 1024; // 25 MB
 if ($file['size'] > $maxBytes) {
-    json_err('파일이 너무 큽니다 (최대 10 MB).');
+    json_err('파일이 너무 큽니다 (최대 25 MB).');
 }
 
 /* ── MIME 검증 (서버 측 독립 체크) ── */
@@ -59,10 +59,20 @@ $allowed = [
     'image' => [
         'image/jpeg' => 'jpg',
         'image/pjpeg' => 'jpg',
+        'image/jfif' => 'jfif',
         'image/png'  => 'png',
         'image/x-png' => 'png',
+        'image/apng' => 'apng',
         'image/gif'  => 'gif',
         'image/webp' => 'webp',
+        'image/avif' => 'avif',
+        'image/bmp' => 'bmp',
+        'image/x-ms-bmp' => 'bmp',
+        'image/tiff' => 'tiff',
+        'image/heic' => 'heic',
+        'image/heif' => 'heif',
+        'image/vnd.microsoft.icon' => 'ico',
+        'image/x-icon' => 'ico',
         'image/svg+xml' => 'svg',
     ],
     'font' => [
@@ -77,10 +87,11 @@ $allowed = [
         'application/x-font-otf' => 'otf',
     ],
 ];
+$imageExts = ['jpg', 'jpeg', 'jfif', 'png', 'apng', 'gif', 'webp', 'svg', 'avif', 'bmp', 'tif', 'tiff', 'heic', 'heif', 'ico'];
 $originalExt = strtolower(pathinfo((string)($file['name'] ?? ''), PATHINFO_EXTENSION));
 if ($kind === 'font' && in_array($originalExt, ['woff2', 'woff', 'ttf', 'otf'], true)) {
     $ext = $originalExt;
-} elseif ($kind === 'image' && in_array($originalExt, ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'], true)) {
+} elseif ($kind === 'image' && in_array($originalExt, $imageExts, true)) {
     $ext = $originalExt === 'jpeg' ? 'jpg' : $originalExt;
 } elseif (isset($allowed[$kind][$mime])) {
     $ext = $allowed[$kind][$mime];

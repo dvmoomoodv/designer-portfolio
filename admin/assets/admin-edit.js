@@ -86,7 +86,11 @@
       if (/^#[0-9A-Fa-f]{6}$/.test(map[key])) body.style.setProperty(key, map[key]);
     });
     var font = fieldValue('d[design][font_family]');
-    if (font) body.style.setProperty('--site-font', "'" + font.replace(/'/g, '') + "'");
+    var target = fieldValue('d[design][font_apply_target]') || 'logo';
+    var safeFont = font ? "'" + font.replace(/'/g, '') + "'" : 'Inter';
+    body.style.setProperty('--site-font', target === 'body' ? safeFont : 'Inter');
+    body.style.setProperty('--heading-font', target === 'heading' ? safeFont : 'inherit');
+    body.style.setProperty('--brand-font', target === 'logo' ? safeFont : "Georgia, 'Times New Roman', serif");
     var scriptSize = fieldValue('d[design][brand_script_size]');
     if (scriptSize) body.style.setProperty('--brand-script-size', scriptSize);
     var mainSize = fieldValue('d[design][brand_main_size]');
@@ -133,18 +137,34 @@
 
   /* ── 제출 전: obj-list 인덱스 재정렬 ── */
   form.addEventListener('submit', function () {
-    form.querySelectorAll('[data-obj-list]').forEach(function (container) {
-      var basePath = container.dataset.objList;
-      var items = container.querySelectorAll(':scope > [data-obj-items] > [data-obj-item]');
-      items.forEach(function (item, idx) {
-        item.querySelectorAll('[name]').forEach(function (el) {
-          // Replace the numeric segment after basePath
-          var escaped = basePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-          el.name = el.name.replace(new RegExp(escaped + '\\[(\\d+)\\]'), basePath + '[' + idx + ']');
-        });
-      });
-    });
+    form.querySelectorAll('[data-obj-list]').forEach(renumberObjList);
   });
+
+  function itemSummary(item, idx) {
+    var title = '';
+    item.querySelectorAll('input, textarea, select').forEach(function (el) {
+      if (title) return;
+      var n = el.name || '';
+      if (/\[title\]\[en\]$/.test(n) || /\[label\]\[en\]$/.test(n) || /\[category_label\]\[en\]$/.test(n) || /\[id\]$/.test(n)) {
+        title = (el.value || '').trim();
+      }
+    });
+    return '항목 ' + (idx + 1) + (title ? ' · ' + title : '');
+  }
+
+  function renumberObjList(container) {
+    if (!container) return;
+    var basePath = container.dataset.objList;
+    var escaped = basePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var items = container.querySelectorAll(':scope > [data-obj-items] > [data-obj-item]');
+    items.forEach(function (item, idx) {
+      item.querySelectorAll('[name]').forEach(function (el) {
+        el.name = el.name.replace(new RegExp(escaped + '\\[(\\d+)\\]'), basePath + '[' + idx + ']');
+      });
+      var summary = item.querySelector('summary');
+      if (summary) summary.textContent = itemSummary(item, idx);
+    });
+  }
 
   /* ── 이벤트 위임: 모든 list 버튼 ── */
   form.addEventListener('click', function (e) {
@@ -157,15 +177,19 @@
       var item = btn.closest('[data-obj-item]');
       var prev = item && item.previousElementSibling;
       if (prev && prev.hasAttribute('data-obj-item')) prev.parentNode.insertBefore(item, prev);
+      renumberObjList(btn.closest('[data-obj-list]'));
 
     } else if (btn.hasAttribute('data-obj-down')) {
       var item = btn.closest('[data-obj-item]');
       var next = item && item.nextElementSibling;
       if (next && next.hasAttribute('data-obj-item')) next.parentNode.insertBefore(next, item);
+      renumberObjList(btn.closest('[data-obj-list]'));
 
     } else if (btn.hasAttribute('data-obj-delete')) {
       var item = btn.closest('[data-obj-item]');
+      var list = btn.closest('[data-obj-list]');
       if (item && confirm('이 항목을 삭제하시겠습니까?')) item.remove();
+      renumberObjList(list);
 
     } else if (btn.hasAttribute('data-obj-add')) {
       objAdd(btn);
@@ -205,6 +229,7 @@
     clone.querySelectorAll('img').forEach(function (img) { img.style.display = 'none'; });
 
     itemsEl.appendChild(clone);
+    renumberObjList(container);
     clone.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
@@ -236,7 +261,9 @@
     var kind = btn.dataset.uploadKind || 'image';
     var input = document.createElement('input');
     input.type = 'file';
-    input.accept = kind === 'font' ? '.woff2,.woff,.ttf,.otf' : 'image/jpeg,image/png,image/gif,image/webp,image/svg+xml';
+    input.accept = kind === 'font'
+      ? '.woff2,.woff,.ttf,.otf'
+      : '.jpg,.jpeg,.jfif,.png,.apng,.gif,.webp,.svg,.avif,.bmp,.tif,.tiff,.heic,.heif,.ico,image/*';
     input.addEventListener('change', function () {
       var file = input.files[0];
       if (!file) return;

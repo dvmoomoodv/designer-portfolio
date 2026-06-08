@@ -66,6 +66,23 @@ function sanitize_design_payload(array $payload, array $existing): array {
     return $payload;
 }
 
+function sync_llms_files(array $payload): void {
+    $text = (string)($payload['meta']['llms_txt'] ?? '');
+    if ($text === '') {
+        return;
+    }
+    $text = str_replace(["\r\n", "\r"], "\n", $text);
+    if (substr($text, -1) !== "\n") {
+        $text .= "\n";
+    }
+    foreach ([APP_ROOT . '/llm.txt', APP_ROOT . '/llms.txt'] as $path) {
+        if (@file_put_contents($path, $text, LOCK_EX) === false) {
+            throw new RuntimeException('LLMs 텍스트 파일 저장 실패: ' . basename($path));
+        }
+        @chmod($path, 0644);
+    }
+}
+
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     try {
         csrf_require_post();
@@ -73,6 +90,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
         $norm = normalize_post($raw);
         $norm = sanitize_design_payload($norm, $data);
         save_data($page, $norm);
+        if ($page === 'site') {
+            sync_llms_files($norm);
+        }
         $data  = $norm;
         $flash = 'success';
         $flash_message = '✓ 저장되었습니다.';

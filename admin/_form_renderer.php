@@ -24,10 +24,10 @@ function fr_is_scalar_list($v): bool {
     return array_keys($v) === range(0, count($v) - 1) && is_scalar(current($v));
 }
 function fr_is_image($v): bool {
-    return is_string($v) && (bool)preg_match('/\.(jpe?g|png|gif|webp|svg)($|\?)/i', $v);
+    return is_string($v) && (bool)preg_match('/\.(jpe?g|jfif|a?png|gif|webp|svg|avif|bmp|tiff?|heic|heif|ico)($|\?)/i', $v);
 }
 function fr_is_image_key(string $key): bool {
-    return in_array($key, ['image', 'cover', 'thumbnail', 'poster'], true)
+    return in_array($key, ['image', 'cover', 'thumbnail', 'poster', 'favicon_url', 'og_image', 'logo_image'], true)
         || (substr($key, -6) === '_image' && strpos($key, 'alt') === false);
 }
 function fr_is_font(string $key, $v): bool {
@@ -66,6 +66,19 @@ function fr_label(string $key): string {
         'dark_brand_accent_color' => '다크 로고 포인트 색',
         'font_family' => '폰트 이름',
         'font_url' => '폰트 파일',
+        'font_apply_target' => '폰트 적용 범위',
+        'favicon_url' => '파비콘 이미지',
+        'og_image' => '공유 미리보기 이미지',
+        'llms_txt' => 'LLMs.txt 내용',
+        'default_title' => '사이트 기본 타이틀',
+        'default_description' => '사이트 기본 설명',
+        'site_name' => '사이트 이름',
+        'keywords' => 'SEO 키워드',
+        'robots' => '검색엔진 노출 설정',
+        'use_image' => '이미지 로고 사용',
+        'image_width' => '로고 이미지 너비',
+        'image' => '이미지',
+        'image_alt' => '이미지 설명',
     ];
     if (isset($labels[$key])) return $labels[$key];
     return ucwords(str_replace(['_', '-'], ' ', $key));
@@ -94,8 +107,19 @@ function fr_help(string $key): string {
         'dark_header_background_color' => '다크모드에서 상단 고정 메뉴 바 배경색입니다.',
         'dark_header_text_color' => '다크모드에서 상단 로고, 메뉴, 아이콘 글자색입니다.',
         'dark_brand_accent_color' => '다크모드 로고 스크립트 색상입니다.',
-        'font_family' => '사이트에 적용할 폰트 이름입니다. 업로드 폰트를 쓰려면 폰트 파일의 이름과 맞춰주세요.',
+        'font_family' => '업로드 폰트의 이름입니다. 화면이 깨지면 폰트 적용 범위를 로고만 또는 적용 안 함으로 바꾸세요.',
         'font_url' => '업로드한 woff2/woff/ttf/otf 파일 경로입니다.',
+        'font_apply_target' => '업로드 폰트를 어디에 적용할지 선택합니다. 장식용 폰트는 전체 본문에 적용하면 UI가 깨질 수 있습니다.',
+        'favicon_url' => '브라우저 탭, 북마크 등에 표시되는 작은 아이콘입니다. ico/png/svg/webp 권장.',
+        'og_image' => '카카오톡, SNS, 메신저 공유 시 보이는 대표 이미지입니다. 1200x630 비율 권장.',
+        'llms_txt' => 'AI/LLM이 사이트를 이해하기 쉽게 제공하는 공개 텍스트입니다. 저장 시 /llm.txt와 /llms.txt에 같이 반영됩니다.',
+        'default_title' => '페이지별 타이틀이 없을 때 사용하는 기본 브라우저/검색 결과 제목입니다.',
+        'default_description' => '페이지별 설명이 없을 때 사용하는 기본 검색 결과 설명입니다.',
+        'site_name' => 'Open Graph, SNS 공유 등에 표시되는 사이트 이름입니다.',
+        'keywords' => '검색엔진 참고용 키워드입니다. 쉼표로 구분해서 입력하세요.',
+        'robots' => '검색엔진 수집 정책입니다. 보통 index, follow를 사용합니다.',
+        'use_image' => '텍스트 로고 대신 업로드한 이미지 로고를 사용할지 선택합니다.',
+        'image_width' => '로고 이미지 표시 너비입니다. 예: 120px, 9rem',
     ];
     return $help[$key] ?? '';
 }
@@ -124,6 +148,10 @@ function fr_select_options(string $key): ?array {
             return ['0.65rem' => '좁게', '0.9rem' => '약간 좁게', '1.25rem' => '기본', '1.6rem' => '넓게'];
         case 'show_brand_main':
             return ['1' => '표시', '0' => '숨김'];
+        case 'font_apply_target':
+            return ['none' => '적용 안 함', 'logo' => '로고만', 'heading' => '제목만', 'body' => '전체 본문'];
+        case 'use_image':
+            return ['1' => '이미지 로고 사용', '0' => '텍스트 로고 사용'];
         default:
             return null;
     }
@@ -295,7 +323,7 @@ function render_design(string $path, array $v, string $label): void {
     render_design_group($path, $v, '헤더 로고 설정', '상단 rohigraphy 로고 텍스트, 크기, 여백을 조절합니다. UI가 커 보이면 여기서 줄이세요.', ['brand_script_text', 'brand_script_size', 'brand_main_size', 'brand_accent_color', 'dark_brand_accent_color', 'header_padding_y', 'show_brand_main']);
     render_design_group($path, $v, '다크모드 · 페이지 색상', '어두운 모드에서 페이지 본문에 적용되는 색상입니다.', ['dark_background_color', 'dark_text_color', 'dark_muted_text_color', 'dark_accent_color', 'dark_card_background_color']);
     render_design_group($path, $v, '다크모드 · 헤더 색상', '어두운 모드에서 상단 고정 메뉴 바에만 적용됩니다.', ['dark_header_background_color', 'dark_header_text_color']);
-    render_design_group($path, $v, '폰트 설정', '업로드한 폰트를 전체 사이트에 적용합니다.', ['font_family', 'font_url']);
+    render_design_group($path, $v, '폰트 설정', '업로드한 폰트를 어디에 적용할지 선택합니다. UI가 깨지면 로고만 또는 적용 안 함으로 되돌리세요.', ['font_family', 'font_url', 'font_apply_target']);
     echo '</div></div>';
 }
 

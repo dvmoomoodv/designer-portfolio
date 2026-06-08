@@ -6,9 +6,14 @@ $current_nav = $current_nav ?? '';
 $site        = site_data();
 $nav_items   = $site['nav'] ?? [];
 $brand       = $site['brand'] ?? ['ko' => '', 'en' => 'ARCHIVE PORTFOLIO'];
+$logo        = $site['logo'] ?? [];
 $design      = resolved_design([]);
 $brand_script = trim((string)($design['brand_script_text'] ?? 'rohigraphy')) ?: 'rohigraphy';
 $show_brand_main = (string)($design['show_brand_main'] ?? '1') !== '0';
+$logo_image = (string)($logo['image'] ?? '');
+$logo_use_image = $logo_image !== '' && (string)($logo['use_image'] ?? '0') === '1';
+$logo_width = (string)($logo['image_width'] ?? '140px');
+if (!preg_match('/^[0-9.]+(px|rem|em|%)$/', $logo_width)) { $logo_width = '140px'; }
 $current     = current_lang();
 $other_lang  = $current === 'ko' ? 'en' : 'ko';
 $active_filter = isset($_GET['filter']) ? (string)$_GET['filter'] : '';
@@ -27,7 +32,11 @@ foreach (($contact['social']['items'] ?? []) as $link) {
 <header class="site-header relative z-30 border-b border-stone-200/80 bg-stone-50/85 backdrop-blur-xl dark:border-stone-800 dark:bg-stone-950/85">
   <div class="site-header-inner mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-10">
     <a href="./index.php" class="header-brand" aria-label="Rohigraphy Archive Portfolio">
-      <span class="brand-script"><?= e($brand_script) ?></span>
+      <?php if ($logo_use_image): ?>
+        <img src="<?= e($logo_image) ?>" alt="<?= te($logo['image_alt'] ?? ['ko' => '', 'en' => 'Rohigraphy logo']) ?>" class="brand-logo-image" style="width: <?= e($logo_width) ?>;">
+      <?php else: ?>
+        <span class="brand-script"><?= e($brand_script) ?></span>
+      <?php endif; ?>
       <?php if ($show_brand_main): ?>
         <span class="brand-main"><?= te($brand) ?></span>
       <?php endif; ?>
